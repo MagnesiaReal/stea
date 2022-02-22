@@ -8,7 +8,7 @@ import MapaObjeto from "./components/MapaObjeto";
 function MapaReg(){
     const [ClassName,setClassName]= useState(); 
     const getClassName = (props) => {
-  
+        
         switch (props.target.id) {
             case 'MES': 
                 setClassName('MES');
@@ -28,7 +28,7 @@ function MapaReg(){
     <svg version="1.1" viewBox="0 0 1366 768" xmlns="http://www.w3.org/2000/svg" >
             
             <a xlinkTitle="1" onClick={getClassName}>
-                <path id="MES" name="1" class="st1" d="M942,767v-22.09v-9.49L887,693l3-8l-1-4h-10.71l-0.29,8h-29l-5-6l-22-4l-16-7h-31.1L691,609l-25-6l-8,8l-5,4
+                <path id="MES" name="1" className="st1" d="M942,767v-22.09v-9.49L887,693l3-8l-1-4h-10.71l-0.29,8h-29l-5-6l-22-4l-16-7h-31.1L691,609l-25-6l-8,8l-5,4
                     l-6,2l-5,2l-4,2l-5,3l-5,1h-5l-11-1l-5-2l-4-3h-4h-6h-7l-5-1l-5-6l-5-3h-5l-6-2l-5.19-4l-3.81-3h-5.68l-6.32-4h-6.34h-5.54l-5.12-2
                     l-7-5l-6-3c0,0-7.56,1-8.78,0s-5.22-3-5.22-3l-5-3l-10-6l-4-3l-5-4l-4-3l-4-3l-4-3h-3.88h-7.52h-5.14l-7.46-4l-4-2l-7-2l-5-2l-5-5
                     l-3-5l-3-4l-4-5l-5-3l-6-2h-4.34l-3.66-3l-6-4l-5-4l-2-3l-6-7l-3-5l-2-6l-6-9v-5.25v-4.35l4-3.4l3-3l2-4c0,0,0-4,1-5s2-5,2-5
@@ -49,7 +49,7 @@ function MapaReg(){
                     c1,1.38,4,8.38,4,8.38l5,4l5,5l8,4l7.95,4H942z"/>
             </a>
             <a xlinkTitle="2" onClick={getClassName}>
-                <path id="ARI" name="2" class="st2" d="M234,400l3,3h4.63l9.49-3l4.88-6v-5.66l-3.3-4.34l-1.7-3l-6-3.21l2-3.79l-2-4.12l-3-1.88l-5-7h-6.98h-3.69
+                <path id="ARI" name="2" className="st2" d="M234,400l3,3h4.63l9.49-3l4.88-6v-5.66l-3.3-4.34l-1.7-3l-6-3.21l2-3.79l-2-4.12l-3-1.88l-5-7h-6.98h-3.69
                     h-3.69l-3.64-5v-4.05v-5.8h2.58L223,344c0,0-1-3-1-5s0-6,0-6h-3l-3-3v-6.01l-5-5.99c-3-4-5-7-5-7v-6v-3.16v-5.8l-3-5.03v-3.93
                     l-4-3.07l-4-3h-2.43l-2.57-8l-3-5l-2-3c0,0,4-1.56,0-3.78s-6-5.22-7-6.22s-3-4-3-4l-4-5v-7.99v-7.38l-5-1.63l-4-10v-2.62l-6-3.38
                     l-3-3v-6.8l-5-3.2v-4.19l-6-3.81l-2-5l-4-3l-6-3l-2-6v-4.51v-6.86v-4.75v-5.27v-3.16l-2-2.45v-5.46v-9.49v-4.75v-9.49l7,6.2l4,5
@@ -75,7 +75,7 @@ function MapaReg(){
                     s9,2,9,2l5,3l4,3l8,11l7,13L234,400z"/>
             </a>
             <a xlinkTitle="3" onClick={getClassName}>
-                <path id="OAS" name="3" class="st3" d="M243,229h8.12l6.88-3h3.67l4.33-8v-8.47v-4.75v-5.8l3-5.98c0,0,3-2,5-3s7-6.32,7-6.32l6-1.68h5.79l3.21-7
+                <path id="OAS" name="3" className="st3" d="M243,229h8.12l6.88-3h3.67l4.33-8v-8.47v-4.75v-5.8l3-5.98c0,0,3-2,5-3s7-6.32,7-6.32l6-1.68h5.79l3.21-7
                     v-2.92v-6.33v-7.91L292,147c0,0-1-1,0-5s1-4,1-4l1-11l8-5l3-2l6-3l6-2l5-4l9-4l6-4l2-5l5-4l-5-6l-3-2l-1-5l-4-9v-3c0,0,1-1-1-3
                     s-2-2-2-2l-6-4l-6-3l-5-5l-4-7l-2-7l1-6l2-3l1-4v-5l-6-4l-7-3h-5.85c0,0-3.15-3-5.15-3s-4,0-4,0V4.87l-6.14-4.75h-5.8H134.02v4.22
                     v5.27v4.22L138,14l6,3l3,2l1,6c0,0,0,3,0,5s0,5,0,5l-1,5v8l4,7l4,7l3,8c0,0,0,2,2,3s6,8,6,8c1,5,1,15,1,15l-4,8c0,0-3,3-4,5
@@ -84,7 +84,7 @@ function MapaReg(){
             </a>
             </svg> 
     
-    return(<div class="mapadiv">    
+    return(<div className="mapadivReg">    
         <div><h1>PREGUNTA CAMBIANTE</h1></div>
         {Regiones}
 

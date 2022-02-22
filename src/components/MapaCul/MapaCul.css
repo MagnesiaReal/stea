@@ -1,18 +1,18 @@
 body{
     background: #069 ;
 }
-.mapadiv{
+.mapadivCul{
     width: 70%;
     margin: auto;
 }
-.mapadiv path{
+.mapadivCul path{
     fill:  #FFF;
     stroke: rgb(102, 102, 102);
     stroke-width: 5px;
 }
-.mapadiv :hover{
+.mapadivCul :hover{
     fill:rgb(71, 60, 173);
 }
-.Contorno :hover {
+.mapadivCul .Contorno :hover {
     fill:#FFF;
 }

@@ -146,7 +146,7 @@ function MapaCul(){
     </a>
     </svg>
     
-    return(<div class="mapadiv">    
+    return(<div class="mapadivCul">    
         <div><h1>PREGUNTA CAMBIANTE</h1></div>
         {MapCul}
 

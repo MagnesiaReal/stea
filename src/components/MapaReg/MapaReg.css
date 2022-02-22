@@ -1,15 +1,15 @@
 body{
     background: #069 ;
 }
-.mapadiv{
+.mapadivReg{
     width: 70%;
     margin: auto;
 }
-.mapadiv path{
+.mapadivReg path{
     fill:  #FFF;
     stroke: rgb(102, 102, 102);
     stroke-width: 5px;
 }
-.mapadiv :hover{
+.mapadivReg :hover{
     fill:rgb(215, 94, 219);
 }
