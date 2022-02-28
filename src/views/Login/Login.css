@@ -1,0 +1,20 @@
+.login-stea{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  color:#fff;
+}
+
+#propiedades-stea{
+  background-color: #133b5c;
+  border-radius: 10px;
+  position: relative;
+}
+
+#regresar{
+  position: absolute;
+  text-align: center;
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}

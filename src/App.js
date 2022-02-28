@@ -3,15 +3,23 @@ import './App.css';
 import Mapa from './components/Mapa/Mapa.jsx'
 import MapaCul from './components/MapaCul/Mapa.jsx'
 import MapaReg from './components/MapaReg/Mapa.jsx'
-import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
+import Login from './views/Login/Login'
+import Home from './views/Home/Home'
+import Register from './views/Register/Registrer'
+import { BrowserRouter as Router, Route, Link, Routes, Navigate } from "react-router-dom";
 
 function App() {
   return ( 
   <Router>
     <Routes>
+      {/*Rutas de usuario*/}
+      <Route path='/home' element={<Home/>}/>
+      <Route path='/login' element={<Login/>}/>
+      <Route path='/register' element={<Register/>}/>
       <Route path='/Mapa' element={<Mapa/>}> </Route>
       <Route path='/MapaCulturas' element={<MapaCul/>}> </Route>
       <Route path='/MapaRegiones' element={<MapaReg/>}> </Route>
+      <Route exact path='*' element={<Navigate to='/home'/>}/>
     </Routes>
   </Router> );
 }
