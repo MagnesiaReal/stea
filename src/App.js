@@ -6,6 +6,7 @@ import MapaReg from './components/MapaReg/Mapa.jsx'
 import Login from './views/Login/Login'
 import Home from './views/Home/Home'
 import Register from './views/Register/Registrer'
+import Placeholder from './components/Ordenamiento/components/Placeholder/Placeholder';
 import { BrowserRouter as Router, Route, Link, Routes, Navigate } from "react-router-dom";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
       <Route path='/Mapa' element={<Mapa/>}> </Route>
       <Route path='/MapaCulturas' element={<MapaCul/>}> </Route>
       <Route path='/MapaRegiones' element={<MapaReg/>}> </Route>
+      <Route path='/Order' element={<Placeholder/>}> </Route>
       <Route exact path='*' element={<Navigate to='/home'/>}/>
     </Routes>
   </Router> );

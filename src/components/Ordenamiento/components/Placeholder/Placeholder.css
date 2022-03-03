@@ -1,0 +1,40 @@
+.options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+    padding-left: 0;
+    justify-content: center;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: solid 2px #d0d0d0;
+    border-radius: .2em;
+    padding: .5em .8em .5em .5em;
+    margin-bottom: 1em;
+}
+
+.title {
+    max-width: none;
+    font-weight: bold;
+    margin: 0;
+}
+  
+.imagen {
+    display: flex;
+    justify-content: center;
+    margin-left: 1em;
+    overflow: hidden;
+    width: 8em;
+    height: 4em;
+    background-color: #e8e8e8;
+}
+
+.img {
+    display: inline;
+    width: 100%;
+    height: auto;
+}
