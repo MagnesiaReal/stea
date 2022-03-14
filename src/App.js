@@ -7,6 +7,7 @@ import Login from './views/Login/Login'
 import Home from './views/Home/Home'
 import Register from './views/Register/Registrer'
 import OrdenamientoAct from './components/Ordenamiento/container/OrdenamientoAct';
+import Entrega from './views/Entrega_1/Entrega';
 import { BrowserRouter as Router, Route, Link, Routes, Navigate } from "react-router-dom";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
       <Route path='/MapaCulturas' element={<MapaCul/>}> </Route>
       <Route path='/MapaRegiones' element={<MapaReg/>}> </Route>
       <Route path='/Order' element={<OrdenamientoAct/>}> </Route>
+      <Route path='/Entrega' element={<Entrega/>}> </Route>
       <Route exact path='*' element={<Navigate to='/home'/>}/>
     </Routes>
   </Router> );
