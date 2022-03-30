@@ -49,7 +49,7 @@ const Placeholder = () => {
     <DragDropContext onDragEnd={handlingOnDrag}>
         <Droppable droppableId='datos'>
           {(provided)=>(
-              <ul className='options' {...provided.droppableProps} ref={provided.innerRef}>
+              <ul className='stea-ordenamientoOptions-flexbox' {...provided.droppableProps} ref={provided.innerRef}>
                   {
                       answers.map((item, index) => {
                           return(
@@ -61,11 +61,11 @@ const Placeholder = () => {
                                         ref={provided.innerRef}
                                         {...provided.draggableProps}
                                         {...provided.dragHandleProps}
-                                        className='item'
+                                        className='stea-orderItem-flexbox'
                                     >
-                                        <h1 className='title'>{item.answer}</h1>
-                                        <div className='imagen'> 
-                                            <img className='img' src={item.image} />
+                                        <h1 className='stea-orderItemTitle-fontTitle'>{item.answer}</h1>
+                                        <div className='stea-orderItemImage-container'> 
+                                            <img className='stea-orderItemImage-style' src={item.image} />
                                         </div>
                                     </div>
                                   )}

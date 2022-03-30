@@ -1,4 +1,4 @@
-.options {
+.stea-ordenamientoOptions-flexbox {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,7 +7,7 @@
     justify-content: center;
 }
 
-.item {
+.stea-orderItem-flexbox {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -19,14 +19,14 @@
     margin-bottom: 1em;
 }
 
-.title {
+.stea-orderItemTitle-fontTitle {
     max-width: none;
     font-size: 1.5em;
     font-weight: bold;
     margin: 0;
 }
   
-.imagen {
+.stea-orderItemImage-container {
     display: flex;
     justify-content: center;
     margin-left: 1em;
@@ -37,7 +37,7 @@
     background-color: #e8e8e8;
 }
 
-.img {
+.stea-orderItemImage-style {
     display: inline;
     width: 100%;
     height: auto;
