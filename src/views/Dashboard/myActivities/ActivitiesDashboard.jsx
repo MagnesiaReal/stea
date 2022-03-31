@@ -1,6 +1,6 @@
 import React from 'react';
 import { actividadesMock } from '../Mock/ActivitiesMock'
-
+import './ActivitiesDashboard.css'
 const ActivitiesDashboard = () => {
   return (
     <div className='stea-actividadesPendientes-contenedor'>

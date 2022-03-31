@@ -1,0 +1,53 @@
+.stea-perfilLateral-contenedor{
+    width: 18%;
+    height: 24em;
+    margin: 5em 0;
+    border-radius: 1em;
+
+    /*Flexboxing*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    box-shadow: 0 .3em 20px 1px rgba(2, 58, 63, 0.432);
+    background-color: #e5e9ec;
+}
+
+.stea-perfilLateral-img {
+    height: 12em;
+    width: 12em;
+    box-shadow: 0 .3em 20px 1px rgba(2, 58, 63, 0.432);
+    border-radius: 50%;
+    margin: 2em 0;
+}
+
+.stea-perfilLateral-informacion{
+    padding: 0;
+    margin: 0;
+    color: rgb(105, 34, 58);
+    background-color: #e5e9ec;
+
+    /*Flexbox*/
+    display: flex;
+    align-items: baseline;
+    justify-content: space-evenly;
+}
+
+.stea-perfilLateral-name{
+    background-color: #e5e9ec;
+    width: 50%;
+    margin: .8em 0;
+    font-size: 1.4em;
+    font-weight: 500;
+}
+
+.stea-perfilLateral-semestre{
+    background-color: #e5e9ec;
+    width: 25%;
+    font-size: 1.2em;
+    font-weight: 300;
+    text-align: center;
+}
+
+
+
