@@ -10,9 +10,9 @@ import './Dashboard.css'
 const Dashboard = () => {
   return (
     <div className='stea-dashboard-contenedor'>
-      <ActivitiesDashboard />
-      <GroupsDashboard/>
       <ProfileDashboard/>
+      <GroupsDashboard/>
+      <ActivitiesDashboard />
     </div>
   )
 }

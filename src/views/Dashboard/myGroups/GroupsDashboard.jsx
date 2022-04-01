@@ -22,10 +22,12 @@ const GroupsDashboard = () => {
               <div className='stea-grupo-imagenContenedor'>
                 <img src={grupo.imagen} alt={grupo.grupo} className='stea-grupo-imagen'></img>
               </div>
-              <div className='stea-grupo-info'>
-                <h1>{grupo.grupo}</h1>
-                <h2>{grupo.nombreMateria}</h2>
-                <h2>{grupo.nombreProfesor}</h2>
+              <div className='stea-grupo-infoContenedor'>
+                <p className='stea-grupo-nomMateria'>{grupo.nombreMateria}</p>  
+                <div className='stea-grupo-nomMateriaProfe'>
+                  <p className='stea-grupo-numGrupo'>{grupo.grupo}</p>
+                  <p className='stea-grupo-nomProfesor'>{grupo.nombreProfesor}</p>
+                </div>
               </div>
             </div>
           )

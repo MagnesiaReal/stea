@@ -4,24 +4,26 @@ import './ActivitiesDashboard.css'
 const ActivitiesDashboard = () => {
   return (
     <div className='stea-actividadesPendientes-contenedor'>
+      <p className='stea-actividadesPendientes-title'>Actividades pendientes</p>
       { actividadesMock.map( (actividad,index) => {
         return(
           <div id={index} className='stea-actividadPendiente-container'>
             <div className='stea-actividadPendiente-info'>
-              <h1>
+              <p className='stea-actividadPendiente-nombre'>
                 {actividad.nombreActividad}
-              </h1>
-              <h3>
+              </p>
+              <p className='stea-actividadPendiente-profesor'>
                 {actividad.nombreProfesor}
-              </h3>
-              <h3>
-                {actividad.fechaLimite}
-              </h3>
+              </p>
+              
             </div>
             <div className='stea-actividadPendiente-modo'>
-              <h3>
+              <p className='stea-actividadPendiente-fechaLimite'>
+                {actividad.fechaLimite}
+              </p>
+              <p className='stea-actividadPendiente-modoActividad'>
                 {actividad.modoActividad}
-              </h3>
+              </p>
             </div>
           </div>
         );

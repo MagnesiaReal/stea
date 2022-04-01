@@ -1,7 +1,7 @@
 .stea-perfilLateral-contenedor{
     width: 18%;
     height: 24em;
-    margin: 5em 0;
+    margin: 5em 0 0 5em;
     border-radius: 1em;
 
     /*Flexboxing*/
@@ -24,7 +24,7 @@
 .stea-perfilLateral-informacion{
     padding: 0;
     margin: 0;
-    color: rgb(105, 34, 58);
+    color: #6c1d45;
     background-color: #e5e9ec;
 
     /*Flexbox*/

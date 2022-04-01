@@ -1,11 +1,10 @@
 .stea-inicio-contenedor{
     overflow-y: scroll;
-    width: 60%;
+    width: 45%;
     margin: 5em 0;
     background-color: #e5e9ec;
 
-    border-radius: 2em;
-    box-shadow: 0 .3em 20px 1px rgba(2, 58, 63, 0.432);
+    box-shadow: 0 .3em 5px .5px rgba(2, 58, 63, 0.432);
 
     /*Flexbox*/
     display: flex;
@@ -52,30 +51,79 @@
 
 .stea-grupos-contenedor{
     background-color: #e5e9ec;
-    padding: 0  1.2em;
     /*Flexbox*/
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	box-sizing: border-box;
 }
 
 .stea-grupo-contenedor{
-    margin: 1.2em;
-    width: 550px;
-    height: 20%;
+    max-width: 320px;
+    min-width: 100px;
+    max-height: 250px;
+    position: relative;
+	margin-bottom: 20px; 
+
     border-radius: 1em;
+    box-shadow: 0 .3em 5px 1px  rgba(2, 58, 63, 0.432);
+    @media (max-width: 700px) {
+		width: 100%;
+	}
+	
+}
+
+.stea-grupo-imagenContenedor{
+    height: 60%;
 }
 
 .stea-grupo-imagen{
     box-sizing: border-box;
     object-fit: cover;
     border-radius: 1em 1em 0 0;
-    height: 200px;
+    height: 100%;
     width: 100%;
 }
 
+.stea-grupo-infoContenedor{
+    box-sizing: border-box;
+    height: 0;
+    overflow: hidden;
+    height: 40%;
+    background-color: white;
 
+    padding: 1em 1em;
+    border-radius: 0 0 1em 1em;
+    /*Flexbox*/
+    display: flex;
+    flex-direction: column;
+}
+
+.stea-grupo-nomMateria{
+    background-color: white;
+    font-size: 1.2em;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.stea-grupo-nomMateriaProfe{
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+.stea-grupo-numGrupo{
+    background-color: white;
+    font-size: 1.5em;
+    font-weight: 200;
+    line-height: 1.2;
+}
+
+.stea-grupo-nomProfesor{
+    background-color: white;
+    font-size: 1.2em;
+    font-weight: 400;
+}
 /*Scroll*/
 
 .stea-inicio-contenedor::-webkit-scrollbar {

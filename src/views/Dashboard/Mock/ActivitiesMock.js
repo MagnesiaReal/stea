@@ -18,7 +18,8 @@ export const actividadesMock = [
         "nombreProfesor" : "Luis Garza",
         "fechaLimite" : "18-Abril-2022 12:45",
         "nombreActividad" : "Mesoamerica",
-        "modoActividad" : "Todos contra todos"
-    }
+        "modoActividad" : "Contra todos"
+    },
+    
 ]
     
