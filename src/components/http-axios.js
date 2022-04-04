@@ -1,8 +1,10 @@
 import axios from 'axios'
 
 export default axios.create({
-    baseURL : "http://magnesiaestelar.ddns.net",
+  baseURL : "http://localhost/routes",
+  mode : 'no-cors',
     headers: {
-        "Content-type": "application/json"
+      'Access-Control-Allow-Origin': '*',
+      "Content-type": "application/json"
     }
 })
