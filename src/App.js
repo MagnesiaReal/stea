@@ -6,12 +6,11 @@ import Home from './views/Home/Home'
 import Register from './views/Register/Registrer'
 import OrdenamientoAct from './components/Ordenamiento/container/OrdenamientoAct';
 import Entrega from './views/Entrega_1/Entrega';
-
 import Session from './components/Session/Sesion'
 import User from './views/User/User'
 import ChangePass from './views/ChangePass/ChangePass'
 
-import { BrowserRouter as Router, Route, Link, Routes, Navigate, useRoutes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Routes, Navigate } from "react-router-dom";
 import { useState } from 'react';
 
 import Cookies from 'universal-cookie';
@@ -33,18 +32,16 @@ function App() {
         <Route path='/changepass/:code' element={<ChangePass/>}/>
 
         <Route path='/mapa' element={<Mapa/>}> </Route>
-        <Route path='/mapaCulturas' element={<MapaCul/>}> </Route>
-        <Route path='/mapaRegiones' element={<MapaReg/>}> </Route>
-        <Route path='/order' element={<OrdenamientoAct/>}> </Route>
+        <Route path='/mapaculturas' element={<MapaCul/>}> </Route>
+        <Route path='/maparegiones' element={<MapaReg/>}> </Route>
         <Route path='/entrega' element={<Entrega/>}> </Route>
         <Route path='/order' element={<OrdenamientoAct/>}> </Route>
-        <Route path='/entrega' element={<Entrega/>}> </Route>
         <Route path='/inicio' element={<Dashboard/>}> </Route>
       
         
         {/*System paths*/}
         <Route path='/' element={<Session cookie={cookie}/>}>
-          <Route index element={<Navigate to={`/user/${cookie.get('userId')}`}/>}/>
+          <Route index element={<Navigate to={(cookie.get('userId') !== undefined) ? `/user/${cookie.get('userId')}` : '/home'}/>}/>
           <Route path='user/:id' element={<User/>}/>
         </Route>
 

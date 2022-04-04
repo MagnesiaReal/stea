@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import NewRegister from '../../views/NewRegister/NewRegister'
 
 import { BrowserRouter as Router, Route, Link, Routes, Navigate, useRoutes } from "react-router-dom";
@@ -14,6 +14,7 @@ export default function Session(props) {
   const [loading, setLoading] = useState(true);
   const [newRegister, setNewRegister] = useState(false);
   const navigation = useNavigate();
+  const location = useLocation();
 
   useEffect(()=>{
   
@@ -51,7 +52,7 @@ export default function Session(props) {
         }
       });
 
-  });
+  }, [location]);
 
   // If new user is registered then go to NewRegister
   if(newRegister) {
