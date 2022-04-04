@@ -1,0 +1,138 @@
+.stea-inicio-contenedor{
+    overflow-y: scroll;
+    width: 45%;
+    margin: 5em 0;
+    background-color: #e5e9ec;
+
+    box-shadow: 0 .3em 5px .5px rgba(2, 58, 63, 0.432);
+
+    /*Flexbox*/
+    display: flex;
+    flex-direction: column;
+}
+
+.stea-barraBusquedaDashboard-contenedor{
+    width: 100%;
+    background-color: #e5e9ec;
+}
+
+.stea-barraBusquedaDashboard-form{
+    background-color: #e5e9ec;
+    padding: 1.2em;
+
+    /*Flexbox*/
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.stea-barraBusquedaDashboard-barra{
+    margin: 1.2em;
+    width: 80%;
+    height: 2.2em;
+
+    border: 0;
+    border-radius: 20px;
+    box-shadow: 0 .3em 10px .5px inset rgba(2, 58, 63, 0.432);
+    background-color: white;
+}
+
+.stea-barraBusquedaDashboard-boton{
+    width: 12%;
+    height: 2em;
+
+    background-color: #6c1d45;
+    color: white;
+    border: 0;
+    border-radius: 20px;
+    box-shadow: 0 .3em 20px 1px rgba(63, 2, 10, 0.432);
+}
+
+.stea-grupos-contenedor{
+    background-color: #e5e9ec;
+    /*Flexbox*/
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+	box-sizing: border-box;
+}
+
+.stea-grupo-contenedor{
+    max-width: 320px;
+    min-width: 100px;
+    max-height: 250px;
+    position: relative;
+	margin-bottom: 20px; 
+
+    border-radius: 1em;
+    box-shadow: 0 .3em 5px 1px  rgba(2, 58, 63, 0.432);
+    @media (max-width: 700px) {
+		width: 100%;
+	}
+	
+}
+
+.stea-grupo-imagenContenedor{
+    height: 60%;
+}
+
+.stea-grupo-imagen{
+    box-sizing: border-box;
+    object-fit: cover;
+    border-radius: 1em 1em 0 0;
+    height: 100%;
+    width: 100%;
+}
+
+.stea-grupo-infoContenedor{
+    box-sizing: border-box;
+    height: 0;
+    overflow: hidden;
+    height: 40%;
+    background-color: white;
+
+    padding: 1em 1em;
+    border-radius: 0 0 1em 1em;
+    /*Flexbox*/
+    display: flex;
+    flex-direction: column;
+}
+
+.stea-grupo-nomMateria{
+    background-color: white;
+    font-size: 1.2em;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.stea-grupo-nomMateriaProfe{
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+.stea-grupo-numGrupo{
+    background-color: white;
+    font-size: 1.5em;
+    font-weight: 200;
+    line-height: 1.2;
+}
+
+.stea-grupo-nomProfesor{
+    background-color: white;
+    font-size: 1.2em;
+    font-weight: 400;
+}
+/*Scroll*/
+
+.stea-inicio-contenedor::-webkit-scrollbar {
+    width: 5px;
+}
+.stea-inicio-contenedor::-webkit-scrollbar-thumb {
+    background-color: #797979;
+    border-radius: 20px;
+}
+.stea-inicio-contenedor::-webkit-scrollbar-track {
+    border-radius: 10px;  
+}

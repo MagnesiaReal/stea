@@ -6,6 +6,7 @@ import Home from './views/Home/Home'
 import Register from './views/Register/Registrer'
 import OrdenamientoAct from './components/Ordenamiento/container/OrdenamientoAct';
 import Entrega from './views/Entrega_1/Entrega';
+
 import Session from './components/Session/Sesion'
 import User from './views/User/User'
 import ChangePass from './views/ChangePass/ChangePass'
@@ -15,12 +16,14 @@ import { useState } from 'react';
 
 import Cookies from 'universal-cookie';
 
+import Dashboard from './views/Dashboard/Dashboard';
+
 function App() {
 
   const cookie = new Cookies();
  
   // Rutas sin login
-  return ( 
+  return (
     <Router>
       <Routes>
         {/*Rutas de usuario*/}
@@ -34,6 +37,10 @@ function App() {
         <Route path='/mapaRegiones' element={<MapaReg/>}> </Route>
         <Route path='/order' element={<OrdenamientoAct/>}> </Route>
         <Route path='/entrega' element={<Entrega/>}> </Route>
+        <Route path='/order' element={<OrdenamientoAct/>}> </Route>
+        <Route path='/entrega' element={<Entrega/>}> </Route>
+        <Route path='/inicio' element={<Dashboard/>}> </Route>
+      
         
         {/*System paths*/}
         <Route path='/' element={<Session cookie={cookie}/>}>
@@ -45,6 +52,7 @@ function App() {
         
       </Routes>
     </Router> );
+
 }
 
 export default App;
