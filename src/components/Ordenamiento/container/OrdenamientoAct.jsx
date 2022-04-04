@@ -32,7 +32,7 @@ const OrdenamientoAct = () => {
 
 
 
-  return <div className='contenedor'>
+  return <div className='.stea-ordenamientoContenedor-Padding'>
     <h2>Pregunta {question.id}-.</h2>
     <h3>{question.pregunta}</h3>
     <Placeholder>a</Placeholder>
