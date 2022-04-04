@@ -1,0 +1,54 @@
+.register-stea{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  color: white;
+  background-image: linear-gradient(to bottom right, #3B595F, white);
+}
+
+.register-stea #propiedades-stea{
+  background-color: #3B6978;
+  border-radius: 3px;
+  position: relative;
+  box-shadow: rgba(0, 0, 0, 1) 0px 0px 15px;
+}
+
+.stea-register-desc {
+  border-radius: 10px;
+  background-color: #A1BCBF;
+  color: black;
+}
+
+.stea-register-desc > p {
+  padding: 10px;
+}
+
+.register-stea .stea-input-error {
+  border: 2px solid #E96;
+}
+
+.register-stea small {
+  color: #EE9966;
+  font-weight: bold;
+}
+
+.stea-register-input-text {
+  border-radius: 10px;
+  border: 2px solid #AEB4BA;
+  padding: 0.375rem 0.75rem;
+  margin: 10px;
+}
+
+
+a:visited#stea-register-resend {
+  color: black;
+}
+
+a:focus#stea-register-resend {
+  color: black;
+}
+
+a:hover#stea-register-resend {
+  color: white;
+}
+

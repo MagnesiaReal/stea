@@ -1,0 +1,21 @@
+.stea-newregister-desc {
+  border-radius: 10px;
+  height: 120px;
+  background-color: #A1BCBF;
+  color: black;
+}
+
+.stea-newregister-img {
+  width: 200px;
+  display: flex;
+  justify-content: center;
+}
+
+.stea-newregister-img > img {
+  border-radius: 10px;
+  height: 200px;
+}
+
+.stea-newregister-desc > p {
+  padding: 10px;
+}
