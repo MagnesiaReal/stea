@@ -24,7 +24,7 @@ export default function Session(props) {
         console.log("SESSION>> ", res.data.message);
         const avatarId = props.cookie.get('avatarId');
 
-        if(avatarId === "null" || avatarId === null) {
+        if(avatarId === 'null' || avatarId === null) {
 
           console.log("SESSION>> finishing the new user register");
           setNewRegister(true);
@@ -48,6 +48,10 @@ export default function Session(props) {
           props.cookie.remove('avatarId', {path: '/'});
 
           navigation('/home');
+
+        } else {
+          
+          console.log("SESSION>> Wow unknown error,be carefull");
 
         }
       });

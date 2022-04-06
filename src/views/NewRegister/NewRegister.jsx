@@ -54,7 +54,7 @@ export default class NewRegister extends react.Component{
       console.log("NEWREGISTER>> response: ", res.data);
       this.props.cookie.set('avatarId', this.state.i+1, { path: '/' });
       this.props.cookie.set('configuration', JSON.stringify({algo:1}), {path: '/'});
-      this.props.cookie.set('photo', null, {path: '/'});
+      
       
       this.props.navigation(`/user/${this.props.cookie.get('userId')}`);
       this.props.setNewRegister(false);
@@ -114,7 +114,7 @@ export default class NewRegister extends react.Component{
 
     );
     else return (
-      <h2>Loading data jajajsjdf </h2>
+      <h2>Loading data</h2>
     );
   }
 }

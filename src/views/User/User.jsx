@@ -1,19 +1,21 @@
-import react from 'react'
+import {useEffect, useState} from 'react';
 
-export default class User extends react.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      something: 1
-    }
-  }
+import ProfileDashboard from '../Dashboard/myProfile/ProfileDashboard';
+import GroupsDashboard from '../Dashboard/myGroups/GroupsDashboard';
+import ActivitiesDashboard from '../Dashboard/myActivities/ActivitiesDashboard';
 
-  render() {
-    return(
-      <div>
-        <h2>Estas en user alv</h2>
-      </div>
-    );
-  }
+import AXIOS from '../../components/http-axios'
+
+
+export default function User (props) {
+  
+  
+  return(
+    <div className='stea-dashboard-contenedor'>
+      <ProfileDashboard/>
+      <GroupsDashboard/>
+      <ActivitiesDashboard />
+    </div>
+  );
   
 }

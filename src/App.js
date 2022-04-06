@@ -42,7 +42,7 @@ function App() {
         {/*System paths*/}
         <Route path='/' element={<Session cookie={cookie}/>}>
           <Route index element={<Navigate to={(cookie.get('userId') !== undefined) ? `/user/${cookie.get('userId')}` : '/home'}/>}/>
-          <Route path='user/:id' element={<User/>}/>
+          <Route path='user/:id' element={<User cookie={cookie}/>}/>
         </Route>
 
         <Route exact path='*' element={<Navigate to='/home'/>}/>

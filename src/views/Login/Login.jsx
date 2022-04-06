@@ -31,7 +31,7 @@ class WrappedLogin extends React.Component{
       email: this.state.email,
       pass: this.state.pass
     }
-    AXIOS.put('/login',userCredentials)
+    AXIOS.post('/login',userCredentials)
       .then(res => {
 
         if(res.data){
@@ -44,7 +44,6 @@ class WrappedLogin extends React.Component{
           this.props.cookie.set('email', this.state.email, {path: '/'});
           this.props.cookie.set('born', res.data.userData.nacimiento, {path: '/'});
           this.props.cookie.set('admin', res.data.userData.admin, {path: '/'});
-          this.props.cookie.set('photo', res.data.userData.foto, {path: '/'});
           this.props.cookie.set('configuration', res.data.userData.configuration, {path: '/'});
           this.props.cookie.set('avatarId', res.data.userData.idAvatar, {path: '/'});
           

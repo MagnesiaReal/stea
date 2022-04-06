@@ -1,10 +1,17 @@
-import React from 'react'
+import {useEffect, useState} from 'react';
 //Importando el mock
 import { profile } from '../Mock/ProfileMock'
 //CSS
 import './ProfileDashboard.css'
 
-const ProfileDashboard = () => {
+import AXIOS from '../../../components/http-axios'
+import Cookies from 'universal-cookie'
+
+
+const ProfileDashboard = (props) => {
+
+  const [avatarUrl, setAvatarUrl] = useState(props.avatarUrl);
+
   return (
     <div className='stea-perfilLateral-contenedor'>
       <img alt={profile.nombre} src={profile.imagen} className='stea-perfilLateral-img'></img>

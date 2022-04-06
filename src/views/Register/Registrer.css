@@ -39,6 +39,9 @@
   margin: 10px;
 }
 
+a#stea-register-resend {
+  color:black;
+}
 
 a:visited#stea-register-resend {
   color: black;

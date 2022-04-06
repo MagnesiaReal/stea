@@ -96,7 +96,6 @@ class WrappedRegister extends React.Component {
           this.props.cookie.set('email', this.state.email, { path: '/'});
           this.props.cookie.set('born', this.state.born, { path: '/'});
           this.props.cookie.set('admin', 0, { path: '/'});
-          this.props.cookie.set('photo', null, { path: '/'});
           this.props.cookie.set('configuration', null, { path: '/'});
           this.props.cookie.set('avatarId', null, { path: '/'});
 
@@ -158,7 +157,7 @@ class WrappedRegister extends React.Component {
   onRegister(e){
     e.preventDefault();
     console.log("REGISTER>> Registering user");
-    if(passwordStrength(this.state.pass, this.passOptions).id < 2) {
+    if(passwordStrength(this.state.pass, this.passOptions).id < 1) {
       
       this.setState({passInfo: <small>* La contraseña debe ser medianamente fuerte</small>});
       return;
@@ -370,7 +369,7 @@ class WrappedRegister extends React.Component {
                 </div>
 
                 <div className="col-12 p-1" align="center">
-                  <input type="submit" value="Entrar" className="btn btn-dark"/>
+                  <input type="submit" value="Registrar" className="btn btn-dark"/>
                 </div>
               </div>
             </form>
