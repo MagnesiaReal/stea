@@ -6,7 +6,7 @@ import Home from './views/Home/Home'
 import Register from './views/Register/Registrer'
 import OrdenamientoAct from './components/Ordenamiento/container/OrdenamientoAct';
 import Entrega from './views/Entrega_1/Entrega';
-import Session from './components/Session/Sesion'
+import Session from './services/Session/Sesion'
 import User from './views/User/User'
 import ChangePass from './views/ChangePass/ChangePass'
 
@@ -16,6 +16,7 @@ import { useState } from 'react';
 import Cookies from 'universal-cookie';
 
 import Dashboard from './views/Dashboard/Dashboard';
+import Group from './views/Group/Group.jsx'
 
 function App() {
 
@@ -43,6 +44,8 @@ function App() {
         <Route path='/' element={<Session cookie={cookie}/>}>
           <Route index element={<Navigate to={(cookie.get('userId') !== undefined) ? `/user/${cookie.get('userId')}` : '/home'}/>}/>
           <Route path='user/:id' element={<User cookie={cookie}/>}/>
+          <Route path='group/:groupId' element={<Group cookie={cookie}/>}/>
+          <Route exact path='*' element={<Navigate to={(cookie.get('userId') !== undefined) ? `/user/${cookie.get('userId')}` : '/home'}/>}/> 
         </Route>
 
         <Route exact path='*' element={<Navigate to='/home'/>}/>

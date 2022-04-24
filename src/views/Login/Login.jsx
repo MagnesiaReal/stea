@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import AXIOS from '../../components/http-axios'
+import AXIOS from '../../services/http-axios'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 
 import './Login.css'

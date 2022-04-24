@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import AXIOS from '../../components/http-axios'
+import AXIOS from '../../services/http-axios'
 import { useNavigate } from 'react-router-dom'
 import { passwordStrength } from 'check-password-strength'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

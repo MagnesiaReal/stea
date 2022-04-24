@@ -11,8 +11,8 @@ class RespCoin extends react.Component {
   render() {
     
     return (
-      <div className="uunuur">
-        soy un texto alv
+      <div className="">
+      
       </div>
     );
   }

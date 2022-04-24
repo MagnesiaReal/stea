@@ -2,9 +2,8 @@ import {useEffect, useState} from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import NewRegister from '../../views/NewRegister/NewRegister'
 
-import { BrowserRouter as Router, Route, Link, Routes, Navigate, useRoutes } from "react-router-dom";
-
 import AXIOS from '../http-axios'
+import UserHeader from "../../components/UserHeader/UserHeader";
 
 //This component works for make sure user is on Session, if not this components denied the access and return the user to home and perform some operations.
 
@@ -66,7 +65,9 @@ export default function Session(props) {
   }
 
   // Else go to main system
-  return(<>
+  return(
+    <>
+      <UserHeader/>
       <Outlet/>
     </>);
 

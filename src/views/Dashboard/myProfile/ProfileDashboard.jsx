@@ -4,9 +4,6 @@ import { profile } from '../Mock/ProfileMock'
 //CSS
 import './ProfileDashboard.css'
 
-import AXIOS from '../../../components/http-axios'
-import Cookies from 'universal-cookie'
-
 
 const ProfileDashboard = (props) => {
 

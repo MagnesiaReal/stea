@@ -3,7 +3,7 @@ import {useParams, useNavigate} from 'react-router-dom';
 import { passwordStrength } from 'check-password-strength';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import AXIOS from '../../components/http-axios';
+import AXIOS from '../../services/http-axios';
 
 
 class WrappedChangePass extends React.Component {

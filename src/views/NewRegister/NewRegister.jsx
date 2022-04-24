@@ -2,7 +2,7 @@ import react from 'react'
 
 import './NewRegister.css'
 
-import AXIOS from '../../components/http-axios'
+import AXIOS from '../../services/http-axios'
 
 export default class NewRegister extends react.Component{
   constructor(props) {

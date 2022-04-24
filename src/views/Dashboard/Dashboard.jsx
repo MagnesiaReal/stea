@@ -4,7 +4,6 @@ import ProfileDashboard from './myProfile/ProfileDashboard'
 import GroupsDashboard from './myGroups/GroupsDashboard'
 import ActivitiesDashboard from './myActivities/ActivitiesDashboard';
 
-import AXIOS from '../../components/http-axios'
 
 import './Dashboard.css'
 
