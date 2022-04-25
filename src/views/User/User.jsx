@@ -17,11 +17,12 @@ export default function User (props) {
   const [groupName, setGroupName] = useState("");
   const [group, setGroup] = useState("");
   const [allGroups, setAllGroups] = useState([]);
+  
+  const [update, setUpdate] = useState();
 
+  useEffect(()=>{ // componentDidMount
 
-  useEffect(()=>{
-
-    AXIOS.post('/usergroups', {userId: props.cookie.get('userId'), uuid: props.cookie.get('UUID')})
+    AXIOS.post('/usergroups', {userId: props.cookie.get('userId'), UUID: props.cookie.get('UUID')})
     .then((res) => {
     if(res.status === 204) {
       console.log('No Groups content');
@@ -31,7 +32,7 @@ export default function User (props) {
     }
 
     }).catch((err)=> {
-      if(err) throw err;
+      console.log(`Error code (${err.response.status}) message: ${err.response.data.message}`);
     });  
 
   },[]);
