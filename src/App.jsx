@@ -9,6 +9,7 @@ import Entrega from './views/Entrega_1/Entrega';
 import Session from './services/Session/Sesion'
 import User from './views/User/User'
 import ChangePass from './views/ChangePass/ChangePass'
+import GroupConf from './views/GroupConf/GroupConf'
 
 import { BrowserRouter as Router, Route, Link, Routes, Navigate } from "react-router-dom";
 import { useState } from 'react';
@@ -45,6 +46,7 @@ function App() {
           <Route index element={<Navigate to={(cookie.get('userId') !== undefined) ? `/user/${cookie.get('userId')}` : '/home'}/>}/>
           <Route path='user/:id' element={<User cookie={cookie}/>}/>
           <Route path='group/:groupId' element={<Group cookie={cookie}/>}/>
+          <Route path='groupconf/:groupId' element={<GroupConf cookie={cookie}/>}/>
           <Route exact path='*' element={<Navigate to={(cookie.get('userId') !== undefined) ? `/user/${cookie.get('userId')}` : '/home'}/>}/> 
         </Route>
 

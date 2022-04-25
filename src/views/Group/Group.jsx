@@ -27,7 +27,7 @@ export default function Group(props) {
   const onConfig = (e) => {
     e.preventDefault();
     console.log('onConfigGroup');
-    navigation(`/groupconf/${props.cookie.get('userId')}`);
+    navigation(`/groupconf/${params.groupId}`);
   }
 
 
@@ -38,7 +38,7 @@ export default function Group(props) {
       <p>Genera tu liga de acceso {">>>>"} </p>
       <button className="btn btn-dark" onClick={onAccessLink}>Liga de Acceso</button>
 
-      <p>Configuracion grupo <button className="btn btn-dark">Go Config</button></p>
+      <p>Configuracion grupo <button className="btn btn-dark" onClick={onConfig}>Go Config</button></p>
 
     </div>
 
