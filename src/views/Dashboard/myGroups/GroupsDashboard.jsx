@@ -23,7 +23,7 @@ const GroupsDashboard = () => {
                 <img src={grupo.imagen} alt={grupo.grupo} className='stea-grupo-imagen'></img>
               </div>
               <div className='stea-grupo-infoContenedor'>
-                <p className='stea-grupo-nomMateria'>{grupo.nombreMateria}</p>  
+                <p className='stea-grupo-nomMateria'>A{grupo.nombreMateria}</p>  
                 <div className='stea-grupo-nomMateriaProfe'>
                   <p className='stea-grupo-numGrupo'>{grupo.grupo}</p>
                   <p className='stea-grupo-nomProfesor'>{grupo.nombreProfesor}</p>

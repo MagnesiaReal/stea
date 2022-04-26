@@ -2,22 +2,25 @@
     overflow-y: scroll;
     width: 45%;
     margin: 5em 0;
-    background-color: #e5e9ec;
+    background-color: white;
 
     box-shadow: 0 .3em 5px .5px rgba(2, 58, 63, 0.432);
 
+    position: relative;
+    box-sizing: border-box;
     /*Flexbox*/
     display: flex;
     flex-direction: column;
 }
 
 .stea-barraBusquedaDashboard-contenedor{
+    position: relative;
     width: 100%;
-    background-color: #e5e9ec;
+    background-color: white;
 }
 
 .stea-barraBusquedaDashboard-form{
-    background-color: #e5e9ec;
+    background-color: white;
     padding: 1.2em;
 
     /*Flexbox*/
@@ -50,7 +53,7 @@
 }
 
 .stea-grupos-contenedor{
-    background-color: #e5e9ec;
+    background-color: white;
     /*Flexbox*/
 	display: flex;
 	justify-content: space-around;
@@ -60,7 +63,7 @@
 
 .stea-grupo-contenedor{
     max-width: 320px;
-    min-width: 100px;
+    min-width: 80px;
     max-height: 250px;
     position: relative;
 	margin-bottom: 20px; 
@@ -135,4 +138,36 @@
 }
 .stea-inicio-contenedor::-webkit-scrollbar-track {
     border-radius: 10px;  
+}
+
+@media (max-width: 1200px) {
+
+    .stea-inicio-contenedor{
+        margin: 1em 0;
+        width: 100%;
+        background-color: white;
+        box-shadow: 0 .3em 5px .5px rgba(2, 58, 63, 0.432);
+    
+        box-sizing: content-box;
+        /*Flexbox*/
+        display: flex;
+        flex-direction: column;
+    }
+
+    .stea-barraBusquedaDashboard-contenedor{
+        position: relative;
+        width: 100%;
+        background-color: white;
+    }
+
+    .stea-grupos-contenedor{
+        background-color: white;
+        /*Flexbox*/
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
 }

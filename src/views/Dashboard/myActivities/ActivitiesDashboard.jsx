@@ -7,7 +7,7 @@ const ActivitiesDashboard = () => {
       <p className='stea-actividadesPendientes-title'>Actividades pendientes</p>
       { actividadesMock.map( (actividad,index) => {
         return(
-          <div id={index} className='stea-actividadPendiente-container'>
+          <div key={index} className='stea-actividadPendiente-container'>
             <div className='stea-actividadPendiente-info'>
               <p className='stea-actividadPendiente-nombre'>
                 {actividad.nombreActividad}

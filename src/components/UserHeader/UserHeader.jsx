@@ -2,6 +2,9 @@ import AXIOS from '../../services/http-axios';
 import Cookies from 'universal-cookie'
 import {useNavigate} from 'react-router-dom';
 
+import './UserHeader.css'
+import { useState } from 'react';
+
 export default function UserHeader(porps) {
     
   const cookie = new Cookies();
@@ -23,11 +26,19 @@ export default function UserHeader(porps) {
     navigation('/home');    
   }
 
+  const [open, setOpen] = useState(false);
+
+  const handleClick = () => {
+    setOpen(!open)
+  }
 
   return (
-    <>
-      <h2>Basic Header</h2> <button className="btn btn-dark">Configuracion</button>
-      <button className="btn btn-primary" onClick={onSignOut}>Cerrar Sesion</button>
-    </>
+    <div className='stea-userHeader-header'>
+      <h2>STEA</h2> 
+      <div className='stea-userHeader-buttonsContainer'>
+        <button className="stea-user-configurationButton">Configuracion</button>
+        <button className="stea-user-sessionButton" onClick={onSignOut}>Cerrar Sesion</button>
+      </div>
+    </div>
   );
 }
