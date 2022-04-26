@@ -13,3 +13,8 @@
 .mapadiv :hover{
     fill:rgb(38, 6, 56);
 }
+[data-escondido="fade"]{
+    opacity: 0;
+    transition: 10s;
+}
+

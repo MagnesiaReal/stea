@@ -1,0 +1,253 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');
+
+
+.stea-home{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.stea-home header{
+    width: 100%;
+    height: 80px;
+    margin-top: 40px;
+    position: fixed;
+    z-index: 1;
+    padding: 40px;
+    margin-bottom: 0px;
+}
+
+.stea-home .container__menu{
+    max-width: 1200px;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.stea-home .logo{
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.stea-home .logo img{
+    width: 60px;
+
+}
+
+.stea-home .menu{
+    display: flex;
+    align-items: center;
+}
+
+.stea-home .menu ul{
+    display: flex;
+}
+
+.stea-home .menu ul li{
+    list-style: none;
+    margin-left: 36px;
+}
+
+.stea-home .menu ul li a{
+    text-decoration: none;
+    font-size: 16px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.stea-home #selected{
+    background: rgb(1, 69, 103);
+    padding: 10px 40px;
+    border-radius: 50px;
+}
+
+.stea-home footer{
+    height: 100vh;
+    background-color: #069;
+    margin: 0px;
+}
+.stea-home main{
+    margin: 0px;
+}
+
+
+/*COVER*/
+
+
+.stea-home .container__cover{
+    width: 100%;
+    height: 90vh;
+    background-image: url(../../images/Background-page.svg);
+    background-position: right;
+    background-repeat: no-repeat;
+    padding: 40px;
+}
+
+.stea-home .cover{
+    max-width: 1200px;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.stea-home .container__cover .text{
+    max-width: 400px;
+}
+
+.stea-home .container__cover .text h1{
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.stea-home .container__cover .text p{
+    font-size: 18px;
+    margin-top: 40px;
+}
+
+.stea-home .container__cover .text input{
+    padding: 18px 80px;
+    border: none;
+    font-size: 16px;
+    border-radius: 50px;
+    margin-top: 40px;
+    background: linear-gradient(to right, rgb(118, 193, 230), #069);
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 1px 1px 30px -12px #069;
+    transition: all 300ms;
+}
+
+.stea-home .container__cover .text input:hover{
+    box-shadow: 1px 1px 30px -6px #069;
+}
+
+
+.stea-home .container__cover .svg img{
+    width: 600px;
+    animation: move-vector 4s linear infinite;
+}
+
+@keyframes move-vector {
+    0%{
+        transform: translateY(15px);
+    }50%{
+        transform: translateY(0px);
+    }100%{
+        transform: translateY(15px);
+    }
+}
+
+/*Haciendo la página Responsive*/
+@media screen and (max-width: 1700px){
+
+    .stea-home .container__cover{
+        background-position: 50%;
+    }
+
+}
+
+@media screen and (max-width:1200px){
+
+    .stea-home header{
+        padding: 40px;
+    }
+
+    .stea-home .container__cover{
+        background-position: -100px;
+    }
+
+    .stea-home .container__cover .svg img{
+        width: 500px;
+    }
+
+}
+
+@media screen and (max-width: 1133px){
+
+    .stea-home .container__cover{
+        background-image: url("");
+        background-color: #069;
+    }
+
+    .stea-home .container__cover .svg img{
+        display: none;
+    }
+
+    .stea-home .container__cover .text{
+        max-width: 600px;
+    }
+
+}
+
+@media screen and (max-width: 720px){
+
+    .stea-home .menu nav{
+        position: fixed;
+        top: 0;
+        right: -250px;
+        background: white;
+        width: 250px;
+        height: 100vh;
+        padding: 40px;
+        z-index: 1;
+        transition: all 300ms;
+    }
+
+    .stea-home .menu ul{
+        flex-direction: column;
+        margin-top: 40px;
+    }
+
+    .stea-home .menu ul li{
+        margin-top: 30px;
+        margin-left: 0;
+    }
+
+    .stea-home .menu ul li a{
+        color: #bebebe;
+    }
+
+    .stea-home #selected{
+        background: none;
+        padding: 0px;
+        border-radius: none;
+        color: #069;
+    }
+
+    .stea-home .menu nav img{
+        display: block;
+        width: 60px;
+    }
+
+    .stea-home #back_menu{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0,0,0,0.5);
+        display: none;
+    }
+
+    .stea-home .menu #btn_menu{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.1);
+        font-size: 24px;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 300ms;
+    }
+
+    .stea-home .menu #btn_menu:hover{
+        background: rgba(255, 255, 255, 0.2);
+    }
+}

@@ -3,11 +3,11 @@
   display: flex;
   align-items: center;
   color: white;
-  background-image: linear-gradient(to bottom right, #3B595F, white);
+  background-image: linear-gradient(to bottom right, #069, white);
 }
 
 .register-stea #propiedades-stea{
-  background-color: #3B6978;
+  background-color: #069;
   border-radius: 3px;
   position: relative;
   box-shadow: rgba(0, 0, 0, 1) 0px 0px 15px;

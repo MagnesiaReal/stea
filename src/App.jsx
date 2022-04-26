@@ -18,6 +18,7 @@ import Cookies from 'universal-cookie';
 
 import Dashboard from './views/Dashboard/Dashboard';
 import Group from './views/Group/Group.jsx'
+import MapaEditor from './views/Editor/MapaEditor/MapaEditor.jsx'
 
 function App() {
 
@@ -32,6 +33,8 @@ function App() {
         <Route path='/login' element={<Login cookie={cookie}/>}/>
         <Route path='/register' element={<Register cookie={cookie}/>}/>
         <Route path='/changepass/:code' element={<ChangePass/>}/>
+
+        <Route path='/editortest' element={<MapaEditor/>}/>
 
         <Route path='/mapa' element={<Mapa/>}> </Route>
         <Route path='/mapaculturas' element={<MapaCul/>}> </Route>

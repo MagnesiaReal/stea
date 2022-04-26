@@ -7,7 +7,7 @@ import ActivitiesDashboard from './myActivities/ActivitiesDashboard';
 
 import './Dashboard.css'
 
-import Cookies from 'universal-cookie';
+
 
 
 const Dashboard = () => {

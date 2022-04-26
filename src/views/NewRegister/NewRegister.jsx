@@ -28,7 +28,7 @@ export default class NewRegister extends react.Component{
       this.setState({loadingImgs: true, avatars: res.data.avatars})
 
     }).catch((err)=>{
-      if(err) throw err;
+      console.log("Aqui estoy :D",err.response.status,err.response.data.message)
     })
     
 
