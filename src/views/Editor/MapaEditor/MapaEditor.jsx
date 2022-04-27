@@ -49,7 +49,7 @@ export default function MapaEditor (props) {
     e.preventDefault();
     const preg={
       ID:i++,
-      Cuerpo:a,
+      Cuerpo:"nothing",
     }
   }
 
