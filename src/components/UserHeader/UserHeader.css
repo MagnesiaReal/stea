@@ -1,7 +1,7 @@
 .stea-userHeader-header{
     font-family: 'Josefin Sans', sans-serif !important;   
-    position: fixed;
-
+    position: absolute;
+    top: 0;
     min-width: 100%;
     max-width: 100%;
     background-color: white;

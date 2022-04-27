@@ -2,6 +2,9 @@ import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import AXIOS from '../../services/http-axios';
 
+//css
+import './GroupConf.css'
+
 export default function GroupConf(props) {
   const params = useParams(); 
   const navigation = useNavigate();
@@ -47,28 +50,36 @@ export default function GroupConf(props) {
 
 
   return(
-    <>
-      <hr/>
-      <h2>GroupConf Component</h2>
-      <article>
-        Aqui estaran las configuraciones de grupo
-        por ahora solo cuenta con 3 operaciones
-        <ol>
-          <li>ADD USER</li>
-          <li>DELETE USER</li>
-          <li>GRANT OR REVOQUE PRIVILEGES TO USER</li>
-        </ol>
-        y otra para borrar el grupo xd
-      </article>
-      <button className="btn btn-danger">Borrar Grupo</button>
-      
-      <ul>
-        <li>Aqui deberia ir un lista de usuarios con su respectivo rol (participante, administrador o propietario)</li>
-      </ul>
+    <div className="stea-groupConfig">
+      <div className="stea-groupConfig-container">
+        <div className="stea-groupConfig-information">
+          <h2>GroupConf Component</h2>
+          <div>
+            Aqui estaran las configuraciones de grupo
+            por ahora solo cuenta con 3 operaciones
+            <ol>
+              <li>ADD USER</li>
+              <li>DELETE USER</li>
+              <li>GRANT OR REVOQUE PRIVILEGES TO USER</li>
+              <button className="btn btn-danger">Borrar Grupo</button>
+            </ol>
+            y otra para borrar el grupo xd
+          </div>
+        </div>
+        <ul className="stea-groupConfig-userList">
+          <li className="stea-groupConfig-userElement">
+            <img src="https://miro.medium.com/max/336/1*N7hOZYrSOKRha4WXnzwRqw.png" className="stea-groupConfig-image"/>
+            <p>Angel Francisco Merlin Solis</p>
+            <p>Administrador</p> 
+            {/* participante, administrador o propiertario */}
+          </li>
+          
+        </ul>
+      </div>
 
 
 
 
-    </>
+    </div>
   );
 }
