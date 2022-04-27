@@ -9,6 +9,8 @@ import ModalAccess from './ModalAccess/ModalAccess'
 import AXIOS from '../../services/http-axios'
 //Mock temporal import
 import { gruposMock } from '../Dashboard/Mock/GroupsMock'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCirclePlus, faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons'
 
 export default function User (props) {
 
@@ -64,8 +66,14 @@ export default function User (props) {
       <div className='stea-inicio-contenedor'>
         <div className='stea-barraBusquedaDashboard-contenedor'>
           <form className='stea-barraBusquedaDashboard-form' action="#">
-            <button className="stea-barrraBusquedaDashboard-boton" onClick={onCreateGroup} data-toggle="modal" data-target="#stea-group-modal" >Crear Grupo (+)</button>
-            <button className="stea-barrraBusquedaDashboard-boton" onClick={onAccessGroup} data-toggle="modal" data-target="#stea-access-modal" >Acceder a Grupo (+)</button>
+            <button className="stea-barrraBusquedaDashboard-boton" onClick={onCreateGroup} data-toggle="modal" data-target="#stea-group-modal" >
+              Crear Grupo &nbsp;&nbsp;
+              <FontAwesomeIcon icon={faCirclePlus}  />
+            </button>
+            <button className="stea-barrraBusquedaDashboard-boton" onClick={onAccessGroup} data-toggle="modal" data-target="#stea-access-modal" >
+              Acceder a Grupo  &nbsp;&nbsp;
+              <FontAwesomeIcon icon={faArrowRightToBracket} />
+            </button>
           </form>
         </div>
         <div className='stea-grupos-contenedor'>
