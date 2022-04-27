@@ -1,0 +1,24 @@
+.stea-group{
+    background-color: #e5e9ec;
+
+    margin: 4em 0;
+    position: absolute;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+}
+
+.stea-group-container{
+    background-color: white;
+    position: relative;
+
+    min-width: 94%;
+    max-width: 100%;
+    margin: 3em;
+    
+
+    border-radius: 1em;
+    /*flexbox*/
+    display: flex;
+    justify-content: space-between;
+}

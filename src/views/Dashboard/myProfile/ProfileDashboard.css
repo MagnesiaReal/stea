@@ -1,16 +1,16 @@
 .stea-perfilLateral-contenedor{
     width: 18%;
     height: 24em;
-    margin: 5em 0 0 5em;
+    margin: 5em 0 0 2em;
     border-radius: 1em;
-
+    box-sizing: border-box;
     /*Flexboxing*/
     display: flex;
     flex-direction: column;
     align-items: center;
 
     box-shadow: 0 .3em 20px 1px rgba(2, 58, 63, 0.432);
-    background-color: #e5e9ec;
+    background-color: white;
 }
 
 .stea-perfilLateral-img {
@@ -25,7 +25,7 @@
     padding: 0;
     margin: 0;
     color: #6c1d45;
-    background-color: #e5e9ec;
+    background-color: white;
 
     /*Flexbox*/
     display: flex;
@@ -34,7 +34,7 @@
 }
 
 .stea-perfilLateral-name{
-    background-color: #e5e9ec;
+    background-color: white;
     width: 50%;
     margin: .8em 0;
     font-size: 1.4em;
@@ -42,12 +42,69 @@
 }
 
 .stea-perfilLateral-semestre{
-    background-color: #e5e9ec;
+    background-color: white;
     width: 25%;
     font-size: 1.2em;
     font-weight: 300;
     text-align: center;
 }
 
+@media (max-width: 1200px) {
+    .stea-perfilLateral-contenedor{
+        width: 100%;
+        max-height: 10em;
+        box-sizing: border-box;
+        margin: 5em 0 0 0;
+        padding: 0;
+        box-sizing: border-box;
+        /*Flexboxing*/
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 .3em 20px 1px rgba(2, 58, 63, 0.432);
+        background-color: white;
+    }
+
+    .stea-perfilLateral-informacion{
+        padding: 0;
+        margin: 0 1em;
+        color: #6c1d45;
+        background-color: white;
+    
+        /*Flexbox*/
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .stea-perfilLateral-name{
+        background-color: white;
+        width: 100%;
+        margin: .8em 0;
+        font-size: 1em;
+        font-weight: 500;
+    }
+
+    .stea-perfilLateral-semestre{
+        background-color: white;
+        width: 100%;
+        font-size: 1.2em;
+        font-weight: 300;
+        text-align: center;
+    }
+
+    .stea-perfilLateral-img {
+        width: 20%;
+        height: auto;
+
+        max-width: 150px;
+        object-fit: contain;
+        box-shadow: 0 .3em 20px 1px rgba(2, 58, 63, 0.432);
+        border-radius: 50%;
+        margin: 2em 0;
+    }
+}
 
 

@@ -1,6 +1,9 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import AXIOS from '../../services/http-axios'
 
+//css
+import './Group.css'
+
 export default function Group(props) {
   
   const navigation = useNavigate();
@@ -32,13 +35,15 @@ export default function Group(props) {
 
 
   return(
-    <div>
-      <h2>Group Component</h2><br/>
+    <div className='stea-group'>
+      <div className='stea-group-container'>
+        <h2>Group Component</h2><br/>
 
-      <p>Genera tu liga de acceso {">>>>"} </p>
-      <button className="btn btn-dark" onClick={onAccessLink}>Liga de Acceso</button>
+        <p>Genera tu liga de acceso {">>>>"} </p>
+        <button className="btn btn-dark" onClick={onAccessLink}>Liga de Acceso</button>
 
-      <p>Configuracion grupo <button className="btn btn-dark" onClick={onConfig}>Go Config</button></p>
+        <p>Configuracion grupo <button className="btn btn-dark" onClick={onConfig}>Go Config</button></p>
+      </div>
 
     </div>
 

@@ -1,21 +1,25 @@
 .stea-actividadesPendientes-contenedor{
     width: 18%;
-    height: 60em;
-    margin: 5em 5em 0 0;
+    min-width: 200px;
+    max-height: 80%;
+    margin: 5em 2em 0 0;
     border-radius: 1em;
-
+    box-sizing: border-box;
     /*Flexboxing*/
     display: flex;
     flex-direction: column;
     align-items: center;
     overflow-y: auto;
     box-shadow: 0 .3em 20px 1px rgba(2, 58, 63, 0.432);
-    background-color: #e5e9ec;
-    box-sizing: content-box;
+    background-color: white;
+    box-sizing: border-box;
 }
 
 .stea-actividadesPendientes-title{
-    background-color: #e5e9ec;
+    justify-self: center;
+    align-self: center;
+    text-align: center;
+    background-color: white;
     color: #6c1d45;
     margin: 1em 0 ;
 
@@ -25,15 +29,16 @@
 }
 
 .stea-actividadPendiente-container{
+    box-sizing: border-box;
     position: relative;
     background-color: white;
     width: 90%;
     
-    margin: 1em;
+    margin: .5em;
     /*Flexbox*/
     display: flex;
     flex-direction: column;
-    
+    box-shadow: 0 .3em 10px 1px rgba(2, 58, 63, 0.432);
     
 }
 
@@ -92,4 +97,21 @@
 }
 .stea-actividadesPendientes-contenedor::-webkit-scrollbar-track {
     border-radius: 10px;  
+}
+
+@media (max-width: 1200px) {
+
+    .stea-actividadesPendientes-contenedor{
+        width: 100%;
+        box-sizing: border-box;
+        margin: 1em 0 0 0;
+        padding: 0;
+    
+        /*Flexboxing*/
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: 0 .3em 20px 1px rgba(2, 58, 63, 0.432);
+        background-color: white;
+    }
 }

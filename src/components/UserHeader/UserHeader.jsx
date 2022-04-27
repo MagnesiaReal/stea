@@ -2,6 +2,11 @@ import AXIOS from '../../services/http-axios';
 import Cookies from 'universal-cookie'
 import {useNavigate} from 'react-router-dom';
 
+import './UserHeader.css'
+import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
+
 export default function UserHeader(porps) {
     
   const cookie = new Cookies();
@@ -23,11 +28,33 @@ export default function UserHeader(porps) {
     navigation('/home');    
   }
 
+  const [open, setOpen] = useState(false);
+
+  const handleClick = () => {
+    setOpen(!open)
+  }
 
   return (
-    <>
-      <h2>Basic Header</h2> <button className="btn btn-dark">Configuracion</button>
-      <button className="btn btn-primary" onClick={onSignOut}>Cerrar Sesion</button>
-    </>
+    <div className='stea-userHeader-header'>
+      <h2>STEA</h2> 
+      <div className='stea-userHeader-buttonsContainer'>
+        <button className="stea-user-configurationButton">
+          Configuracion &nbsp;
+          <FontAwesomeIcon icon="fa-solid fa-cog" />
+        </button>
+        <button className="stea-user-sessionButton" onClick={onSignOut}>
+          Cerrar Sesion &nbsp;
+          <FontAwesomeIcon icon={faArrowRightFromBracket} onClick={onSignOut}/>
+        </button>
+      </div>
+      <div className='stea-userHeader-iconContainer'>
+        <button className="stea-user-configurationButton">
+        &nbsp; <FontAwesomeIcon icon="fa-solid fa-cog" /> &nbsp;
+        </button>
+        <button className="stea-user-sessionButton" onClick={onSignOut}>
+        &nbsp; <FontAwesomeIcon icon={faArrowRightFromBracket} onClick={onSignOut}/> &nbsp;
+        </button>
+      </div>
+    </div>
   );
 }
