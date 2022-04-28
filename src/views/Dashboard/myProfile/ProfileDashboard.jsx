@@ -7,14 +7,13 @@ import './ProfileDashboard.css'
 
 const ProfileDashboard = (props) => {
 
-  const [avatarUrl, setAvatarUrl] = useState(props.avatarUrl);
 
   return (
     <div className='stea-perfilLateral-contenedor'>
-      <img alt={profile.nombre} src={profile.imagen} className='stea-perfilLateral-img'></img>
+      <img alt={profile.nombre} src={props.avatar.avatarUrl} className='stea-perfilLateral-img'></img>
       <div className='stea-perfilLateral-informacion'>
-        <div className='stea-perfilLateral-name'>{profile.nombre}</div>
-        <div className='stea-perfilLateral-semestre'>{profile.semestre}</div>
+        <div className='stea-perfilLateral-name'>{props.userName}</div>
+        <div className='stea-perfilLateral-semestre'>{props.avatar.nombre}</div>
       </div>
     </div>
   )

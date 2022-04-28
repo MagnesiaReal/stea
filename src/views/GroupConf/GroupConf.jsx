@@ -11,10 +11,10 @@ export default function GroupConf(props) {
 
   const [updateTimes, setUpdateTimes] = useState(0);
   const [userList, setUserList] = useState([]);
+  const [loading, setLoading] = useState(true);
  
   
   useEffect(()=> {
-    console.log('get all user of this group useEffect');
     // bad practice this could be GET insted of POST
     AXIOS.post('/allusersofgroup', {userId: props.cookie.get('userId'), groupId: params.groupId, UUID: props.cookie.get('UUID')})
     .then((res)=> {
@@ -22,9 +22,11 @@ export default function GroupConf(props) {
       if(res.status === 200) {
         console.log(res.data.message);
         setUserList(res.data.userList);
+        
       } else {
         console.log('GROUPCONF>> No content userList');
       }
+      setLoading(false);
       
     }).catch(err => {
       console.log('GROUPCONF>> Error getting userList: ', err.response.data.message);
@@ -48,6 +50,7 @@ export default function GroupConf(props) {
     }
   }
 
+  if (loading) return (<div>LOADING. . .</div>);
 
   return(
     <div className="stea-groupConfig">
@@ -73,6 +76,13 @@ export default function GroupConf(props) {
             <p>Administrador</p> 
             {/* participante, administrador o propiertario */}
           </li>
+          {userList.map((value, index)=> {
+            return(<li className="stea-groupConfig-userElement" key={index}>
+              <img src="https://miro.medium.com/max/336/1*N7hOZYrSOKRha4WXnzwRqw.png" className="stea-groupConfig-image"/>
+              <p>{value.nombre+ ' ' + value.apellido}</p>
+              <p>{(value.tipoUsuario===3 ? 'Participante' : (value.tipoUsuario===2) ? 'Administrador' : (value.tipoUsuario===1) ? 'Propietario' : 'Desconocido')}</p> 
+            </li>);
+          })}
           
         </ul>
       </div>
