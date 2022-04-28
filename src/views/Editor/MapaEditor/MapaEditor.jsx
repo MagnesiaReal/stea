@@ -1,8 +1,10 @@
 import { Component, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Pregunta from './Pregunta/Pregunta';
 
 import AXIOS from '../../../services/http-axios';
 
-
+var i=0;
 export default function MapaEditor (props) {
   const estaditos=<>
   <option value="AGU">Aguascalientes</option>
@@ -38,19 +40,28 @@ export default function MapaEditor (props) {
   <option value="YUC">Yucatán</option>
   <option value="ZAC">Zacatecas</option>
 </>;
-  var i=0;
+  
   const [tipoMapa,setTipoMapa]=useState ("estados");
   const [pregunta,setPregunta]=useState ();
   const [respuesta,setRespuesta]=useState ();
   const [opciones,setOpciones]=useState (estaditos);
   const [preguntas, setPreguntas]=useState([]);
+  
 
   const onGuardarPreguntas = (e) => {
     e.preventDefault();
     const preg={
-      ID:i++,
+      ID:i,
       Cuerpo:"nothing",
+      Resp: "algo",
+      Tiempo: "00:00"
     }
+  }
+
+  const onNuevaPregunta = (e) =>{
+    e.preventDefault();
+    setPreguntas([...preguntas,i++]);
+    console.log(preguntas);
   }
 
   const onTipoMapa=function (e){
@@ -98,26 +109,15 @@ export default function MapaEditor (props) {
           
         </section>
 
-        <section className="row">
-         <label htmlFor="pregunta" className='col-sm-12 col-lg-2 col-form-label col-form-label-sm'>Ingresa la pregunta:</label>
-          <input id="pregunta" class="col-sm-12 col-lg-4 col-form-label col-form-label-sm" type="text" placeholder="Pregunta"></input>
-          <select name='respuesta' id='respuesta' className="col-sm-12 col-lg-2 col-form-label col-form-label-sm">
-            {opciones}
-          </select>
-          <div className='col-sm-4 col-lg-2'>
-            <button type="submit" class="btn btn-primary my-1">Agregar pregunta</button>
-          </div>
-          <div className='col-sm-4 col-lg-2'>
-            <button type="submit" class="btn btn-primary my-1">Enviar Formulario</button>
-          </div>
-        </section>
-        
-        
-
-    
-  
+        {preguntas.map((value, index) =>
+          <Pregunta opciones={opciones} />
+         )
+        }
+       
       </form>
-
+      <div className='col-sm-4 col-lg-2'>
+        <button type="submit" class="btn btn-primary stea-mapaEditor-add my-1" onClick={onNuevaPregunta}><FontAwesomeIcon icon="fa-solid fa-plus" /></button>
+      </div>
     </div>
   );
 }
