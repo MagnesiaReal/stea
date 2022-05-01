@@ -21,21 +21,21 @@
 }
 
 .stea-user-configurationButton{
-    color: #6c1d45;
-    font-size: 1.2em;
+    color: #069;
+    font-size: .8em;
     cursor: pointer;
     padding: .2em;
     border-radius: .3em;
     background-color: white;
-    border-color: #6c1d45;
+    border-color: #069;
 }
 
 .stea-user-sessionButton{
     color: white;
-    font-size: 1.2em;
+    font-size: .8em;
     margin: 0 1em;
     padding: .2em;
-    background-color: #6c1d45;
+    background-color: #069;
     border-radius: .3em;
 }
 
@@ -69,12 +69,12 @@
     }
 
     .stea-user-configurationButton{
-        color: #6c1d45;
+        color: #069;
         font-size: 1.2em;
         margin: 0 1em;
         border-radius: 2em;
         background-color: white;
-        border-color: #6c1d45;
+        border-color: #069;
     }
 
     .stea-user-sessionButton{
@@ -82,7 +82,7 @@
         font-size: 1.2em;
         cursor: pointer;
         border-radius: 2em;
-        background-color: #6c1d45;
+        background-color: #069;
         border-color: white;
     }
     

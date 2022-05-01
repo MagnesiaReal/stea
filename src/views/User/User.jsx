@@ -93,7 +93,7 @@ export default function User (props) {
     </div>
   );
   else return(
-    <div>
+    <>
       <div className='stea-dashboard-contenedor'>
         <ProfileDashboard userName={userName} avatar={avatars[props.cookie.get('avatarId')-1]}/>
         <div className='stea-inicio-contenedor'>
@@ -152,7 +152,7 @@ export default function User (props) {
 
       {/*Modal Access*/}
       <ModalAccess/>
-    </div>
+    </>
   );
 
 }
