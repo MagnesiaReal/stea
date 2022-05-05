@@ -1,8 +1,10 @@
-import { Component, useState } from 'react';
+import { Component, createRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Pregunta from './Pregunta/Pregunta';
 
 import AXIOS from '../../../services/http-axios';
+import { useRef } from 'react';
+
 
 var i=0;
 export default function MapaEditor (props) {
@@ -33,7 +35,7 @@ export default function MapaEditor (props) {
   <option value="SLP">San Luis Potosí</option>
   <option value="SIN">Sinaloa</option>
   <option value="SON">Sonora</option>
-  <option value="TAB">TabascO</option>
+  <option value="TAB">Tabasco</option>
   <option value="TAM">Tamaulipas</option>
   <option value="TLA">Tlaxcala</option>
   <option value="VER">Veracruz</option>
@@ -41,41 +43,50 @@ export default function MapaEditor (props) {
   <option value="ZAC">Zacatecas</option>
 </>;
   
+  const refPregunta=createRef();
   const [tipoMapa,setTipoMapa]=useState ("estados");
   const [pregunta,setPregunta]=useState ();
   const [respuesta,setRespuesta]=useState ();
   const [opciones,setOpciones]=useState (estaditos);
   const [preguntas, setPreguntas]=useState([]);
-  
+  const jsonPreguntas={}
+  var listaPreguntas=[]
 
   const onGuardarPreguntas = (e) => {
     e.preventDefault();
     const preg={
-      ID:i,
+      IDMapa:e.target.value,
+      IDPregunta:i,
       Cuerpo:"nothing",
       Resp: "algo",
       Tiempo: "00:00"
     }
   }
-
+  const onGuardarHijo = (data) =>{
+    data.IDMapa=refPregunta.current.value
+    listaPreguntas.push(data);
+  }
+  const onBorrarHijo = (idx) =>{
+    setPreguntas(preguntas.filter((value,index)=>index!==idx))
+  }
   const onNuevaPregunta = (e) =>{
     e.preventDefault();
     setPreguntas([...preguntas,i++]);
-    console.log(preguntas);
+    
   }
 
   const onTipoMapa=function (e){
     e.preventDefault();
     setTipoMapa(e.target.value);
-    if(e.target.value==="estados"){
+    if(e.target.value==="1"){
       setOpciones(estaditos)
-    }else if (e.target.value==="regiones"){
+    }else if (e.target.value==="2"){
       setOpciones(<>
         <option value="MES">Mesoamérica</option>
         <option value="ARI">Aridoamérica</option>
         <option value="OAS">Oasisamérica</option>
       </>)
-    }else if (e.target.value==="culturas"){
+    }else if (e.target.value==="3"){
       setOpciones(<>
         <option value="MAY">Mayas</option>
         <option value="OLM">Olmecas</option>
@@ -96,25 +107,27 @@ export default function MapaEditor (props) {
 
   return(
     <div className='container'>
-      <form className=''>
+      <form className='formulario'>
         <section className="form-group row">
           <label htmlFor="tipoMapa" className='col-sm-12 col-lg-4 col-form-label col-form-label-sm'>Selecciona el tipo de mapa a elegir:</label>
           <div className='col-sm-12 col-lg-8'>
-            <select name="tipoMapa" id="tipoMapa" className="form-control form-control-sm" onChange={onTipoMapa} value={tipoMapa}>
-              <option selected value="estados">Mapa de la republica mexicana con división sin nombres</option>
-              <option value="regiones">Mapa de las regiones del México prehispanico</option>
-              <option value="culturas">Mapa de las culturas del México prehispanico</option>
+            <select ref={refPregunta} name="tipoMapa" id="tipoMapa" className="form-control form-control-sm" onChange={onTipoMapa} value={tipoMapa}>
+              <option id="0" selected value="1">Mapa de la republica mexicana con división sin nombres</option>
+              <option id="1" value="2">Mapa de las regiones del México prehispanico</option>
+              <option id="2" value="3">Mapa de las culturas del México prehispanico</option>
             </select>
           </div>
           
         </section>
+      </form>
 
-        {preguntas.map((value, index) =>
-          <Pregunta opciones={opciones} />
-         )
+        {preguntas.map((value, index) =>{
+          return <Pregunta opciones={opciones} key={index} data-key={index} onBorrarme={onBorrarHijo} onGuardarme={onGuardarHijo}/>
+        }
+        )
         }
        
-      </form>
+      
       <div className='col-sm-4 col-lg-2'>
         <button type="submit" class="btn btn-primary stea-mapaEditor-add my-1" onClick={onNuevaPregunta}><FontAwesomeIcon icon="fa-solid fa-plus" /></button>
       </div>
