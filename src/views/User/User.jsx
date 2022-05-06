@@ -32,7 +32,7 @@ export default function User (props) {
 
   useEffect(()=>{ // componentDidMount
 
-    AXIOS.post('/usergroups', {userId: props.cookie.get('userId'), UUID: props.cookie.get('UUID')})
+    AXIOS.get('/usergroups', {params: {userId: props.cookie.get('userId'), UUID: props.cookie.get('UUID')}})
     .then((res) => {
       if(res.status === 204) {
         console.log('No Groups content');
