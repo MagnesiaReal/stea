@@ -60,7 +60,7 @@ class WrappedChangePass extends React.Component {
   componentDidMount() {
     console.log(this.props.params.code);
     
-    AXIOS.post('/verifychangepass', {code: this.props.params.code})
+    AXIOS.post('/user/verifychangepass', {code: this.props.params.code})
     .then((res)=> {
       
       console.log("CHANGEPASS>> ",res.data);
@@ -87,7 +87,7 @@ class WrappedChangePass extends React.Component {
           pass: this.state.newPass
         }
 
-        AXIOS.post('/changepass', credentials)
+        AXIOS.post('/user/changepass', credentials)
         .then(res => {
           
           console.log("CHANGEPASS>> ", res.data.message);

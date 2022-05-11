@@ -13,11 +13,27 @@ export default function GroupConf(props) {
   const [updateTimes, setUpdateTimes] = useState(0);
   const [userList, setUserList] = useState([]);
   const [loading, setLoading] = useState(true);
- 
+  const [groupData, setGroupData] = useState(true);
+  
+
+  useEffect(()=> {
+    
+    AXIOS.get('/group/groupdata', {params: {userId: props.cookie.get('userId'), groupId: params.groupId, UUID: props.cookie.get('UUID')}})
+      .then((res)=> {
+        console.log('GROUPCONF>> GroupData: ', res.data.groupData);
+        console.log('GROUPCONF>> message:' , res.data.message);
+        setGroupData(res.data.groupData);
+
+      }).catch((err)=> {
+        navigation('/');
+        if(err) throw err;
+      })
+
+  }, []);
   
   useEffect(()=> {
     // bad practice this could be GET insted of POST
-    AXIOS.get('/allusersofgroup', { params: {userId: props.cookie.get('userId'), groupId: params.groupId, UUID: props.cookie.get('UUID')}})
+    AXIOS.get('/group/allusersofgroup', { params: {userId: props.cookie.get('userId'), groupId: params.groupId, UUID: props.cookie.get('UUID')}})
     .then((res)=> {
       console.log(res);
       if(res.status === 200) {
@@ -31,33 +47,12 @@ export default function GroupConf(props) {
       
     }).catch(err => {
       console.log('GROUPCONF>> Error getting userList: ', err.response.data.message);
+      navigation('/')
       
-      if(err.response.status === 404) {
-        navigation('/');
-      } else {
-        throw err;
-      }
     });
 
   }, [updateTimes]);
 
-  const onDeleteGroup = (e) => {
-    e.preventDefault();
-    const credentials = {
-      userId: props.cookie.get('userId'),
-      UUID: props.cookie.get('UUID'),
-      groupId: params.groupId,
-    }
-    
-    AXIOS.delete('/deletegroup', credentials)
-      .then(res => {
-        console.log('GROUPCONF>> res.data= ',res.data);
-      }).catch(err=> {
-        
-        if(err) throw err;
-      })
-
-  }
 
   if (loading) return (<div>LOADING. . .</div>);
 
@@ -97,7 +92,7 @@ export default function GroupConf(props) {
           </ul>
         </div>
       </div>
-      <DeleteModal/>
+      <DeleteModal groupName={groupData.nombre}/>
     </>
     
   );

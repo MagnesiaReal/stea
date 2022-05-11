@@ -1,7 +1,12 @@
 import {useState} from "react";
-
+import {useParams} from "react-router-dom";
+import Cookies from "universal-cookie";
+import AXIOS from '../../../services/http-axios'
 
 export default function DeleteModal (props) {
+
+  const cookie = new Cookies();
+  const params = useParams();
 
   const [groupName, setGroupName] = useState('');
   const [isDeletable, setIsDeletable] = useState(true);
@@ -12,6 +17,8 @@ export default function DeleteModal (props) {
 
     if(e.target.value === props.groupName) {
       setIsDeletable(false);
+    } else {
+      setIsDeletable(true);
     }
 
   }
@@ -19,6 +26,14 @@ export default function DeleteModal (props) {
   function onDeleteGroup(e) {
     e.preventDefault();
     console.log('onCloseDeleteModal');
+
+    AXIOS.delete('/group/delete', {data: {userId: cookie.get('userId'), groupId: params.groupId, UUID: cookie.get('UUID')}})
+      .then((res)=> {
+        console.log('DELETEMODAL>> message: ', res.data.message);
+      }).catch((err)=> {
+        if(err) throw err;
+      });
+
   }
 
   function onCloseModal(e) {
@@ -32,7 +47,7 @@ export default function DeleteModal (props) {
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title" id="exampleModalLabel">Crear Grupo</h5>
+            <h5 className="modal-title" id="exampleModalLabel">Borrar Grupo</h5>
             <button type="button" onClick={onCloseModal} className="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -43,7 +58,7 @@ export default function DeleteModal (props) {
               <input type="text"  name="groupName" id="groupName" value={groupName} onChange={onGroupName} placeholder="Historia" required/>
             </div>
             <div className="modal-footer">
-              <button disabled={isDeletable} className="btn btn-dark" type="submit" onClick={onDeleteGroup} data-dismiss="modal">Crear Grupo </button>
+              <button disabled={isDeletable} className="btn btn-danger" onClick={onDeleteGroup} data-dismiss="modal"> Borrar !!! </button>
               <button className="btn" data-dismiss="modal" aria-label="Close" onClick={onCloseModal}>Cancelar</button>
             </div>
           </form>

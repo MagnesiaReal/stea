@@ -1,7 +1,6 @@
 import {useEffect, useState} from 'react';
 
 import ProfileDashboard from '../Dashboard/myProfile/ProfileDashboard';
-import GroupsDashboard from '../Dashboard/myGroups/GroupsDashboard';
 import ActivitiesDashboard from '../Dashboard/myActivities/ActivitiesDashboard';
 import ModalGroup from './ModalGroup/ModalGroup'
 import ModalAccess from './ModalAccess/ModalAccess'
@@ -32,7 +31,7 @@ export default function User (props) {
 
   useEffect(()=>{ // componentDidMount
 
-    AXIOS.get('/usergroups', {params: {userId: props.cookie.get('userId'), UUID: props.cookie.get('UUID')}})
+    AXIOS.get('/group/usergroups', {params: {userId: props.cookie.get('userId'), UUID: props.cookie.get('UUID')}})
     .then((res) => {
       if(res.status === 204) {
         console.log('No Groups content');
@@ -43,7 +42,7 @@ export default function User (props) {
       setUserName(props.cookie.get('name')+' '+props.cookie.get('lastName'));
       
 
-      AXIOS.get('/avatars',{})
+      AXIOS.get('/user/avatars',{})
       .then((res)=> {
 
         console.log("USER>> avatars: ", res.data);
@@ -72,19 +71,6 @@ export default function User (props) {
     e.preventDefault();
     console.log('onCreateGroup');
   }
-
-  const onSubmitGroup = function(e) {
-    e.preventDefault();
-    console.log('onSubmitGroup');
-    AXIOS.post()
-  }
-
-  const onCloseModal = (e)=> {
-    e.preventDefault();
-    console.log('onCloseModal');
-    setGroupName('');
-    setGroup('');
-  }
   
 
   if (loading) return (
@@ -110,22 +96,6 @@ export default function User (props) {
             </form>
           </div>
           <div className='stea-grupos-contenedor'>
-            {gruposMock.map( (grupo,index) => {
-              return(
-                <div key={index} className='stea-grupo-contenedor'>
-                  <div className='stea-grupo-imagenContenedor'>
-                    <img src={grupo.imagen} alt={grupo.grupo} className='stea-grupo-imagen'></img>
-                  </div>
-                  <div className='stea-grupo-infoContenedor'>
-                    <p className='stea-grupo-nomMateria'>{grupo.nombreMateria}</p>  
-                    <div className='stea-grupo-nomMateriaProfe'>
-                      <p className='stea-grupo-numGrupo'>{grupo.grupo}</p>
-                      <p className='stea-grupo-nomProfesor'>{grupo.nombreProfesor}</p>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
             {allGroups.map((g, index) => {
               return(
                 <div key={index} className='stea-grupo-contenedor'>

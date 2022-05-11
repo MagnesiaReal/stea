@@ -31,7 +31,7 @@ class WrappedLogin extends React.Component{
       email: this.state.email,
       pass: this.state.pass
     }
-    AXIOS.post('/login',userCredentials)
+    AXIOS.post('/user/login',userCredentials)
       .then(res => {
 
         if(res.data){
@@ -81,7 +81,7 @@ class WrappedLogin extends React.Component{
     const fullUrl = `${window.location.protocol}//${window.location.host}`;
     console.log("LOGIN>> ", fullUrl);
 
-    AXIOS.post('/forgotpass', {email: this.state.registeredEmail, fullUrl: fullUrl})
+    AXIOS.post('/user/forgotpass', {email: this.state.registeredEmail, fullUrl: fullUrl})
     .then((res)=> {
     
       console.log("LOGIN>> ", res.data.message);

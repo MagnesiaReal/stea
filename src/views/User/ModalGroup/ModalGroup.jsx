@@ -28,7 +28,7 @@ export default function ModalGroup(props) {
       group: group
     };
 
-    AXIOS.post('/creategroup', credentials)
+    AXIOS.post('/group/creategroup', credentials)
       .then((res)=> {
       console.log("MODALGROUP>> ", res.data.message);
       navigation(`/group/${res.data.idGrupo}`);

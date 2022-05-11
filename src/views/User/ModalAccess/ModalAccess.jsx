@@ -17,7 +17,7 @@ export default function ModalAccess(props) {
       code: code
     };
 
-    AXIOS.post('/accessgroup', credentials)
+    AXIOS.post('/group/accessgroup', credentials)
       .then((res)=>{
       console.log('MODALACCESS>> ', res.data.message);
       }).catch(err => {

@@ -21,7 +21,7 @@ export default class NewRegister extends react.Component{
 
   componentDidMount() {
 
-    AXIOS.get('/avatars',{})
+    AXIOS.get('/user/avatars',{})
     .then((res)=> {
 
       console.log("NEWREGISTER>> ", res.data);
@@ -48,7 +48,7 @@ export default class NewRegister extends react.Component{
   onNewRegister(e){
     e.preventDefault();
 
-    AXIOS.put('/newregister', {idAvatar: this.state.i+1, configuration: JSON.stringify({algo: 1}), UUID: this.props.cookie.get('UUID'), photo: null})
+    AXIOS.put('/user/newregister', {idAvatar: this.state.i+1, configuration: JSON.stringify({algo: 1}), UUID: this.props.cookie.get('UUID'), photo: null})
     .then(res => {
 
       console.log("NEWREGISTER>> response: ", res.data);
