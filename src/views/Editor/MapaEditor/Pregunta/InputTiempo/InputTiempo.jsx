@@ -2,21 +2,25 @@ import { Component, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import "./InputTiempo.css"
 
+
 export default function InputTiempo (props) {
   const [inputTiempo,setInputTiempo]=useState (0);
   
 
   const onMasTiempo=(e)=>{
     e.preventDefault()
+    props.onChange(inputTiempo+5)
     setInputTiempo(inputTiempo+5)
+
   }
 
   const onMenosTiempo=(e)=>{
     e.preventDefault()
-    
     if (inputTiempo<=0){
+      props.onChange(0)
       setInputTiempo(0);
     }else
+      props.onChange(inputTiempo-5)
       setInputTiempo(inputTiempo-5)
   }
 

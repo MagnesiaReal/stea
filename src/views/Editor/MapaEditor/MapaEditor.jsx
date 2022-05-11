@@ -7,8 +7,10 @@ import { useRef } from 'react';
 
 
 var i=0;
+var listaPreguntasMapa=[];
 export default function MapaEditor (props) {
   const estaditos=<>
+  <option value="---">Selecciona tu respuesta</option>
   <option value="AGU">Aguascalientes</option>
   <option value="BCN">Baja California</option>
   <option value="BCS">Baja California Sur</option>
@@ -44,35 +46,37 @@ export default function MapaEditor (props) {
 </>;
   
   const refPregunta=createRef();
-  const [tipoMapa,setTipoMapa]=useState ("estados");
-  const [pregunta,setPregunta]=useState ();
-  const [respuesta,setRespuesta]=useState ();
+  const [tipoMapa,setTipoMapa]=useState ("1");
   const [opciones,setOpciones]=useState (estaditos);
   const [preguntas, setPreguntas]=useState([]);
   const jsonPreguntas={}
-  var listaPreguntas=[]
+  
 
   const onGuardarPreguntas = (e) => {
     e.preventDefault();
     const preg={
       IDMapa:e.target.value,
-      IDPregunta:i,
+      IDPregunta:i++,
       Cuerpo:"nothing",
       Resp: "algo",
       Tiempo: "00:00"
     }
   }
+
   const onGuardarHijo = (data) =>{
     data.IDMapa=refPregunta.current.value
-    listaPreguntas.push(data);
+    listaPreguntasMapa.push(data);
   }
+
   const onBorrarHijo = (idx) =>{
     setPreguntas(preguntas.filter((value,index)=>index!==idx))
+    listaPreguntasMapa.splice(idx,1)
   }
+
   const onNuevaPregunta = (e) =>{
     e.preventDefault();
     setPreguntas([...preguntas,i++]);
-    
+    console.log(listaPreguntasMapa)
   }
 
   const onTipoMapa=function (e){
@@ -82,12 +86,14 @@ export default function MapaEditor (props) {
       setOpciones(estaditos)
     }else if (e.target.value==="2"){
       setOpciones(<>
+      <option value="---">Selecciona tu respuesta</option>
         <option value="MES">Mesoamérica</option>
         <option value="ARI">Aridoamérica</option>
         <option value="OAS">Oasisamérica</option>
       </>)
     }else if (e.target.value==="3"){
       setOpciones(<>
+      <option value="---">Selecciona tu respuesta</option>
         <option value="MAY">Mayas</option>
         <option value="OLM">Olmecas</option>
         <option value="TOT">Totonacas</option>
@@ -112,7 +118,7 @@ export default function MapaEditor (props) {
           <label htmlFor="tipoMapa" className='col-sm-12 col-lg-4 col-form-label col-form-label-sm'>Selecciona el tipo de mapa a elegir:</label>
           <div className='col-sm-12 col-lg-8'>
             <select ref={refPregunta} name="tipoMapa" id="tipoMapa" className="form-control form-control-sm" onChange={onTipoMapa} value={tipoMapa}>
-              <option id="0" selected value="1">Mapa de la republica mexicana con división sin nombres</option>
+              <option id="0" defaultValue={"1"} value="1">Mapa de la republica mexicana con división sin nombres</option>
               <option id="1" value="2">Mapa de las regiones del México prehispanico</option>
               <option id="2" value="3">Mapa de las culturas del México prehispanico</option>
             </select>
@@ -122,14 +128,14 @@ export default function MapaEditor (props) {
       </form>
 
         {preguntas.map((value, index) =>{
-          return <Pregunta opciones={opciones} key={index} data-key={index} onBorrarme={onBorrarHijo} onGuardarme={onGuardarHijo}/>
+          return <Pregunta IDMapa={tipoMapa} opciones={opciones} key={index} data-key={index} onBorrarme={onBorrarHijo} onGuardarme={onGuardarHijo} lista={listaPreguntasMapa} />
         }
         )
         }
        
       
       <div className='col-sm-4 col-lg-2'>
-        <button type="submit" class="btn btn-primary stea-mapaEditor-add my-1" onClick={onNuevaPregunta}><FontAwesomeIcon icon="fa-solid fa-plus" /></button>
+        <button type="submit" className="btn btn-primary stea-mapaEditor-add my-1" onClick={onNuevaPregunta}><FontAwesomeIcon icon="fa-solid fa-plus" /></button>
       </div>
     </div>
   );
