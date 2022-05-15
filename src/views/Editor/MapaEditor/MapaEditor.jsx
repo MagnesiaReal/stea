@@ -69,8 +69,14 @@ export default function MapaEditor (props) {
   }
 
   const onBorrarHijo = (idx) =>{
+    console.log(preguntas)
     setPreguntas(preguntas.filter((value,index)=>index!==idx))
-    listaPreguntasMapa.splice(idx,1)
+    listaPreguntasMapa.splice(idx,1);
+    var id=0
+    listaPreguntasMapa.forEach(element => {
+      element.IDPregunta=id++
+    });
+    console.log(preguntas)
   }
 
   const onNuevaPregunta = (e) =>{
@@ -128,7 +134,7 @@ export default function MapaEditor (props) {
       </form>
 
         {preguntas.map((value, index) =>{
-          return <Pregunta IDMapa={tipoMapa} opciones={opciones} key={index} data-key={index} onBorrarme={onBorrarHijo} onGuardarme={onGuardarHijo} lista={listaPreguntasMapa} />
+          return <Pregunta IDMapa={tipoMapa} opciones={opciones} key={value} data-key={index} onBorrarme={onBorrarHijo} onGuardarme={onGuardarHijo} lista={listaPreguntasMapa} />
         }
         )
         }

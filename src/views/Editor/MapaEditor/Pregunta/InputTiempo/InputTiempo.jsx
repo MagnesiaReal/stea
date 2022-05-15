@@ -19,9 +19,10 @@ export default function InputTiempo (props) {
     if (inputTiempo<=0){
       props.onChange(0)
       setInputTiempo(0);
-    }else
+    }else{
       props.onChange(inputTiempo-5)
       setInputTiempo(inputTiempo-5)
+    }
   }
 
   return<div className='stea-input-tiempo'>
