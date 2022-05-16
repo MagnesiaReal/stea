@@ -18,7 +18,7 @@ export default function GroupConf(props) {
 
   useEffect(()=> {
     
-    AXIOS.get('/group/groupdata', {params: {userId: props.cookie.get('userId'), groupId: params.groupId, UUID: props.cookie.get('UUID')}})
+    AXIOS.get('/group/group', {params: {userId: props.cookie.get('userId'), groupId: params.groupId, UUID: props.cookie.get('UUID')}})
       .then((res)=> {
         console.log('GROUPCONF>> GroupData: ', res.data.groupData);
         console.log('GROUPCONF>> message:' , res.data.message);
