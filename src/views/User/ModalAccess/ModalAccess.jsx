@@ -2,8 +2,10 @@
 import {useState} from 'react';
 import Cookies from 'universal-cookie'
 import AXIOS from '../../../services/http-axios'
+import {useNavigate} from 'react-router-dom';
 
 export default function ModalAccess(props) {
+  const navigation = useNavigate();
   const cookie = new Cookies();
   const [code, setCode] = useState('');
     
@@ -20,9 +22,9 @@ export default function ModalAccess(props) {
     AXIOS.post('/group/access', credentials)
       .then((res)=>{
       console.log('MODALACCESS>> ', res.data.message);
+      navigation(`/group/${res.data.idGrupo}`);
       }).catch(err => {
       console.log('MODALACCESS>> Error status code: ', err.response.status, err.response.data.message);
-      throw err;
       });
   }
 
@@ -52,7 +54,7 @@ export default function ModalAccess(props) {
               <input type="text"  name="groupName" id="groupName" value={code} onChange={onCode} placeholder="Codigo" required/>
             </div>
             <div className="modal-footer">
-              <input className="btn btn-dark" type="submit" value="Acceder"/>
+              <input className="btn btn-dark" data-dismiss="modal" type="submit" value="Acceder"/>
               <button className="btn" data-dismiss="modal" aria-label="Close" onClick={onCloseModal}>Cancelar</button>
             </div>
           </form>
