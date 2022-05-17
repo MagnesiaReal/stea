@@ -31,6 +31,7 @@ class WrappedLogin extends React.Component{
       email: this.state.email,
       pass: this.state.pass
     }
+    console.log(this.state.email);
     AXIOS.post('/user/login',userCredentials)
       .then(res => {
 

@@ -21,7 +21,7 @@ export default function Group(props) {
       groupId: params.groupId
     };
 
-    AXIOS.post('/group/createtokengroup', credentials)
+    AXIOS.post('/group/createtoken', credentials)
       .then((res)=> {
         console.log(res.data.message);
         console.log("TOKEN: ", res.data.code);
