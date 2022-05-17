@@ -85,7 +85,7 @@ class WrappedRegister extends React.Component {
     }
 
 
-    AXIOS.post('/verify', newUserCredentials)
+    AXIOS.post('/user/verify', newUserCredentials)
       .then((res)=> {
         if (true) {
           
@@ -131,7 +131,7 @@ class WrappedRegister extends React.Component {
 
   onResend(e) {
     e.preventDefault();
-    AXIOS.post('/register', {email: this.state.email})
+    AXIOS.post('/user/register', {email: this.state.email})
       .then(res=> {
 
         console.log("REGISTER>> ", res);
@@ -165,7 +165,7 @@ class WrappedRegister extends React.Component {
     }
     if (this.state.pass === this.state.passr) {
 
-      AXIOS.post('/register', {email: this.state.email})
+      AXIOS.post('/user/register', {email: this.state.email})
         .then(res=> {
 
           console.log("REGISTER>> ", res);

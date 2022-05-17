@@ -1,17 +1,49 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import { useNavigate, useParams } from 'react-router-dom'
 import AXIOS from '../../services/http-axios'
 
 //css
 import './Group.css'
 import ModalLink from './ModalLink/ModalLink';
+import ModalAddActivity from './ModalAddActivity/ModalAddActivity';
 
 export default function Group(props) {
   
   const navigation = useNavigate();
   const params = useParams();
-  
+
+  const [groupData, setGroupData] = useState();
+  const [activities, setActivities] = useState();
   const [token, setToken] = useState('');
+
+
+  useEffect(()=> {
+    // Trae la informacion del grupo en general
+    const groupCredentials = {
+      userId: props.cookie.get('userId'),
+      UUID: props.cookie.get('UUID'),
+      groupId: params.groupId
+    }
+
+    AXIOS.get('group/group', {params: groupCredentials})
+    .then((res)=> {
+      setGroupData(res.data.groupData);
+      console.log('group/ group data ->', res.data.groupData);
+    }).catch((err)=>{
+      console.log('MODALACCESS>> Error status code: ', err.response.status, err.response.data.message);
+    });
+
+    AXIOS.get('activity/allfogroup', {params: groupCredentials})
+    .then((res)=> {
+      setActivities(res.data.activitiesData);
+      console.log('activity/ all activities from group -> ', res.data.activitiesData);
+    }).catch((err)=> {
+      console.log('MODALACCESS>> Error status code: ', err.response.status, err.response.data.message);
+    });
+
+  }, []);
+
+
 
   const onAccessLink = (e) => {
     e.preventDefault();
@@ -21,7 +53,7 @@ export default function Group(props) {
       groupId: params.groupId
     };
 
-    AXIOS.post('/createtokengroup', credentials)
+    AXIOS.post('/group/createtoken', credentials)
       .then((res)=> {
         console.log(res.data.message);
         console.log("TOKEN: ", res.data.code);
@@ -36,6 +68,10 @@ export default function Group(props) {
     console.log('onConfigGroup');
     navigation(`/groupconf/${params.groupId}`);
   }
+
+  // Esto tiene que abrir un modal de acuerdo a lo que habiamos hablado
+  // el modal debe mostrr la lista de actividaddes que solamete el owner puede agregar
+  // admin no debe agregar actividades, solo se le puedan dar permisos de editar actividades
 
 
   return(
@@ -52,6 +88,7 @@ export default function Group(props) {
 
       </div>
       <ModalLink token={token}/>
+      <ModalAddActivity groupId={params.userId}/> {/*Pasamos el groupId para ponerlo en los datos de envio */}
     </>
   );
 }

@@ -1,27 +1,51 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useEffect } from 'react';
 import { Component, useState } from 'react';
 
+import InputTiempo from './InputTiempo/InputTiempo';
+import "./Pregunta.css"
 
 export default function Pregunta (props) {
-  const [tiempo,setTiempo]=useState ();
+  const [tiempo,setTiempo]=useState (0);
+  const [pregunta,setPregunta]=useState ('');
+  const [respuesta,setRespuesta]=useState ('');
+  
+  useEffect(function (){
+    props.lista.push({IDMapa:props.IDMapa,IDPregunta:props['data-key'],Tiempo:0,})
 
-  const onCambiarTiempo=(e)=>{
+  },[])
+  const onBorrarPregunta=(e)=>{
     e.preventDefault();
-    console.log(e);
-
+    props.onBorrarme(props['data-key'])
+    console.log(props.lista)
   }
-  return <>
-    <section className="row">
-      <label htmlFor="pregunta" className='col-sm-12 col-lg-2 col-form-label col-form-label-sm'>Ingresa la pregunta:</label>
-      <input id="pregunta" class="col-sm-12 col-lg-4 col-form-label col-form-label-sm" type="text" placeholder="Pregunta"></input>
-      <select name='respuesta' id='respuesta' className="col-sm-12 col-lg-2 col-form-label col-form-label-sm">
-        {props.opciones}
-      </select>
-      <input id="tiempo" class="col-sm-12 col-lg-1 col-form-label col-form-label-sm" type="number" step="5" min="0" max="60" value="0" placeholder="Tiempo (Segundos)"></input>
-      <div className='col-sm-4 col-lg-2'>
-        <button type="submit" class="btn btn-danger"><FontAwesomeIcon icon="fa-solid fa-trash" /></button>
-      </div>
-
-    </section>
-  </>
+  const onPregunta=(e)=>{
+    e.preventDefault();
+    setPregunta(e.target.value);
+    props.lista[props["data-key"]].Cuerpo=e.target.value
+  }
+  const onRespuesta=(e)=>{
+    e.preventDefault();
+    setRespuesta(e.target.value);
+    props.lista[props["data-key"]].Resp=e.target.value
+  }
+  const onTiempo=(time)=>{
+    setTiempo(time);
+    props.lista[props["data-key"]].Tiempo=time
+  }
+  return (
+  <section className="stea-pregunta-row row">
+    <h1>{props['data-key']}</h1>
+    <label htmlFor="pregunta" className='col-sm-12 col-lg-2 col-form-label col-form-label-sm'>Ingresa la pregunta:</label>
+    <input value={pregunta} id="pregunta" className="col-sm-12 col-lg-4 col-form-label col-form-label-sm" type="text" placeholder="Pregunta" onChange={onPregunta}/>
+    <select onChange={onRespuesta} value={respuesta} name='respuesta' id='respuesta' className="col-sm-12 col-lg-2 col-form-label col-form-label-sm">
+      {props.opciones}
+    </select>
+    <InputTiempo onChange={onTiempo} value={tiempo}></InputTiempo>
+    <div className='col-sm-4 col-lg-2'>
+      <button type="submit" className="btn btn-danger" onClick={onBorrarPregunta}><FontAwesomeIcon icon="fa-solid fa-trash" /></button>
+    </div>
+  </section>)
+  
+  
 }

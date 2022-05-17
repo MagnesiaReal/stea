@@ -17,7 +17,7 @@ export default function Session(props) {
 
   useEffect(()=>{
   
-    AXIOS.put('/checksession', {UUID: props.cookie.get('UUID')})
+    AXIOS.put('/user/checksession', {UUID: props.cookie.get('UUID')})
       .then((res)=>{
 
         console.log("SESSION>> ", res.data.message);
