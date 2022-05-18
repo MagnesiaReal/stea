@@ -1,0 +1,234 @@
+.stea-ordenamiento-editor{
+    background-color: #e5e9ec;
+    position: relative;
+
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 3em;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.stea-ordenamiento-editorTiempo{
+    display: flex;
+    width: 50%;
+    align-self: center;
+    
+    margin: 1em;
+    align-items: baseline;
+    justify-content: space-around;
+
+}
+
+.stea-ordenamiento-botonTiempo{
+    height: 2.5em;
+    width: 2.5em;
+
+    border: solid white;
+    border-radius: .5em;
+    color: white;
+    font-weight: 600;
+    background-color: #069;
+    
+}
+
+.stea-ordenamiento-editorPregunta{
+    font-size: 2em;
+    margin: 0;
+    margin-bottom: .5em;
+    padding: 0;
+    font-weight: 600;
+    text-align: center;
+
+}
+
+.stea-ordenamiento-editorLabel{
+    font-size: 1em;
+    font-weight: 600;
+    text-align: center;
+}
+
+.stea-ordenamiento-editorContenido{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.stea-ordenamiento-formPrincipal{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.stea-ordenamiento-form{
+    display: flex;
+    
+    flex-direction: column;
+    box-sizing: border-box;
+
+    background-color: white;
+    border-radius: .5em;
+    
+    padding: 1.5em;
+
+    min-width: 40%;
+    height: 100%;
+}
+
+.stea-ordenamiento-botonGuay{
+    border-radius: 1em;
+    height: 3em;
+    border: solid #069;
+    background-color: white;
+}
+
+.stea-ordenamiento-botonGuay:hover{
+    border-radius: 1em;
+    height: 3em;
+    border: solid rgb(0, 70, 105);
+    background-color: rgb(240, 240, 240);
+    transition-duration: 100ms;
+}
+
+.stea-ordenamiento-botonGuay:active{
+    border-radius: 1em;
+    height: 3em;
+    border: solid rgb(0, 68, 102);
+    background-color: rgb(122, 122, 122);
+}
+
+.stea-ordenamiento-editoritemQuestion {
+    box-shadow: 0 0 1px black inset;
+    height: 2em;
+    margin: .7em 0;
+    padding: .2em;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+}
+
+.stea-ordenamiento-editorInput{
+    align-self: center;
+    margin: .3em;
+    width: 70%;
+    padding: .2em;
+    border-radius: .3em;
+}
+
+.stea-ordenamiento-editorbotones{
+    display: flex;
+    margin: 1em;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.stea-ordenamientoOptions-editorflexbox {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+    padding-left: 0;
+    justify-content: center;
+}
+
+.stea-ordenamiento-editorAviso{
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.stea-orderItem-editorflexbox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: solid 2px #d0d0d0;
+    background-color: white;
+    height: 40px;
+    width: 100%;
+    border-radius: .2em;
+    padding: .5em .8em .5em .5em;
+    margin-bottom: .5em;
+}
+
+@media (max-width: 900px) {
+    .stea-ordenamiento-editor{
+        background-color: #e5e9ec;
+        position: relative;
+    
+        box-sizing: border-box;
+    
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 3em;
+        width: 100%;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    .stea-ordenamiento-editorInput{
+        align-self: center;
+        margin: 1em 0;
+        width: 70%;
+        padding: .2em;
+        border-radius: .3em;
+    }
+
+    .stea-ordenamiento-editorContenido{
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 80%;
+    }
+    
+    .stea-ordenamiento-form{
+        display: flex;
+    
+        flex-direction: column;
+        box-sizing: border-box;
+
+        background-color: white;
+        border-radius: .5em;
+        
+        padding: 1.5em;
+
+        min-width: 100%;
+        height: 100%;
+    }
+
+    .stea-ordenamientoOptions-editorflexbox {
+        margin: 2em;
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        list-style: none;
+        padding-left: 0;
+        justify-content: center;
+    }
+
+    .stea-ordenamiento-editoritemQuestion {
+        box-shadow: 0 0 1px black inset;
+        height: 15em;
+        margin: .7em 0;
+        padding: .2em;
+    
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    
+    }
+
+    .stea-ordenamiento-editorInputQ{
+        margin: 1em;
+    }
+  } 
