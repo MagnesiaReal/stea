@@ -20,10 +20,10 @@
     align-self: center;
     text-align: center;
     background-color: white;
-    color: #6c1d45;
+    color: #069;
     margin: 1em 0 ;
 
-    font-size: 1.8em;
+    font-size: 1.5em;
 
     font-weight: 600;
 }
@@ -47,10 +47,10 @@
 }
 
 .stea-actividadPendiente-nombre{
-    background-color: #6c1d45;
+    background-color: #069;
     color: white;
     padding: .5em .5em;
-    font-size: 1.5em;
+    font-size: 1em;
     font-weight: 600;
     margin: 0;
 }
@@ -58,7 +58,7 @@
 .stea-actividadPendiente-profesor{
     margin: .5em 0;
     padding: 0 .7em;
-    font-size: 1.2em;
+    font-size: .8em;
     background-color: white;
 }
 
@@ -67,6 +67,7 @@
     align-self: center;
     min-width: 90%;
     margin: 0 1em ;
+    font-size: .8em;
     display: flex;
     justify-content: space-between;
 }
@@ -77,12 +78,15 @@
 }
 
 .stea-actividadPendiente-fechaLimite{
+    font-size: .9em;
+    text-align: left;
     width: 160px;
     color: #797979;
 }
 
 .stea-actividadPendiente-modoActividad{
-    color: #6c1d4586;
+    color: #069;
+    text-align: end;
     font-weight: 600;
 }
 /*Scroll*/
@@ -102,6 +106,7 @@
 @media (max-width: 1200px) {
 
     .stea-actividadesPendientes-contenedor{
+        height: max-content;
         width: 100%;
         box-sizing: border-box;
         margin: 1em 0 0 0;
