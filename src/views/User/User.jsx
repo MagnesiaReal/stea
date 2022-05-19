@@ -75,15 +75,15 @@ export default function User (props) {
 
     // Esta llamada tra todas las actividad que un owner o un admin pueden editar
     // NOTA: Estas actividades pueden o no estar asociadas a un grupo por lo tanto solo pueden ser borradas o editadas.
-    AXIOS.get('/activity/allforadmin')
+    AXIOS.get('/activity/allforadmin', {params: {userId: props.cookie.get('userId'), UUID: props.cookie.get('UUID')}})
     .then((res) => {
       if(res.status === 204) {
         console.log('ACTIVITIES ADMINOWNER>> No content');
       } else {
-        console.log('ACTIVITIES ADMINOWNER>> ', res.data.message);
+        console.log('ACTIVITIES ADMINOWNER>> ', res.data.activitiesData);
         setAllactivitiesAdmin(res.data.activitiesData);
       }
-    }).catch((err)=> {
+    }).catch(err=> {
       console.log('ACTIVITIES>> Error: ', err.response.status, err.response.data.message);
     })
     
@@ -141,6 +141,7 @@ export default function User (props) {
                 </div>
               );
             })}
+            {console.log(allActivitiesAdmin)}
           </div>
         </div>
         <ActivitiesDashboard allActivitiesUser={allActivitiesUser} allActivitiesAdmin={allActivitiesAdmin}/>

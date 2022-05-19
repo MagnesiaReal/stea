@@ -33,7 +33,9 @@ export default function Group(props) {
     AXIOS.get('group/group', {params: groupCredentials})
     .then((res)=> {
       setGroupData(res.data.groupData);
+      setLoading(false)
       console.log('group/ group data ->', res.data.groupData);
+      
     }).catch((err)=>{
       console.log('MODALACCESS>> Error status code: ', err.response.status, err.response.data.message);
     });
@@ -42,11 +44,11 @@ export default function Group(props) {
     .then((res)=> {
       // console.log('activity/ all activities from group -> ', res.data.activities);
       setActivities(res.data.activities)
-      setLoading(false)
+      
     }).catch((err)=> {
       console.log('MODALACCESS>> Error status code: ', err.response.status, err.response.data.message);
     });
-
+    
     // const fetchData = async () =>{
     //   setLoading(true);
     //   try {
@@ -61,7 +63,6 @@ export default function Group(props) {
     //   setLoading(false);
     // }
 
-    // fetchData();
     
   }, []);
 
