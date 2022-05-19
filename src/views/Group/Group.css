@@ -20,5 +20,6 @@
     border-radius: 1em;
     /*flexbox*/
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
 }

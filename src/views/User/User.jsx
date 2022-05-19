@@ -41,7 +41,7 @@ export default function User (props) {
       }
       setUserName(props.cookie.get('name')+' '+props.cookie.get('lastName'));
       
-
+      
       AXIOS.get('/user/avatars',{})
       .then((res)=> {
 
@@ -126,7 +126,8 @@ export default function User (props) {
           <div className='stea-grupos-contenedor'>
             {allGroups.map((g, index) => {
               return(
-                <div key={index} className='stea-grupo-contenedor'>
+                
+                <div key={index} className='stea-grupo-contenedor' onClick={() => navigation(`/group/${g.idGrupo}`)}>
                   <div className='stea-grupo-imagenContenedor'>
                     <img src={gruposMock[0].imagen} alt={g.nombre} className='stea-grupo-imagen'></img>
                   </div>
@@ -142,7 +143,7 @@ export default function User (props) {
             })}
           </div>
         </div>
-        <ActivitiesDashboard />
+        <ActivitiesDashboard allActivitiesUser={allActivitiesUser} allActivitiesAdmin={allActivitiesAdmin}/>
 
       </div>
       {/*Modal*/}

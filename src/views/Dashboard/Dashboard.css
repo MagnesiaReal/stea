@@ -1,5 +1,6 @@
 .stea-dashboard-contenedor {
     height: 100%;
+    width: 100%;
     position: fixed;
     display: flex;
     background-color: #e5e9ec;
