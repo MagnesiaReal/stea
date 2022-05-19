@@ -36,7 +36,7 @@ export default function UserHeader(porps) {
 
   return (
     <div className='stea-userHeader-header'>
-      <h2>STEA</h2> 
+      <h2 onClick={() => navigation(`/user/${cookie.get('userId')}`)}>STEA</h2> 
       <div className='stea-userHeader-buttonsContainer'>
         <button className="stea-user-configurationButton">
           Configuracion &nbsp;
