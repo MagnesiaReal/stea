@@ -5,6 +5,7 @@ import AXIOS from '../../services/http-axios'
 //css
 import './Group.css'
 import ModalLink from './ModalLink/ModalLink';
+import ModalConfigActivity from './ModalConfigActivity/ModalConfigActivity';
 import ModalAddActivity from './ModalAddActivity/ModalAddActivity';
 import { act } from '@testing-library/react';
 
@@ -79,6 +80,21 @@ export default function Group(props) {
     })
   }
 
+  const deleteActivity = (e) => {
+    e.preventDefault();
+    const actividad = {
+      userId: props.cookie.get('userId'),
+      UUID: props.cookie.get('UUID'),
+      groupId: params.groupId,
+    }
+    AXIOS.post('/activity/add', actividad)
+    .then((res)=>{
+      console.log(res.data.message);
+    }).catch((err)=>{
+      console.log('MODALACCESS>> Error status code: ', err.response.status, err.response.data.messag);
+    })
+  }
+
   const onAccessLink = (e) => {
     e.preventDefault();
     const credentials = {
@@ -121,7 +137,8 @@ export default function Group(props) {
           <p>Genera tu liga de acceso {">>>>"} </p>
           <div className='stea-grupoDetalles-container'>
           <button className="btn btn-dark" onClick={onAccessLink} data-toggle="modal" data-target="#stea-token-modal">Liga de Acceso</button>
-          {activities != undefined && activities.map( (actividad, index) => {return(
+          <button className="btn btn-dark" onClick={addActivity} data-toggle="modal" data-target="#stea-add-modal">Añadir actividad</button>
+          {activities !== undefined && activities.map( (actividad, index) => {return(
               <div key={index} className='stea-grupoActividades-container'>
                 <div className='stea-grupoActividades-info'>
                   <p className='stea-grupoActividades-nombre'>
@@ -143,6 +160,11 @@ export default function Group(props) {
                     {actividad.modoActividad}
                   </p>
                 </div>
+                <div className='stea-grupoActividades-botones'>
+                  <button className="btn btn-dark" onClick={() => console.log("jugando jiji")} data-toggle="modal">Jugar</button>
+                  {actividad.tipoPermiso === null ? <div>a</div> : <button className="btn btn-dark" onClick={addActivity} data-target="#stea-config-modal" data-toggle="modal">Configurar</button>}
+                  {actividad.tipoPermiso === null ? <div>a</div> : <button className="btn btn-danger" onClick={deleteActivity}  >Borrar</button>}
+                </div>
               </div>
             );})}
           </div>
@@ -152,6 +174,7 @@ export default function Group(props) {
 
       </div>
       <ModalLink token={token}/>
+      <ModalConfigActivity />
       <ModalAddActivity groupId={params.userId}/> {/*Pasamos el groupId para ponerlo en los datos de envio */}
     </>
   );

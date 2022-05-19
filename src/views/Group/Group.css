@@ -93,3 +93,8 @@
     text-align: end;
     font-weight: 600;
 }
+
+.stea-grupoActividades-botones{
+    display: flex;
+    flex-direction: row;
+}

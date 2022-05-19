@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Cookies from "universal-cookie";
 import AXIOS from "../../../services/http-axios"
 
-export default function ModalAddActivity(props) {
+export default function ModalConfigActivity(props) {
     const cookie = new Cookies;
 
     const [initDate, setInitDate] = useState("");
@@ -48,6 +48,6 @@ export default function ModalAddActivity(props) {
     }
 
     return (
-        <div id="stea-add-modal">Un simple modal a editar</div>
+        <div id="stea-config-modal">Un simple modal a editar</div>
     );
 }
