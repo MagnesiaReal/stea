@@ -24,7 +24,6 @@ import RespCoinEditor from './views/Editor/RespCoinEditor/RespCoinEditor.jsx'
 function App() {
 
   const cookie = new Cookies();
- 
   // Rutas sin login
   return (
     <Router>

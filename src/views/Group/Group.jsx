@@ -93,7 +93,7 @@ export default function Group(props) {
         console.log("TOKEN: ", res.data.code);
         setToken(res.data.code);
       }).catch(err => {
-        throw err;
+        console.log(err.response.data.message);
       });
   }
 

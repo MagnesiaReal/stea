@@ -2,6 +2,8 @@ import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import AXIOS from '../../services/http-axios';
 import DeleteModal from "./DeleteModal/DeleteModal";
+import { DefaultEditor } from 'react-simple-wysiwyg';
+
 
 //css
 import './GroupConf.css'
@@ -14,6 +16,9 @@ export default function GroupConf(props) {
   const [userList, setUserList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [groupData, setGroupData] = useState(true);
+  const [groupName, setGroupName] = useState('');
+  const [group, setGroup] = useState('');
+  const [info, setInfo] = useState('');
   
 
   useEffect(()=> {
@@ -22,7 +27,10 @@ export default function GroupConf(props) {
       .then((res)=> {
         console.log('GROUPCONF>> GroupData: ', res.data.groupData);
         console.log('GROUPCONF>> message:' , res.data.message);
-        setGroupData(res.data.groupData);
+        console.log(res.data.groupData);
+        setGroupName(res.data.groupData.nombre);
+        setGroup(res.data.groupData.grupo);
+        //setInfo(res.data.groupData.info);
 
       }).catch((err)=> {
         navigation('/');
@@ -33,7 +41,7 @@ export default function GroupConf(props) {
   
   useEffect(()=> {
     // bad practice this could be GET insted of POST
-    AXIOS.get('/group/allusersofgroup', { params: {userId: props.cookie.get('userId'), groupId: params.groupId, UUID: props.cookie.get('UUID')}})
+    AXIOS.get('/groupconf/allusers', { params: {userId: props.cookie.get('userId'), groupId: params.groupId, UUID: props.cookie.get('UUID')}})
     .then((res)=> {
       console.log(res);
       if(res.status === 200) {
@@ -46,12 +54,34 @@ export default function GroupConf(props) {
       setLoading(false);
       
     }).catch(err => {
-      console.log('GROUPCONF>> Error getting userList: ', err.response.data.message);
-      navigation('/')
+      console.log('GROUPCONF>> Error getting userList: ', err.response);
       
     });
 
   }, [updateTimes]);
+
+
+  function onUpdateContent(e) {
+    e.preventDefault();
+    console.log(info);
+    const credentials = {
+      userId: props.cookie.get('userId'),
+      UUID: props.cookie.get('UUID'),
+      groupId: params.groupId,
+      groupName: groupName,
+      group: group,
+      info: info
+    }
+
+    AXIOS.put('/groupconf/update', credentials)
+    .then((res)=> {
+      console.log(res.data.message);
+    }).catch((err)=>{
+      console.log(err.response.data.message);
+      console.log(err.status);
+    })
+
+  }
 
 
   if (loading) return (<div>LOADING. . .</div>);
@@ -90,6 +120,22 @@ export default function GroupConf(props) {
             })}
             
           </ul>
+        </div>
+        <div className="stea-groupConfig-container">
+          <article className="stea-groupConfig-information">
+            <h2>Configuracion de Grupo</h2>
+            <section>
+              <label htmlFor="groupName">Nombre de Grupo:</label>
+              <input type="text" id="groupName" value={groupName} onChange={({target:{value}})=> {setGroupName(value)}} className="form-control"/>
+              <label htmlFor="group">Grupo</label>
+              <input type="text" id="group" value={group} onChange={({target:{value}})=>{setGroup(value)}} className="form-control"/>
+              <label htmlFor="info">Información</label>
+              <DefaultEditor value={info} onChange={({target:{value}})=>{setInfo(value)}}/>
+
+              <button className="btn btn-dark" onClick={onUpdateContent}>Actualizar</button>                          
+            </section>
+
+          </article>
         </div>
       </div>
       <DeleteModal groupName={groupData.nombre}/>

@@ -48,13 +48,13 @@ export default function ModalAccess(props) {
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form onSubmit={onSubmitAccess}>
+          <form>
             <div className="modal-body">
               <label htmlFor="groupName">Codigo de Acceso: </label><br/>
               <input type="text"  name="groupName" id="groupName" value={code} onChange={onCode} placeholder="Codigo" required/>
             </div>
             <div className="modal-footer">
-              <input className="btn btn-dark" data-dismiss="modal" type="submit" value="Acceder"/>
+              <input className="btn btn-dark" data-dismiss="modal" type="submit" value="Acceder" onClick={onSubmitAccess}/>
               <button className="btn" data-dismiss="modal" aria-label="Close" onClick={onCloseModal}>Cancelar</button>
             </div>
           </form>
