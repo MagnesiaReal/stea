@@ -19,6 +19,7 @@ import Cookies from 'universal-cookie';
 import Dashboard from './views/Dashboard/Dashboard';
 import Group from './views/Group/Group.jsx'
 import MapaEditor from './views/Editor/MapaEditor/MapaEditor.jsx'
+import RespCoinEditor from './views/Editor/RespCoinEditor/RespCoinEditor.jsx'
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
         <Route path='/changepass/:code' element={<ChangePass/>}/>
 
         <Route path='/editortest' element={<MapaEditor/>}/>
+        <Route path='/editortest2' element={<RespCoinEditor/>}/>
 
         <Route path='/mapa' element={<Mapa/>}> </Route>
         <Route path='/mapaculturas' element={<MapaCul/>}> </Route>
