@@ -28,7 +28,29 @@ const ActivitiesDashboard = (props) => {
           </div>
         );
       })}
-     
+     { props.allActivitiesAdmin.map( (actividad,index) => {
+        return(
+          <div key={index} className='stea-actividadPendiente-container'>
+            <div className='stea-actividadPendiente-info'>
+              <p className='stea-actividadPendiente-nombre'>
+                {actividad.titulo}
+              </p>
+              <p className='stea-actividadPendiente-profesor'>
+                {actividad.descripcion}
+              </p>
+              
+            </div>
+            <div className='stea-actividadPendiente-modo'>
+              <p className='stea-actividadPendiente-fechaLimite'>
+                {actividad.fechaFin}
+              </p>
+              <p className='stea-actividadPendiente-modoActividad'>
+                {actividad.modoActividad}
+              </p>
+            </div>
+          </div>
+        );
+      })}
     </div>
   )
 }

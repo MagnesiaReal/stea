@@ -169,7 +169,7 @@ export default function Group(props) {
               </div>
             );})}
           </div>
-          
+          {console.log(groupData.tipoUsuario)}
           <p>Configuracion grupo <button className="btn btn-dark" onClick={onConfig}>Go Config</button></p>
         </div>
 

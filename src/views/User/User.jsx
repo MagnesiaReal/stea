@@ -79,9 +79,10 @@ export default function User (props) {
     .then((res) => {
       if(res.status === 204) {
         console.log('ACTIVITIES ADMINOWNER>> No content');
+        setAllactivitiesAdmin([])
       } else {
-        console.log('ACTIVITIES ADMINOWNER>> ', res.data.activitiesData);
-        setAllactivitiesAdmin(res.data.activitiesData);
+        console.log('ACTIVITIES ADMINOWNER>> ', res.data.allAdminActivities);
+        setAllactivitiesAdmin(res.data.allAdminActivities);
       }
     }).catch(err=> {
       console.log('ACTIVITIES>> Error: ', err.response.status, err.response.data.message);
