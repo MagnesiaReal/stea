@@ -116,34 +116,36 @@ export default function Group(props) {
     <>
       <div className='stea-group'>
         <div className='stea-group-container'>
-          <h2>Group Component</h2><br/>
+          <h2>{groupData.nombre}</h2><br/>
+          <p>{groupData.info}</p>
           <p>Genera tu liga de acceso {">>>>"} </p>
-          <div>
-          {
-            activities.map( (actividad, index) => {return(
-              <div key={index} className='stea-actividadPendiente-container'>
-                <div className='stea-actividadPendiente-info'>
-                  <p className='stea-actividadPendiente-nombre'>
+          <div className='stea-grupoDetalles-container'>
+          <button className="btn btn-dark" onClick={onAccessLink} data-toggle="modal" data-target="#stea-token-modal">Liga de Acceso</button>
+          {activities != undefined && activities.map( (actividad, index) => {return(
+              <div key={index} className='stea-grupoActividades-container'>
+                <div className='stea-grupoActividades-info'>
+                  <p className='stea-grupoActividades-nombre'>
                     {actividad.titulo}
                   </p>
-                  <p className='stea-actividadPendiente-profesor'>
+                  <p className='stea-grupoActividades-profesor'>
                     {actividad.descripcion}
                   </p>
                   
                 </div>
-                <div className='stea-actividadPendiente-modo'>
-                  <p className='stea-actividadPendiente-fechaLimite'>
-                    {actividad.fechaFin}
+                <div className='stea-grupoActividades-modo'>
+                  <p className='stea-grupoActividades-fechaLimite'>
+                    Creada el {actividad.fechaInicio}
                   </p>
-                  <p className='stea-actividadPendiente-modoActividad'>
+                  <p className='stea-grupoActividades-fechaLimite'>
+                    Disponible hasta {actividad.fechaFin}
+                  </p>
+                  <p className='stea-grupoActividades-modoActividad'>
                     {actividad.modoActividad}
                   </p>
                 </div>
               </div>
-            );})
-          }
+            );})}
           </div>
-          <button className="btn btn-dark" onClick={onAccessLink} data-toggle="modal" data-target="#stea-token-modal">Liga de Acceso</button>
           
           <p>Configuracion grupo <button className="btn btn-dark" onClick={onConfig}>Go Config</button></p>
         </div>
