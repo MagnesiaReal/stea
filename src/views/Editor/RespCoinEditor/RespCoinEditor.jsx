@@ -3,9 +3,29 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './RespCoinEditor.css'
 import { useState } from 'react';
 
+let wrongAnsersKey = 0;
 export default function RespCoinEditor(props) {
+  
+  const [questAns, setQuestAns] = useState([]);
+  const [wrongAnswers, setWrongAnswers] = useState([]);
+  const [wrongAnswer, setWrongAnswer] = useState('');
+  
 
-  const [wrongAnswers, setWrongAnswers] = useState([1,2,3]);
+  function onAddWrongAnswer(e) {
+    e.preventDefault();
+    if(wrongAnswer === '' || wrongAnswers.find(wa=> wa === wrongAnswer)) return;
+    if(questAns.length && questAns.find(qa => qa.answer === wrongAnswer)) return;
+    setWrongAnswers([...wrongAnswers, wrongAnswer]);
+    setWrongAnswer('');
+  }
+  
+  function onEnter(e) {
+    if(e.key === 'Enter') onAddWrongAnswer(e);
+  }
+
+  function onWrongAnswer(e){
+    setWrongAnswer(e.target.value);
+  }
 
   return (
   <>
@@ -14,21 +34,30 @@ export default function RespCoinEditor(props) {
       <section>
 
       </section>
-      <section>
-        <h3>Respuestas Incorrectas</h3>
+      <article>
+        <label htmlFor="wrongAnswer">Ingresa una respuesta incorrecta: </label>
+        <section className="stea-rce-set-wa">
+          <input type="text" id="wrongAnswer" className="form-control" placeholder="Solo respuestas incorrectas" value={wrongAnswer} onChange={onWrongAnswer} onKeyDown={onEnter}/>
+          <button className="btn btn-primary" onClick={onAddWrongAnswer}><FontAwesomeIcon icon="fa-solid fa-plus" /></button>
+        </section>
+        <h3>Banco de respuestas incorrectas</h3>
         
-        {wrongAnswers.map((value, index, array)=> {
-          console.log(array);
-          return <h3 key={value}>o watu</h3>
-        })}
-        <input type="text" name="wrong-answers" id="" className="stea-resp-coin-editor-wrong-answers" />
+        <section className="stea-rce-wrong-answers">
+          {wrongAnswers.map((value, index)=> 
+            <div key={value}>
+              <button className="btn" onClick={()=>{setWrongAnswers(wrongAnswers.filter((v) => v !== value))}}>
+                <FontAwesomeIcon icon="fas fa-times"/>
+              </button> 
+              <span>{value}</span>
+            </div>)}
+        </section>
 
-      </section>
+      </article>
     </div>
 
 
 
-    <div className="modal fade" id="stea-resp-coin-help-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div className="modal fade" id="stea-resp-coin-help-modal" tabIndex="-1" role="dialog" aria-hidden="true">
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">

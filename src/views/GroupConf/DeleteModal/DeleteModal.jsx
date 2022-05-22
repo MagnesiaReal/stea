@@ -43,7 +43,7 @@ export default function DeleteModal (props) {
 
   
   return(
-    <div className="modal fade" id="stea-delete-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div className="modal fade" id="stea-delete-modal" tabIndex="-1" role="dialog" aria-hidden="true">
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">

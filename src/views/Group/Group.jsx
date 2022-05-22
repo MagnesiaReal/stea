@@ -14,7 +14,7 @@ export default function Group(props) {
   const params = useParams();
   const [loading, setLoading] = useState(true);
   const [groupData, setGroupData] = useState();
-  const [activities, setActivities] = useState();
+  const [activities, setActivities] = useState([]);
   const [token, setToken] = useState('');
 
   /*
@@ -35,15 +35,16 @@ export default function Group(props) {
       console.log('group/ group data ->', res.data.groupData);
     }).catch((err)=>{
       console.log('MODALACCESS>> Error status code: ', err.response.status, err.response.data.message);
+      navigation('/');
     });
 
     AXIOS.get('activity/allforgroup', {params: groupCredentials})
     .then((res)=> {
-      // console.log('activity/ all activities from group -> ', res.data.activities);
+      console.log('activity/ all activities from group -> ', res.data.activities);
       setActivities(res.data.activities)
       setLoading(false)
     }).catch((err)=> {
-      console.log('MODALACCESS>> Error status code: ', err.response.status, err.response.data.message);
+      console.log('MODALACCESS>> Error status code: ', err.status, err.response.data.message);
     });
 
     // const fetchData = async () =>{
@@ -120,7 +121,7 @@ export default function Group(props) {
           <p>Genera tu liga de acceso {">>>>"} </p>
           <div>
           {
-            activities.map( (actividad, index) => {return(
+            activities!==undefined && activities.map( (actividad, index) => {return(
               <div key={index} className='stea-actividadPendiente-container'>
                 <div className='stea-actividadPendiente-info'>
                   <p className='stea-actividadPendiente-nombre'>
