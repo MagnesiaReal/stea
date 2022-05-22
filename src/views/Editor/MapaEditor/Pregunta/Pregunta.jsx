@@ -12,7 +12,6 @@ export default function Pregunta (props) {
   
   useEffect(function (){
     props.lista.push({IDMapa:props.IDMapa,IDPregunta:props['data-key'],Tiempo:0,})
-
   },[])
   const onBorrarPregunta=(e)=>{
     e.preventDefault();

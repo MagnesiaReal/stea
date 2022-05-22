@@ -49,20 +49,7 @@ export default function MapaEditor (props) {
   const [tipoMapa,setTipoMapa]=useState ("1");
   const [opciones,setOpciones]=useState (estaditos);
   const [preguntas, setPreguntas]=useState([]);
-  const jsonPreguntas={}
   
-
-  const onGuardarPreguntas = (e) => {
-    e.preventDefault();
-    const preg={
-      IDMapa:e.target.value,
-      IDPregunta:i++,
-      Cuerpo:"nothing",
-      Resp: "algo",
-      Tiempo: "00:00"
-    }
-  }
-
   const onGuardarHijo = (data) =>{
     data.IDMapa=refPregunta.current.value
     listaPreguntasMapa.push(data);
