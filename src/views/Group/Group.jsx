@@ -17,7 +17,9 @@ export default function Group(props) {
   const [groupData, setGroupData] = useState();
   const [activities, setActivities] = useState();
   const [token, setToken] = useState('');
-
+  const [idConfig, setIdConfig] = useState();
+  //Para modal para agregar actvidad al grupo
+  const [activitiesList, setActivitiesList] = useState([]);
   /*
 
   */
@@ -32,7 +34,7 @@ export default function Group(props) {
     
     AXIOS.get('group/group', {params: groupCredentials})
     .then((res)=> {
-      setGroupData(res.data.groupData);
+      setGroupData(res.data);
       setLoading(false)
       console.log('group/ group data ->', res.data.groupData);
       
@@ -42,58 +44,75 @@ export default function Group(props) {
 
     AXIOS.get('activity/allforgroup', {params: groupCredentials})
     .then((res)=> {
-      // console.log('activity/ all activities from group -> ', res.data.activities);
+      console.log('activity/ all activities from group -> ', res.data.activities);
       setActivities(res.data.activities)
       
     }).catch((err)=> {
       console.log('MODALACCESS>> Error status code: ', err.response.status, err.response.data.message);
     });
     
-    // const fetchData = async () =>{
-    //   setLoading(true);
-    //   try {
-    //     const {data: response} = await AXIOS.get('activity/allforgroup', {params: groupCredentials})
-    //     const actividades = response.activities
-    //     console.log(actividades);
-    //     setActivities(actividades)
-    //     console.log(activities);
-    //   } catch (err) {
-    //     console.log('MODALACCESS>> Error status code: ', err.response.status, err.response.data.message);
-    //   }
-    //   setLoading(false);
-    // }
-
-    
   }, []);
 
   const addActivity = (e) => {
     e.preventDefault();
-    const actividad = {
-      userId: props.cookie.get('userId'),
-      UUID: props.cookie.get('UUID'),
-      groupId: params.groupId,
+    const userActivity = {
+      userId: props.cookie.get('userId'), 
+      UUID: props.cookie.get('UUID')
     }
-    AXIOS.post('/activity/add', actividad)
+    AXIOS.get('/activity/allforadmin', { params: userActivity} )
     .then((res)=>{
-      console.log(res.data.message);
+      console.log(res);
+      setActivitiesList(res.data.allAdminActivities)
     }).catch((err)=>{
       console.log('MODALACCESS>> Error status code: ', err.response.status, err.response.data.messag);
     })
   }
+  
+  const configActivity = (e) => {
+    e.preventDefault();
+    const activityCredentials = {
+      userId: props.cookie.get('userId'),
+      UUID: props.cookie.get('UUID'),
+      activityId : e.target.id
+    }
+    console.log(e.target.id);
+    setIdConfig(e.target.id)
+    // AXIOS.get('/activity/activityedit', {params: activityCredentials})
+    // .then((res)=> {
+    //   console.log('activityedit/ -> ', res.data.activityData);
+    // }).catch((err)=> {
+    //   console.log('MODALACCESS>> Error status code: ', err.response.status, err.response.data.message);
+    // });
+    
+  }
 
   const deleteActivity = (e) => {
-    e.preventDefault();
     const actividad = {
       userId: props.cookie.get('userId'),
       UUID: props.cookie.get('UUID'),
-      groupId: params.groupId,
+      groupActivityId: e.target.id,
+      groupId: params.groupId
     }
-    AXIOS.post('/activity/add', actividad)
+    console.log(actividad)
+    AXIOS.delete('activity/remove', {data: actividad})
     .then((res)=>{
-      console.log(res.data.message);
+      console.log(res);
     }).catch((err)=>{
       console.log('MODALACCESS>> Error status code: ', err.response.status, err.response.data.messag);
     })
+    const groupCredentials = {
+      userId: props.cookie.get('userId'),
+      UUID: props.cookie.get('UUID'),
+      groupId: params.groupId
+    }
+    AXIOS.get('activity/allforgroup', {params: groupCredentials})
+    .then((res)=> {
+      console.log('activity/ all activities from group -> ', res.data.activities);
+      setActivities(res.data.activities)
+      
+    }).catch((err)=> {
+      console.log('MODALACCESS>> Error status code: ', err.response.status, err.response.data.message);
+    });
   }
 
   const onAccessLink = (e) => {
@@ -133,12 +152,12 @@ export default function Group(props) {
     <>
       <div className='stea-group'>
         <div className='stea-group-container'>
-          <h2>{groupData.nombre}</h2><br/>
-          <p>{groupData.info}</p>
+          <h2>{groupData.groupData.nombre}</h2><br/>
+          <p>{groupData.groupData.info}</p>
           <p>Genera tu liga de acceso {">>>>"} </p>
           <div className='stea-grupoDetalles-container'>
           <button className="btn btn-dark" onClick={onAccessLink} data-toggle="modal" data-target="#stea-token-modal">Liga de Acceso</button>
-          <button className="btn btn-dark" onClick={addActivity} data-toggle="modal" data-target="#stea-add-modal">Añadir actividad</button>
+          {groupData.userType !== 3 ? <button className="btn btn-dark" onClick={addActivity} data-toggle="modal" data-target="#stea-add-modal">Añadir actividad</button> : <div></div>}
           {activities !== undefined && activities.map( (actividad, index) => {return(
               <div key={index} className='stea-grupoActividades-container'>
                 <div className='stea-grupoActividades-info'>
@@ -162,21 +181,22 @@ export default function Group(props) {
                   </p>
                 </div>
                 <div className='stea-grupoActividades-botones'>
-                  <button className="btn btn-dark" onClick={() => console.log("jugando jiji")} data-toggle="modal">Jugar</button>
-                  {actividad.tipoPermiso === null ? <div>a</div> : <button className="btn btn-dark" onClick={addActivity} data-target="#stea-config-modal" data-toggle="modal">Configurar</button>}
-                  {actividad.tipoPermiso === null ? <div>a</div> : <button className="btn btn-danger" onClick={deleteActivity}  >Borrar</button>}
+                  <button className="btn btn-primary" onClick={() => console.log("jugando jiji")} data-toggle="modal">Jugar</button>
+                  {groupData.userType === 3 ? <div></div> : <button className="btn btn-dark" id={actividad.idGrupoActividad} onClick={configActivity} data-target="#stea-config-modal" data-toggle="modal">Configurar</button>}
+                  {actividad.tipoPermiso === null ? <div></div> : <button className="btn btn-danger" id={actividad.idGrupoActividad} onClick={deleteActivity}  >Borrar</button>}
+                  {actividad.tipoPermiso === null ? <div></div> : <button className="btn btn-info" id={actividad.idGrupoActividad} onClick={() => console.log("Yendo al editor")}  >editar</button>}
                 </div>
               </div>
             );})}
           </div>
-          {console.log(groupData.tipoUsuario)}
+          {console.log("Las propiedades son:",activitiesList)}
           <p>Configuracion grupo <button className="btn btn-dark" onClick={onConfig}>Go Config</button></p>
         </div>
 
       </div>
       <ModalLink token={token}/>
-      <ModalConfigActivity />
-      <ModalAddActivity groupId={params.userId}/> {/*Pasamos el groupId para ponerlo en los datos de envio */}
+      <ModalConfigActivity groupId={params.groupId} idConfig={idConfig} />
+      <ModalAddActivity groupId={params.groupId} activities={activitiesList} /> {/*Pasamos el groupId para ponerlo en los datos de envio */}
     </>
   );
 }

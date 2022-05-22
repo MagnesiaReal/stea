@@ -101,6 +101,32 @@ export default function User (props) {
     console.log('onCreateGroup');
   }
   
+  const deleteActivity = (e) => {
+    const actividad = {
+      userId: props.cookie.get('userId'),
+      UUID: props.cookie.get('UUID'),
+      activityId: e.target.id,
+    }
+    console.log(actividad)
+    AXIOS.delete('/activity/delete', {data: actividad})
+    .then((res)=>{
+      console.log(res);
+    }).catch((err)=>{
+      console.log('MODALACCESS>> Error status code: ', err.response.status, err.response.data.messag);
+    })
+    AXIOS.get('/activity/allforadmin', {params: {userId: props.cookie.get('userId'), UUID: props.cookie.get('UUID')}})
+    .then((res) => {
+      if(res.status === 204) {
+        console.log('ACTIVITIES ADMINOWNER>> No content');
+        setAllactivitiesAdmin([])
+      } else {
+        console.log('ACTIVITIES ADMINOWNER>> ', res.data.allAdminActivities);
+        setAllactivitiesAdmin(res.data.allAdminActivities);
+      }
+    }).catch(err=> {
+      console.log('ACTIVITIES>> Error: ', err.response.status, err.response.data.message);
+    })
+  }
 
   if (loading) return (
     <div>
@@ -145,7 +171,52 @@ export default function User (props) {
             {console.log(allActivitiesAdmin)}
           </div>
         </div>
-        <ActivitiesDashboard allActivitiesUser={allActivitiesUser} allActivitiesAdmin={allActivitiesAdmin}/>
+        <div className='stea-actividadesTodas-Contenedor'>
+          <div className='stea-actividadesPendientes-contenedor'>
+            <p className='stea-actividadesPendientes-title'>Actividades pendientes</p>
+            { allActivitiesUser.map( (actividad,index) => {
+              return(
+                <div key={index} className='stea-actividadPendiente-container'>
+                  <div className='stea-actividadPendiente-info'>
+                    <p className='stea-actividadPendiente-nombre'>
+                      {actividad.titulo}
+                    </p>
+                    <p className='stea-actividadPendiente-profesor'>
+                      {actividad.descripcion}
+                    </p>
+                    
+                  </div>
+                  <div className='stea-actividadPendiente-modo'>
+                    <p className='stea-actividadPendiente-fechaLimite'>
+                      {actividad.fechaFin}
+                    </p>
+                    <p className='stea-actividadPendiente-modoActividad'>
+                      {actividad.modoActividad}
+                    </p>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+          <div className='stea-actividadesPendientes-contenedor'>
+            <p className='stea-actividadesPendientes-title'>Actividades creadas por ti</p>
+            { allActivitiesAdmin.map( (actividad,index) => {
+              return(
+                actividad.tipoPermiso !== null && <div key={index} className='stea-actividadPendiente-container'>
+                  <div className='stea-actividadPendiente-info'>
+                    <p className='stea-actividadPendiente-nombre'>
+                      {actividad.titulo}
+                    </p>
+                    <p className='stea-actividadPendiente-profesor'>
+                      {actividad.descripcion}
+                    </p>
+                    <button className="btn btn-danger" id={actividad.idActividad} onClick={deleteActivity}  >Borrar</button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
 
       </div>
       {/*Modal*/}
