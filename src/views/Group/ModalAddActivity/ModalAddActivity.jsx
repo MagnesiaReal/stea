@@ -5,9 +5,13 @@ import AXIOS from "../../../services/http-axios"
 export default function ModalAddActivity(props) {
     const cookie = new Cookies;
 
-    const [initDate, setInitDate] = useState("");
-    const [endDate, setEndDate] = useState("");
+    
+    
 
+    const [initDate, setInitDate] = useState("");
+    const [endDate, setEndDate] = useState();
+    const [activityId, setActivityId] = useState("1");
+    const [mode, setMode] = useState("1")
     const [activities, setActivities] = useState("");
 
     useEffect(()=> {
@@ -23,6 +27,17 @@ export default function ModalAddActivity(props) {
         }).catch((err)=> {
             console.log('ACTIVITIES>> Error: ', err.response.status, err.response.data.message);
         });
+
+        const d = new Date()
+            var month = '' + (d.getMonth() + 1)
+            var day = '' + d.getDate()
+            var year = d.getFullYear();
+
+            if (month < 10) 
+                month = "0" + month;
+            if (day < 10) 
+                day = "0" + day;
+        setInitDate( [year, month, day].join('-'))
     });
 
     // Esta funcion manda a la base de datos los datos de la actividad que se agrego
@@ -33,21 +48,82 @@ export default function ModalAddActivity(props) {
         const credentials = {
             userId: cookie.get('userId'),
             UUID: cookie.get('UUID'),
-            initDate: "2022-12-13", // Fecha inicial del 
-            endDate: "2022-12-15", // Aqui debe ir la fecha final para hacer la actividad
+            initDate: initDate, // Fecha inicial del 
+            endDate: endDate, // Aqui debe ir la fecha final para hacer la actividad
             groupId: props.groupId, 
-            activityId: 1 // Aqui traer la Id de la actividad seleccionada
+            activityId: activityId, // Aqui traer la Id de la actividad seleccionada
+            mode: mode
         };
-
+        console.log(credentials)
         AXIOS.post('activity/add', credentials)
         .then((res)=> {
             console.log('MODALADDACTIVITY>> ', res.data.message);
         }).catch((err)=>{
             console.log('MODALACCESS>> Error status code: ', err.response.status, err.response.data.message);
         });
+        window.location.reload()
     }
 
+    const addActivityId = (e) => {
+        setActivityId(e.target.id)
+    }
+
+    const handleDates = (e) => {
+        setEndDate(e.target.value)
+    }
+
+    const handleMode = (e) => {
+        setMode(e.target.value)
+    }
+    
+
     return (
-        <div>Un simple modal a editar</div>
+        <div className="modal fade" id="stea-add-modal" tabindex="-1" role="dialog" aria-hidden="true">
+            
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">Codigo de acceso</h5>
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div className="modal-body" align="middle">
+                        {  props.activities.map( (actividad,index) => {
+                            return(
+                                actividad.tipoPermiso !== null && actividad.tipoPermiso !== 3  && <div key={index} className='stea-actividadPendiente-container'>
+                                <div className='stea-actividadPendiente-info'>
+                                    <p className='stea-actividadPendiente-nombre'>
+                                    {actividad.titulo}
+                                    </p>
+                                    <p className='stea-actividadPendiente-profesor'>
+                                    {actividad.descripcion}
+                                    </p>
+                                </div>
+                                <div>
+                                    <button className="btn" id={actividad.idActividad} onClick={addActivityId}>Seleccionar</button>
+                                    { actividad.idActividad == activityId ? <h6>Actividad seleccionada</h6> : console.log("no")}
+                                    
+                                </div>
+                            </div>
+                        );
+                    })}
+                        </div>
+                        <div className="modal-footer">
+                            <input name="endDate" onChange={handleDates} min={initDate} type="date"/>
+                            <select name="mode" id="mode"  onChange={handleMode}>
+                                <option defaultValue value="1">Examen</option>
+                                <option value="2">Actividad</option>
+                                <option value="3">Competencia</option>
+                            </select>
+                            {mode === "1" ? <p>El usuario hará la actividad individual y solo puede ver sus resultados al final</p> : <p></p>}
+                            {mode === "2" ? <p>El usuario hará la actividad individual y puede los resultados de todos</p> : <p></p>}
+                            {mode === "3" ? <p>El usuario hace la actividad en conjunto hasta que el administrador la inicie y puede ver los resultados de todos</p> : <p></p>}
+                            <button className="btn" data-dismiss="modal" aria-label="Close">Cerrar</button>
+                            { endDate !== undefined && <button onClick={onAddActivity}>Agregar</button>}
+                        </div>
+                    </div>
+                </div>
+        </div>
     );
 }

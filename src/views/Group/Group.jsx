@@ -5,6 +5,7 @@ import AXIOS from '../../services/http-axios'
 //css
 import './Group.css'
 import ModalLink from './ModalLink/ModalLink';
+import ModalConfigActivity from './ModalConfigActivity/ModalConfigActivity';
 import ModalAddActivity from './ModalAddActivity/ModalAddActivity';
 import { act } from '@testing-library/react';
 
@@ -16,7 +17,9 @@ export default function Group(props) {
   const [groupData, setGroupData] = useState();
   const [activities, setActivities] = useState([]);
   const [token, setToken] = useState('');
-
+  const [idConfig, setIdConfig] = useState();
+  //Para modal para agregar actvidad al grupo
+  const [activitiesList, setActivitiesList] = useState([]);
   /*
 
   */
@@ -31,8 +34,10 @@ export default function Group(props) {
     
     AXIOS.get('group/group', {params: groupCredentials})
     .then((res)=> {
-      setGroupData(res.data.groupData);
+      setGroupData(res.data);
+      setLoading(false)
       console.log('group/ group data ->', res.data.groupData);
+      
     }).catch((err)=>{
       console.log('MODALACCESS>> Error status code: ', err.response.status, err.response.data.message);
       navigation('/');
@@ -42,42 +47,73 @@ export default function Group(props) {
     .then((res)=> {
       console.log('activity/ all activities from group -> ', res.data.activities);
       setActivities(res.data.activities)
-      setLoading(false)
+      
     }).catch((err)=> {
       console.log('MODALACCESS>> Error status code: ', err.status, err.response.data.message);
     });
-
-    // const fetchData = async () =>{
-    //   setLoading(true);
-    //   try {
-    //     const {data: response} = await AXIOS.get('activity/allforgroup', {params: groupCredentials})
-    //     const actividades = response.activities
-    //     console.log(actividades);
-    //     setActivities(actividades)
-    //     console.log(activities);
-    //   } catch (err) {
-    //     console.log('MODALACCESS>> Error status code: ', err.response.status, err.response.data.message);
-    //   }
-    //   setLoading(false);
-    // }
-
-    // fetchData();
     
   }, []);
 
   const addActivity = (e) => {
     e.preventDefault();
-    const actividad = {
-      userId: props.cookie.get('userId'),
-      UUID: props.cookie.get('UUID'),
-      groupId: params.groupId,
+    const userActivity = {
+      userId: props.cookie.get('userId'), 
+      UUID: props.cookie.get('UUID')
     }
-    AXIOS.post('/activity/add', actividad)
+    AXIOS.get('/activity/allforadmin', { params: userActivity} )
     .then((res)=>{
-      console.log(res.data.message);
+      console.log(res);
+      setActivitiesList(res.data.allAdminActivities)
     }).catch((err)=>{
       console.log('MODALACCESS>> Error status code: ', err.response.status, err.response.data.messag);
     })
+  }
+  
+  const configActivity = (e) => {
+    e.preventDefault();
+    const activityCredentials = {
+      userId: props.cookie.get('userId'),
+      UUID: props.cookie.get('UUID'),
+      activityId : e.target.id
+    }
+    console.log(e.target.id);
+    setIdConfig(e.target.id)
+    // AXIOS.get('/activity/activityedit', {params: activityCredentials})
+    // .then((res)=> {
+    //   console.log('activityedit/ -> ', res.data.activityData);
+    // }).catch((err)=> {
+    //   console.log('MODALACCESS>> Error status code: ', err.response.status, err.response.data.message);
+    // });
+    
+  }
+
+  const deleteActivity = (e) => {
+    const actividad = {
+      userId: props.cookie.get('userId'),
+      UUID: props.cookie.get('UUID'),
+      groupActivityId: e.target.id,
+      groupId: params.groupId
+    }
+    console.log(actividad)
+    AXIOS.delete('activity/remove', {data: actividad})
+    .then((res)=>{
+      console.log(res);
+    }).catch((err)=>{
+      console.log('MODALACCESS>> Error status code: ', err.response.status, err.response.data.messag);
+    })
+    const groupCredentials = {
+      userId: props.cookie.get('userId'),
+      UUID: props.cookie.get('UUID'),
+      groupId: params.groupId
+    }
+    AXIOS.get('activity/allforgroup', {params: groupCredentials})
+    .then((res)=> {
+      console.log('activity/ all activities from group -> ', res.data.activities);
+      setActivities(res.data.activities)
+      
+    }).catch((err)=> {
+      console.log('MODALACCESS>> Error status code: ', err.response.status, err.response.data.message);
+    });
   }
 
   const onAccessLink = (e) => {
@@ -117,41 +153,52 @@ export default function Group(props) {
     <>
       <div className='stea-group'>
         <div className='stea-group-container'>
-          <h2>Group Component</h2><br/>
+          <h2>{groupData.groupData.nombre}</h2><br/>
+          <p>{groupData.groupData.info}</p>
           <p>Genera tu liga de acceso {">>>>"} </p>
-          <div>
-          {
-            activities!==undefined && activities.map( (actividad, index) => {return(
-              <div key={index} className='stea-actividadPendiente-container'>
-                <div className='stea-actividadPendiente-info'>
-                  <p className='stea-actividadPendiente-nombre'>
+
+          <div className='stea-grupoDetalles-container'>
+          <button className="btn btn-dark" onClick={onAccessLink} data-toggle="modal" data-target="#stea-token-modal">Liga de Acceso</button>
+          {groupData.userType !== 3 ? <button className="btn btn-dark" onClick={addActivity} data-toggle="modal" data-target="#stea-add-modal">Añadir actividad</button> : <div></div>}
+          {activities !== undefined && activities.map( (actividad, index) => {return(
+              <div key={index} className='stea-grupoActividades-container'>
+                <div className='stea-grupoActividades-info'>
+                  <p className='stea-grupoActividades-nombre'>
                     {actividad.titulo}
                   </p>
-                  <p className='stea-actividadPendiente-profesor'>
+                  <p className='stea-grupoActividades-profesor'>
                     {actividad.descripcion}
                   </p>
                   
                 </div>
-                <div className='stea-actividadPendiente-modo'>
-                  <p className='stea-actividadPendiente-fechaLimite'>
-                    {actividad.fechaFin}
+                <div className='stea-grupoActividades-modo'>
+                  <p className='stea-grupoActividades-fechaLimite'>
+                    Creada el {actividad.fechaInicio}
                   </p>
-                  <p className='stea-actividadPendiente-modoActividad'>
+                  <p className='stea-grupoActividades-fechaLimite'>
+                    Disponible hasta {actividad.fechaFin}
+                  </p>
+                  <p className='stea-grupoActividades-modoActividad'>
                     {actividad.modoActividad}
                   </p>
                 </div>
+                <div className='stea-grupoActividades-botones'>
+                  <button className="btn btn-primary" onClick={() => console.log("jugando jiji")} data-toggle="modal">Jugar</button>
+                  {groupData.userType === 3 ? <div></div> : <button className="btn btn-dark" id={actividad.idGrupoActividad} onClick={configActivity} data-target="#stea-config-modal" data-toggle="modal">Configurar</button>}
+                  {actividad.tipoPermiso === null ? <div></div> : <button className="btn btn-danger" id={actividad.idGrupoActividad} onClick={deleteActivity}  >Borrar</button>}
+                  {actividad.tipoPermiso === null ? <div></div> : <button className="btn btn-info" id={actividad.idGrupoActividad} onClick={() => console.log("Yendo al editor")}  >editar</button>}
+                </div>
               </div>
-            );})
-          }
+            );})}
           </div>
-          <button className="btn btn-dark" onClick={onAccessLink} data-toggle="modal" data-target="#stea-token-modal">Liga de Acceso</button>
-          
+          {console.log("Las propiedades son:",activitiesList)}
           <p>Configuracion grupo <button className="btn btn-dark" onClick={onConfig}>Go Config</button></p>
         </div>
 
       </div>
       <ModalLink token={token}/>
-      <ModalAddActivity groupId={params.userId}/> {/*Pasamos el groupId para ponerlo en los datos de envio */}
+      <ModalConfigActivity groupId={params.groupId} idConfig={idConfig} />
+      <ModalAddActivity groupId={params.groupId} activities={activitiesList} /> {/*Pasamos el groupId para ponerlo en los datos de envio */}
     </>
   );
 }

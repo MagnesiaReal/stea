@@ -36,21 +36,15 @@ export default function UserHeader(porps) {
 
   return (
     <div className='stea-userHeader-header'>
-      <h2>STEA</h2> 
+      <h2 onClick={() => navigation(`/user/${cookie.get('userId')}`)}>STEA</h2> 
       <div className='stea-userHeader-buttonsContainer'>
-        <button className="stea-user-configurationButton">
-          Configuracion &nbsp;
-          <FontAwesomeIcon icon="fa-solid fa-cog" />
-        </button>
+        
         <button className="stea-user-sessionButton" onClick={onSignOut}>
           Cerrar Sesion &nbsp;
           <FontAwesomeIcon icon={faArrowRightFromBracket} onClick={onSignOut}/>
         </button>
       </div>
       <div className='stea-userHeader-iconContainer'>
-        <button className="stea-user-configurationButton">
-        &nbsp; <FontAwesomeIcon icon="fa-solid fa-cog" /> &nbsp;
-        </button>
         <button className="stea-user-sessionButton" onClick={onSignOut}>
         &nbsp; <FontAwesomeIcon icon={faArrowRightFromBracket} onClick={onSignOut}/> &nbsp;
         </button>
