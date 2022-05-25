@@ -5,11 +5,11 @@ import MapaObjeto from "./components/MapaObjeto";
 
 
 
-function MapaCul(){
+function MapaCul(props){
     const [ClassName,setClassName]= useState(); 
-    const getClassName = (props) => {
+    const getClassName = (event) => {
   
-        switch (props.target.id) {
+        switch (event.target.id) {
             case 'MAY': 
                 setClassName('MAY');
             break;
@@ -44,6 +44,7 @@ function MapaCul(){
           default: 
             return 'NA';
          }
+         props.nextPregunta(true)
     };
 
     var MapCul =

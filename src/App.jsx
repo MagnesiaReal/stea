@@ -20,6 +20,7 @@ import Dashboard from './views/Dashboard/Dashboard';
 import Group from './views/Group/Group.jsx'
 import MapaEditor from './views/Editor/MapaEditor/MapaEditor.jsx'
 import RespCoinEditor from './views/Editor/RespCoinEditor/RespCoinEditor.jsx'
+import Mapas from './views/Actividad/Mapas/Mapas.jsx'
 
 function App() {
 
@@ -37,9 +38,7 @@ function App() {
         <Route path='/editortest' element={<MapaEditor/>}/>
         <Route path='/editortest2' element={<RespCoinEditor/>}/>
 
-        <Route path='/mapa' element={<Mapa/>}> </Route>
-        <Route path='/mapaculturas' element={<MapaCul/>}> </Route>
-        <Route path='/maparegiones' element={<MapaReg/>}> </Route>
+        <Route path='/mapas' element={<Mapas/>}> </Route>
         <Route path='/entrega' element={<Entrega/>}> </Route>
         <Route path='/order' element={<OrdenamientoAct/>}> </Route>
         <Route path='/inicio' element={<Dashboard/>}> </Route>

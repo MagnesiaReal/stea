@@ -5,13 +5,13 @@ import MapaObjeto from "./components/MapaObjeto";
 
 
 
-function MapaDiv(){
+function MapaDiv(props){
     const [ClassName,setClassName]= useState(); 
     const [esconder,setEsconder]= useState("fade"); 
 
-    const getClassName = (props) => {
-  
-        switch (props.target.id) {
+    const getClassName = (event) => {
+        
+        switch (event.target.id) {
             case 'BCN': 
                 setClassName('BCN');
             break;
@@ -108,6 +108,7 @@ function MapaDiv(){
           default: 
             return 'NA';
          }
+        props.nextPregunta(true)
     };
 
     var Republica = <svg version="1.2" viewBox="0 0 1000 631"  xmlns="http://www.w3.org/2000/svg">
@@ -217,7 +218,7 @@ function MapaDiv(){
         {Republica}
 
         <MapaObjeto keyProp={ClassName}></MapaObjeto>
-
+        
     </div>);
     
 }

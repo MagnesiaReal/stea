@@ -5,11 +5,11 @@ import MapaObjeto from "./components/MapaObjeto";
 
 
 
-function MapaReg(){
+function MapaReg(props){
     const [ClassName,setClassName]= useState(); 
-    const getClassName = (props) => {
-        
-        switch (props.target.id) {
+    const getClassName = (event) => {
+         
+        switch (event.target.id) {
             case 'MES': 
                 setClassName('MES');
             break;
@@ -22,6 +22,7 @@ function MapaReg(){
             default: 
             return 'NA';
          }
+        props.nextPregunta(true)
     };
 
     var Regiones =
