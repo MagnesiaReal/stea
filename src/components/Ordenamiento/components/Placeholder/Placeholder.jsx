@@ -3,30 +3,10 @@ import './Placeholder.css';
 
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
-const Placeholder = () => {
-    const datos = [
-        {
-            id : "01",
-            answer : "Independencia",
-            image : "https://www.mexicodesconocido.com.mx/wp-content/uploads/2010/06/independencia-mexico-historia.jpg"
-        },
-        {
-            id : "02",
-            answer : "Porfiriato",
-            image : "https://concepto.de/wp-content/uploads/2019/04/Jos%C3%A9-de-la-Cruz-Porfirio-D%C3%ADaz-Mori-e1555691580270.jpg"
-        },
-        {
-            id : "03",
-            answer : "Revolución",
-            image : "https://www.trespm.mx/media/k2/items/cache/2be061c2b6449abf6812de42524d71ab_XL.jpg"
-        },
-        {
-            id : "04",
-            answer : "Matanza de tlatelolco",
-            image : "https://larepublica.pe/resizer/t9AJLyGQjrPSQBG2zfXMw0FVnu8=/1102x648/top/smart/cloudfront-us-east-1.images.arcpublishing.com/gruporepublica/2PLCTNNH5JFZFPVNBJQXBV3NYE.png"
-        },
-    ]
+const Placeholder = (props) => {
+    const datos = props.options
 
+    
     const [answers, setAnswer] = useState(datos);
     const handlingOnDrag  = (result) => {
         if(result.destination == null)  return;
@@ -39,7 +19,9 @@ const Placeholder = () => {
         const result = [...prevAnswers];
         const [removed] = result.splice(start, 1);
         result.splice(end, 0, removed);
-        console.table(result);
+
+        props.setRespuesta(result)
+        console.table(props.respuesta);
 
         return result;
     }
@@ -53,7 +35,7 @@ const Placeholder = () => {
                   {
                       answers.map((item, index) => {
                           return(
-                              <Draggable  draggableId={item.id} index={index} key={item.id}>
+                              <Draggable  draggableId={index.toString()} index={index} key={index.toString()}>
                                   {(provided) => (
                                     
                                     <div
@@ -63,10 +45,9 @@ const Placeholder = () => {
                                         {...provided.dragHandleProps}
                                         className='stea-orderItem-flexbox'
                                     >
-                                        <h1 className='stea-orderItemTitle-fontTitle'>{item.answer}</h1>
-                                        <div className='stea-orderItemImage-container'> 
-                                            <img className='stea-orderItemImage-style' src={item.image} />
-                                        </div>
+                                        <p>{index}.</p>
+                                        <p className='stea-orderItemTitle-fontTitle'>{item.answer}</p>
+                                        <p>{item.pista}</p>
                                     </div>
                                   )}
                               </Draggable>

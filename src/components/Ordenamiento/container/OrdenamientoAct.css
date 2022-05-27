@@ -1,3 +1,32 @@
 .stea-ordenamientoContenedor-Padding{
+    display: flex;
+    
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     padding: 2em;
+
+    height: 100%;
+    overflow: hidden;
 }
+
+.stea-ordenamientoContenedor-contenedorDragNDrop{
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 3em;
+    width: 30%;
+    box-shadow: inset 0 0 1em black;
+}
+
+.stea-ordenamientoAct-botonEstilo{
+    position: fixed;
+    top: 80%;
+    right: 10em;
+    height: 4em;
+    width: 10%;
+
+}
+  

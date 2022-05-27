@@ -1,43 +1,79 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Placeholder from '../components/Placeholder/Placeholder';
 import './OrdenamientoAct.css'
 const OrdenamientoAct = () => {
 
   const question = {
     id : 1,
+    time: 10,
     pregunta : "Ordena los momentos historicos importantes de México a lo largo de la historia",
-    respuestas : [
-      {
-        id : "01",
-        answer : "Independencia",
-        image : "https://www.mexicodesconocido.com.mx/wp-content/uploads/2010/06/independencia-mexico-historia.jpg"
-      },
-      {
-          id : "02",
-          answer : "Porfiriato",
-          image : "https://concepto.de/wp-content/uploads/2019/04/Jos%C3%A9-de-la-Cruz-Porfirio-D%C3%ADaz-Mori-e1555691580270.jpg"
-      },
-      {
-          id : "03",
-          answer : "Revolución",
-          image : "https://www.trespm.mx/media/k2/items/cache/2be061c2b6449abf6812de42524d71ab_XL.jpg"
-      },
-      {
-          id : "04",
-          answer : "Matanza de tlatelolco",
-          image : "https://larepublica.pe/resizer/t9AJLyGQjrPSQBG2zfXMw0FVnu8=/1102x648/top/smart/cloudfront-us-east-1.images.arcpublishing.com/gruporepublica/2PLCTNNH5JFZFPVNBJQXBV3NYE.png"
-      }
+    pista_inferior: "fadva",
+    pista_superior: "fda",
+    options : [
+        {answer: 'Primero', pista: 's'},
+        {answer: 'Asesinato de agustin de iturbide', pista: 'fag'},
+        {answer: 'Tercero', pista: 'hfs'},
+        {answer: 'Cuarto', pista: 'e'},
+        {answer: 'Primero', pista: 's'},
+        {answer: 'Segundo', pista: 'fag'},
+        {answer: 'Tercero', pista: 'hfs'},
+        {answer: 'Cuarto', pista: 'e'},
+        {answer: 'Tercero', pista: 'hfs'},
+        {answer: 'Cuarto', pista: 'e'},
     ]
   }
 
+  const [calificacion, setCalificacion] = useState(question);
+  const [ready, setReady] = useState(false);
+  const [opciones, setOpciones] = useState([]);
+  const [respuesta, setRespuesta] = useState([]);
 
 
-  return <div className='.stea-ordenamientoContenedor-Padding'>
-    <h2>Pregunta {question.id}-.</h2>
-    <h3>{question.pregunta}</h3>
-    <Placeholder>a</Placeholder>
-    <button> Enviar </button>
-  </div>;
+  useEffect(() => {
+    question.options.map( (item, index) => {
+      question.options[index] = {
+        ...item, "id" : index
+      }
+    })
+    setOpciones(question.options);
+
+    
+    
+    setReady(true)
+  },[]);
+
+  const resultado = () => {
+    setRespuesta(opciones)
+    let cont = 0;
+    console.log(respuesta);
+    respuesta.map((opcion,index) => {
+      if(opciones[index]===opcion) cont++;
+    })
+    console.log(cont)
+    setCalificacion({
+      ...question,
+      calificacion : cont
+    })
+    console.log(calificacion)
+  }
+
+  if(!ready) return( <div>Loading</div>) 
+  else{
+
+    return (
+      <div className='stea-ordenamientoContenedor-Padding'>
+        <p>Pregunta {question.id}-. {question.pregunta}</p>
+        
+        <h3>{question.pista_superior}</h3>
+
+        <div className='stea-ordenamientoContenedor-contenedorDragNDrop'>
+          <Placeholder options={opciones} respuesta={respuesta} setRespuesta={setRespuesta}/>
+        </div>
+        <h3>{question.pista_inferior}</h3>
+
+        <button className='stea-ordenamientoAct-botonEstilo' onClick={resultado}> Enviar </button>
+      </div>
+    )}
 };
 
 export default OrdenamientoAct;

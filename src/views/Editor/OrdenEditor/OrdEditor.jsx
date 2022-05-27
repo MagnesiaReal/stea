@@ -98,9 +98,9 @@ const OrdEditor = () => {
                     <label className='stea-ordenamiento-editorLabel'>Pregunta</label>
                     <input className='stea-ordenamiento-editorInput' type="text" name='pregunta'  placeholder='Coloca tu pregunta aquí' onChange={handleChange} required="required"/>
                     <div className='stea-ordenamiento-editorTiempo'>
-                        {time === 5 ? <button className='stea-ordenamiento-botonTiempo-disabled' onClick={handleSubTime} name="time" disabled>-</button> : <button className='stea-ordenamiento-botonTiempo' onClick={handleSubTime} name="time">-</button>}
+                    {time === 0 ? <div className='stea-ordenamiento-botonTiempo-disabled' onClick={handleSubTime} name="time" disabled>-</div> : <div className='stea-ordenamiento-botonTiempo' onClick={handleSubTime} name="time">-</div>}
                         <label className='stea-ordenamiento-editorLabel' onChange={handleChange} >{time} segundos</label>
-                        {time >= 360 ? <button className='stea-ordenamiento-botonTiempo-disabled' onClick={handleAddTime} name="time" disabled>+</button> : <button className='stea-ordenamiento-botonTiempo' onClick={handleAddTime} name="time">+</button>}
+                    {time >= 360 ? <div className='stea-ordenamiento-botonTiempo-disabled' onClick={handleAddTime} name="time" disabled>+</div> : <div className='stea-ordenamiento-botonTiempo' onClick={handleAddTime} name="time">+</div>}
                     </div>
                     <label className='stea-ordenamiento-editorLabel'>Pista superior</label>
                     <input className='stea-ordenamiento-editorInput' type='text' name='pista_superior' placeholder='Puedes colocar una pista superior' onChange={handleChange} />
