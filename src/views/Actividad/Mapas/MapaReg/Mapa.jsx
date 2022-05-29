@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './MapaReg.css';
 import  './components/MapaObjeto'
 import MapaObjeto from "./components/MapaObjeto";
@@ -7,6 +7,47 @@ import MapaObjeto from "./components/MapaObjeto";
 
 function MapaReg(props){
     const [ClassName,setClassName]= useState(); 
+    const [tiempo,setTiempo]=useState(props.pregunta.Tiempo)
+    const [idProcess,setIdProcess]=useState(0)
+    const [desmontar, setDesmontar]=useState(0)
+
+    useEffect(()=>{
+    
+        if(desmontar===1){
+        //    console.log("Se respondio")
+            clearInterval(idProcess);
+            props.nextPregunta(true)
+            
+        }else if(desmontar===2) {
+        //  console.log("No se respondio")    
+            clearInterval(idProcess);
+            props.nextPregunta(true)
+            
+        }
+    },[desmontar]);
+
+    useEffect(()=>{
+        if(tiempo===0 && props.pregunta.Tiempo!==0) {
+            props.lista.push({IDPreg:props.pregunta.IDPregunta,Respuesta:props.pregunta.Resp,Tiempo:props.pregunta.Tiempo,respuestaRes:"N/A",tiempoRes:0})
+            console.log(props.lista)
+            setDesmontar(2)
+            
+        }
+    },[tiempo]);
+
+    useEffect(()=>{
+        const idProceso=setInterval(function(){
+            if(tiempo<=0) {
+                clearInterval(idProceso);   
+            }
+            else
+            setTiempo((tiempo)=>tiempo-1)
+        },1000);
+        setIdProcess(idProceso)
+        return ()=>clearInterval(idProceso);     
+    },[]);
+    
+
     const getClassName = (event) => {
          
         switch (event.target.id) {
@@ -21,8 +62,11 @@ function MapaReg(props){
             break;
             default: 
             return 'NA';
-         }
-        props.nextPregunta(true)
+        }
+        props.lista.push({IDPreg:props.pregunta.IDPregunta,Respuesta:props.pregunta.Resp,Tiempo:props.pregunta.Tiempo,respuestaRes:event.target.id,tiempoRes:tiempo})
+        console.log(props.lista)
+        setDesmontar(1) 
+        
     };
 
     var Regiones =
@@ -85,12 +129,22 @@ function MapaReg(props){
             </a>
             </svg> 
     
-    return(<div className="mapadivReg">    
-        <div><h1>PREGUNTA CAMBIANTE</h1></div>
+    return(<div className='div-reg'>
+    <div className="mapadivReg">    
+        <div className='div-pregunta-reg'>
+            <h1 id='stea-pregunta-reg'>{props.pregunta.Cuerpo}</h1>
+            {props.pregunta.Tiempo===0?null:
+            <section className='stea-timer'> 
+                <h1>
+                    {tiempo}
+                </h1>
+            </section>}
+        </div>
         {Regiones}
 
         <MapaObjeto keyProp={ClassName}></MapaObjeto>
 
+    </div>
     </div>);
     
 }

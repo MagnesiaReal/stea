@@ -13,8 +13,29 @@
 .mapadiv :hover{
     fill:rgb(38, 6, 56);
 }
-[data-escondido="fade"]{
-    opacity: 0;
-    transition: 10s;
+.stea-timer{
+    border:5px dashed red;
+    position: absolute;
+    right:10px;
+    top: 10px;
+    padding: 5px;
+    
 }
-
+.div-div{
+    height: 100vh;
+    background-image: linear-gradient(to bottom right, #069, rgb(93, 183, 228));
+}
+.mapadiv #stea-pregunta-div{
+    color: aliceblue;
+}
+.div-pregunta-div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    
+}
+.div-pregunta-div > h1{
+    background-color: #0006;
+    padding: 5px;
+    
+}

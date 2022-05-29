@@ -13,3 +13,21 @@
 .mapadivReg :hover{
     fill:rgb(215, 94, 219);
 }
+.div-reg{
+height: 100vh;
+background-image: linear-gradient(to bottom right, #069, rgb(93, 183, 228));
+}
+.mapadivReg #stea-pregunta-reg{
+    color: aliceblue;
+}
+.div-pregunta-reg{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    
+}
+.div-pregunta-reg > h1{
+    background-color: #0006;
+    padding: 5px;
+    
+}

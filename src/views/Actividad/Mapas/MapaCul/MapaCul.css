@@ -16,3 +16,21 @@
 .mapadivCul .Contorno :hover {
     fill:#FFF;
 }
+.div-cul{
+    height: 100vh;
+    background-image: linear-gradient(to bottom right, #069, rgb(93, 183, 228));
+}
+.mapadivCul #stea-pregunta-cul{
+    color: aliceblue;
+}
+.div-pregunta-cul{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    
+}
+.div-pregunta-cul > h1{
+    background-color: #0006;
+    padding: 5px;
+    
+}

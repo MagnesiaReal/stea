@@ -36,7 +36,10 @@ export default class Home extends react.Component {
               <div className="text">
                   <h1>Nosotros somos STEA</h1>
 
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate quo nostrum eligendi sequi iste quae voluptates assumenda nemo odit cum!</p>
+                  <p>Nuestro objetivo es desarrollar un sistema web con el cual se puedan desarrollar
+                  actividades, organizados en grupos para su facil gestión haciendo uso de la ludificación
+                  
+                  </p>
                   <Link to="/login">
                     <input type="button" value="Ingresar" />
                   </Link>

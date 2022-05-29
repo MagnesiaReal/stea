@@ -10,6 +10,7 @@ import Session from './services/Session/Sesion'
 import User from './views/User/User'
 import ChangePass from './views/ChangePass/ChangePass'
 import GroupConf from './views/GroupConf/GroupConf'
+import Actividad from './views/Actividad/Actividad'
 
 import { BrowserRouter as Router, Route, Link, Routes, Navigate } from "react-router-dom";
 import { useState } from 'react';
@@ -38,7 +39,7 @@ function App() {
         <Route path='/editortest' element={<MapaEditor/>}/>
         <Route path='/editortest2' element={<RespCoinEditor/>}/>
 
-        <Route path='/mapas' element={<Mapas/>}> </Route>
+        <Route path='/actividad' element={<Actividad/>}> </Route>
         <Route path='/entrega' element={<Entrega/>}> </Route>
         <Route path='/order' element={<OrdenamientoAct/>}> </Route>
         <Route path='/inicio' element={<Dashboard/>}> </Route>

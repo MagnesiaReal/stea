@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Mapa.css';
 import  './components/MapaObjeto'
 import MapaObjeto from "./components/MapaObjeto";
@@ -7,7 +7,48 @@ import MapaObjeto from "./components/MapaObjeto";
 
 function MapaDiv(props){
     const [ClassName,setClassName]= useState(); 
-    const [esconder,setEsconder]= useState("fade"); 
+    const [tiempo,setTiempo]=useState(props.pregunta.Tiempo)
+    const [idProcess,setIdProcess]=useState(0)
+    const [desmontar, setDesmontar]=useState(0)
+
+    useEffect(()=>{
+    
+        if(desmontar===1){
+        //    console.log("Se respondio")
+            clearInterval(idProcess);
+            props.nextPregunta(true)
+            
+        }else if(desmontar===2) {
+        //  console.log("No se respondio")    
+            clearInterval(idProcess);
+            props.nextPregunta(true)
+            
+        }
+    },[desmontar]);
+
+    useEffect(()=>{
+        if(tiempo===0 && props.pregunta.Tiempo!==0) {
+            props.lista.push({IDPreg:props.pregunta.IDPregunta,Respuesta:props.pregunta.Resp,Tiempo:props.pregunta.Tiempo,respuestaRes:"N/A",tiempoRes:0})
+            console.log(props.lista)
+            setDesmontar(2)
+
+            
+        }
+    },[tiempo]);
+
+    useEffect(()=>{
+         
+        const idProceso=setInterval(function(){
+            if(tiempo<=0) {
+                clearInterval(idProceso);   
+            }
+            else
+            setTiempo((tiempo)=>tiempo-1)
+        },1000);
+        setIdProcess(idProceso)
+        return ()=>clearInterval(idProceso);           
+    },[]);
+    
 
     const getClassName = (event) => {
         
@@ -105,10 +146,13 @@ function MapaDiv(props){
             case 'YUC': 
                 setClassName('YUC');
             break;
-          default: 
-            return 'NA';
-         }
-        props.nextPregunta(true)
+            
+        } 
+        props.lista.push({IDPreg:props.pregunta.IDPregunta,Respuesta:props.pregunta.Resp,Tiempo:props.pregunta.Tiempo,respuestaRes:event.target.id,tiempoRes:tiempo})
+        console.log(props.lista)
+        setDesmontar(1)
+              
+
     };
 
     var Republica = <svg version="1.2" viewBox="0 0 1000 631"  xmlns="http://www.w3.org/2000/svg">
@@ -213,12 +257,22 @@ function MapaDiv(props){
     
     </svg>; 
     
-    return(<div class="mapadiv">    
-        <div><h1>PREGUNTA CAMBIANTE</h1></div>
+    return(<div className='div-div'>
+    <div className="mapadiv">    
+        <div className='div-pregunta-div'>
+            <h1 id='stea-pregunta-div'>{props.pregunta.Cuerpo}</h1>
+            {props.pregunta.Tiempo===0?null:
+            <section className='stea-timer'> 
+                <h1>
+                    {tiempo}
+                </h1>
+            </section>}
+        </div>
         {Republica}
 
         <MapaObjeto keyProp={ClassName}></MapaObjeto>
         
+    </div>
     </div>);
     
 }
