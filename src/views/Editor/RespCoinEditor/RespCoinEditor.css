@@ -19,6 +19,18 @@
   align-items: center;
 }
 
+.stea-rc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stea-rc-total-time {
+  background-color: #BFBFBF;
+  padding: 5px;
+  border-radius: 5px;
+}
+
 .stea-rce-wrong-answers > div > button {
   border-radius: 1em;
   align-items: center;

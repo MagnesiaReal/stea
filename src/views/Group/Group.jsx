@@ -154,7 +154,7 @@ export default function Group(props) {
       <div className='stea-group'>
         <div className='stea-group-container'>
           <h2>{groupData.groupData.nombre}</h2><br/>
-          <p>{groupData.groupData.info}</p>
+          <div dangerouslySetInnerHTML={{ __html: groupData.groupData.info}}></div>
           <p>Genera tu liga de acceso {">>>>"} </p>
 
           <div className='stea-grupoDetalles-container'>

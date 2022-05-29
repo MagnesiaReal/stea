@@ -4,7 +4,6 @@ import  './components/MapaObjeto'
 import MapaObjeto from "./components/MapaObjeto";
 
 
-
 function MapaDiv(props){
     const [ClassName,setClassName]= useState(); 
     const [tiempo,setTiempo]=useState(props.pregunta.Tiempo)
@@ -146,6 +145,8 @@ function MapaDiv(props){
             case 'YUC': 
                 setClassName('YUC');
             break;
+            default:
+            console.log('Might be not print never');
             
         } 
         props.lista.push({IDPreg:props.pregunta.IDPregunta,Respuesta:props.pregunta.Resp,Tiempo:props.pregunta.Tiempo,respuestaRes:event.target.id,tiempoRes:tiempo})
@@ -276,4 +277,3 @@ function MapaDiv(props){
     </div>);
     
 }
-export default MapaDiv;

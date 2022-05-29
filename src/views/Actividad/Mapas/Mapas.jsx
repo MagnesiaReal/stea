@@ -31,6 +31,7 @@ export default function Mapas(props){
         if(nextPregunta){
             onNextPregunta();
             setNextPregunta(false);
+
         }
     },[nextPregunta])
 
@@ -69,3 +70,4 @@ export default function Mapas(props){
         </>
     }
 }
+

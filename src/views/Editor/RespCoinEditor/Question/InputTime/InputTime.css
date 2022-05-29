@@ -1,0 +1,10 @@
+.stea-input-time{
+    display: flex;
+    border: 1px solid grey;
+    border-radius: 5px;
+    align-items: center;
+    justify-content:space-between;
+    height: 40px;
+    width: 120px;
+}
+
