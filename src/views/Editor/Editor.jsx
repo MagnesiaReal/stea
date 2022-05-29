@@ -16,14 +16,19 @@ export default function Editor(props) {
 
 
   useEffect(()=> {    
-    AXIOS.get('/activity/activityresolve')
-    .then((res)=> {
+    //AXIOS.get('/activity/activityresolve')
+    //.then((res)=> {
       
-    }).catch((err)=> {
+    //}).catch((err)=> {
 
-    });
-
+    //});
+    setCurrentEditor(<MapaEditor setData={setActivityData}/>);
   }, []);
+
+
+  function setActivityData(data) {
+    setAllActivity([...allActivity, data]);
+  };
 
 
   return (
@@ -43,9 +48,10 @@ export default function Editor(props) {
             Respuestas Coincidentes
           </li>
         </ul>
+      <button onClick={()=>setCurrentEditor(null)}>nullo</button>
       </section>
       <section id="stea-editor-called">
-        <RespCoinEditor/>
+      {currentEditor}
       </section>
     </article>
   );

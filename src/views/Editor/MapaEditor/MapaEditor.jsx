@@ -1,4 +1,4 @@
-import { Component, createRef, useState } from 'react';
+import { Component, createRef, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Pregunta from './Pregunta/Pregunta';
 
@@ -9,6 +9,19 @@ import { useRef } from 'react';
 var i=0;
 var listaPreguntasMapa=[];
 export default function MapaEditor (props) {
+
+  useEffect(()=> {
+    console.log('Componente montado');
+    
+    return ()=> {
+      console.log('Componente desmontado');
+      
+      props.setLista(listaPreguntasMapa);
+
+    }
+
+  }, [])
+
   const estaditos=<>
   <option value="---">Selecciona tu respuesta</option>
   <option value="AGU">Aguascalientes</option>
