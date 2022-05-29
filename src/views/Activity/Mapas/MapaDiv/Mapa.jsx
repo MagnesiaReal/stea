@@ -4,7 +4,7 @@ import  './components/MapaObjeto'
 import MapaObjeto from "./components/MapaObjeto";
 
 
-function MapaDiv(props){
+export default function MapaDiv(props){
     const [ClassName,setClassName]= useState(); 
     const [tiempo,setTiempo]=useState(props.pregunta.Tiempo)
     const [idProcess,setIdProcess]=useState(0)

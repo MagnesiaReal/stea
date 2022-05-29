@@ -1,12 +1,13 @@
 .stea-resp-coin-editor-help {
-    border-radius: 50px;    
+    border-radius: 50px;
 }
 
 .stea-rce-wrong-answers{
   border-radius: 1em;
-  background-color: #ebe5eb;
+  background-color: #dbd5db;
   width: 100%;
   display: inline-block;
+  margin-top: 1em;
 }
 
 .stea-rce-wrong-answers > div {

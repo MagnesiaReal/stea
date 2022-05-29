@@ -47,6 +47,12 @@ export default function RespCoinEditor(props) {
     setWrongAnswer(e.target.value);
   }
 
+  function onCheckRepeat(e){
+    console.log('On blur ', e);
+    if(wrongAnswers.find(wa=> wa === e.target.value)) return true;
+    else return false;
+  }
+
   return (
     <>
       <div className="container">
@@ -56,27 +62,26 @@ export default function RespCoinEditor(props) {
             <h3>Preguntas</h3>
           </section>
           <section className="stea-rc-header">
-            <button className="btn btn-success" onClick={onAddQuesiton}>
-              <FontAwesomeIcon icon="fa-solid fa-plus"/> Agregar pregunta
-            </button>
             <section className="stea-rc-total-time">Tiempo total actividad:
               <InputTime value={time} onChange={(time)=>setTime(time)} step={15}/>
             </section>
           </section>
 
           {questions.map(function(v, idx){
-            return <Question key={v} questAns={questAns} data-key={idx} showTime={(time===0)} onDeleteMe={onDeleteQuesiton}/>
+            return <Question key={v} questAns={questAns} data-key={idx} showTime={(time===0)} onDeleteMe={onDeleteQuesiton} onBlur={onCheckRepeat}/>
           }        
           )}
+          <button className="btn btn-success" onClick={onAddQuesiton}>
+            <FontAwesomeIcon icon="fa-solid fa-plus"/> Agregar pregunta
+          </button>
         </article>
-        <article>
+        <article className="stea-rc-question">
+          <h3>Banco de respuestas incorrectas</h3>
           <label htmlFor="wrongAnswer">Ingresa una respuesta incorrecta: </label>
           <section className="stea-rce-set-wa">
             <input type="text" id="wrongAnswer" className="form-control" placeholder="Solo respuestas incorrectas" value={wrongAnswer} onChange={onWrongAnswer} onKeyDown={onEnter}/>
             <button className="btn btn-primary" onClick={onAddWrongAnswer}><FontAwesomeIcon icon="fa-solid fa-plus" /></button>
           </section>
-          <h3>Banco de respuestas incorrectas</h3>
-
           <section className="stea-rce-wrong-answers">
             {wrongAnswers.map((value, index)=> 
               <div key={value}>
@@ -122,6 +127,6 @@ export default function RespCoinEditor(props) {
           </div>
         </div>
       </div>
-    </>
+      </>
   );
 }

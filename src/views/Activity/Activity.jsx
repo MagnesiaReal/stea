@@ -1,26 +1,33 @@
 import Mapas from "./Mapas/Mapas"
 import { useEffect, useState } from "react"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-const jsonMoc={type:1,jsonActividad:[
+const jsonMoc={id:0, type:1,preguntas:[
   {IDMapa:1,IDPregunta:1,Cuerpo:"Estado de la republica donde se tiene más turismo",Resp:"ROO",Tiempo:5},
   {IDMapa:2,IDPregunta:2,Cuerpo:"Estado de la republica donde vivimos",Resp:"MEX",Tiempo:5},
   {IDMapa:3,IDPregunta:3,Cuerpo:"Estado de la republica más grande",Resp:"CHH",Tiempo:5}]}
 
+const RespCoin={
+
+}
 
 const ActividadCompleta={actividades:[jsonMoc]}
 
 var actItr=0;
-const answersList=[];
-var activityAnswers=null;
-
 export default function Activity(){
   const [nextActivity,setNextActivity]=useState (false);
-  const [currentActivity, setCurrentActivity]=useState(null)
+  const [currentActivity, setCurrentActivity]=useState(null);
+  const [answersList, setAnswersList] = useState([]);
+
+   const carga=<>
+    <div className="stea-rotar">
+      <FontAwesomeIcon icon="fas fa-spinner" />
+    </div>    
+    </>;
 
   useEffect(()=>{
     actItr=0;
     onNextActivity();
-
   },[]);
 
   useEffect(function(){
@@ -30,19 +37,21 @@ export default function Activity(){
     }
   },[nextActivity]);
 
-  const onNextActivity=(e)=>{
-    if(activityAnswers!==null){
-      answersList.push(activityAnswers);
-    }
-    if(ActividadCompleta.actividades.length>actItr){
-      const activity=ActividadCompleta.actividades[actItr++]
+  function setResults(results) {
+    console.log('Finishing activity, saving results...');
+    setAnswersList([...answersList, results]);
+    setNextActivity(true);
+  }
+
+  const onNextActivity = () => {
+    if(actItr < ActividadCompleta.actividades.length){
+      const activity=ActividadCompleta.actividades[actItr++];
       switch (activity.type){
         case 1:
-          activityAnswers={id:actItr,type:activity.type,grade:0,answers:[]}
-          setCurrentActivity(<Mapas activity={activity.jsonActividad} nextActividad={setNextActivity} listaRespuestas={activityAnswers.answers}/>)
+          setCurrentActivity(<Mapas activity={activity} setResults={setResults}/>);
           break;
         case 2:
-
+          
 
           break;
         case 3:
@@ -54,11 +63,14 @@ export default function Activity(){
       }
     }else{
       setCurrentActivity(<h1>TERMINADO</h1>)//Finalizar Actividad
-      console.log(answersList)
+      console.log(answersList);
     }
 
   }
-  return<>
+  
+
+  if(nextActivity) <>{carga}</>
+  else return<>
     {currentActivity}
     </>
 }

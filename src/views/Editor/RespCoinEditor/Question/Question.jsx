@@ -9,9 +9,9 @@ export default function Question (props) {
   const [time,setTime]=useState (0);
   const [question,setQuestion]=useState ('');
   const [answer,setAnswer]=useState ('');
+  const [answerErr, setAnswerErr] = useState(null);
   
   useEffect(function (){
-    console.log('question mounted', props['data-key']);
     props.questAns.push({
       questionId: props['data-key'],
       question: '',
@@ -26,18 +26,25 @@ export default function Question (props) {
     props.onDeleteMe(props['data-key']);
   }
   const onQuestion=(e)=>{
-    e.preventDefault();
     setQuestion(e.target.value);
     props.questAns[props["data-key"]].question=e.target.value;
   }
   const onAnswer=(e)=>{
-    e.preventDefault();
     setAnswer(e.target.value);
     props.questAns[props["data-key"]].answer=e.target.value;
   }
   const onTime=(time)=>{
     setTime(time);
     props.questAns[props["data-key"]].time=time;
+  }
+
+  async function onRepeatWrongAnswer(e) {
+    if(await props.onBlur(e)) {
+      setAnswerErr(<small style={{color: "red"}}>*Ya existe esta respuesta en el Banco de respuestas incorrectas</small>);
+      onAnswer({target: {value: ""}});
+    } else {
+      setAnswerErr(null);
+    }
   }
 
   return (
@@ -57,7 +64,8 @@ export default function Question (props) {
         </section>
         <section className="col-lg-4">
           <label htmlFor="answer" className="">Respuesta:</label>
-          <input type="text" name="anwer" id="" className="form-control" value={answer} onChange={onAnswer} placeholder="Respuesta"/>
+          <input type="text" name="anwer" id="" className="form-control" value={answer} onChange={onAnswer} placeholder="Respuesta" onBlur={onRepeatWrongAnswer}/>
+          {answerErr}
         </section>
         {(!props.showTime)?null:
         <section style={{paddingLeft: "1em"}} className="col-lg-2">

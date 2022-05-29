@@ -1,0 +1,12 @@
+#stea-editor-container {
+  display: flex;
+}
+
+#stea-editor-sidebar {
+  width: 18em;
+  background-color: grey;
+}
+
+#stea-editor-called {
+  width: 100%;
+}

@@ -139,4 +139,4 @@ const OrdEditor = () => {
   )
 }
 
-export default OrdEditor
+export default OrdEditor;

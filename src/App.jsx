@@ -16,7 +16,8 @@ import Group from './views/Group/Group.jsx';
 import MapaEditor from './views/Editor/MapaEditor/MapaEditor.jsx';
 import RespCoinEditor from './views/Editor/RespCoinEditor/RespCoinEditor.jsx';
 
-import Activity from './views/Actividad/Actividad'
+import Activity from './views/Activity/Activity'
+import Editor from './views/Editor/Editor';
 
 function App() {
 
@@ -32,7 +33,7 @@ function App() {
         <Route path='/changepass/:code' element={<ChangePass/>}/>
 
         <Route path='/editortest' element={<MapaEditor/>}/>
-        <Route path='/editortest2' element={<RespCoinEditor/>}/>
+        <Route path='/editortest2' element={<Editor/>}/>
 
         <Route path='/actividad' element={<Activity/>}> </Route>
 
