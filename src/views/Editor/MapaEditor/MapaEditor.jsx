@@ -25,7 +25,7 @@ export default function MapaEditor (props) {
       console.log(activityData)
     }
 
-  }, [])
+  }, []);
 
   const estaditos=<>
   <option value="---">Selecciona tu respuesta</option>

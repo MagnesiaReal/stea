@@ -12,11 +12,17 @@ import UserHeader from "../../components/UserHeader/UserHeader";
 export default function Session(props) {
   const [loading, setLoading] = useState(true);
   const [newRegister, setNewRegister] = useState(false);
+  const [header, setHeader] = useState(true);
+
   const navigation = useNavigate();
   const location = useLocation();
 
+
   useEffect(()=>{
-  
+    
+    if(location.pathname.split('/')[1] === 'editor') setHeader(false);
+    else setHeader(true);
+
     AXIOS.put('/user/checksession', {UUID: props.cookie.get('UUID')})
       .then((res)=>{
 
@@ -67,7 +73,7 @@ export default function Session(props) {
   // Else go to main system
   return(
     <>
-      <UserHeader/>
+      {header ? <UserHeader/> : null}
       <Outlet/>
     </>);
 

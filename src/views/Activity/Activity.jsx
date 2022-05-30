@@ -52,7 +52,6 @@ export default function Activity(){
           break;
         case 2:
           
-
           break;
         case 3:
 

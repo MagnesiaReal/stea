@@ -8,27 +8,41 @@ import OrdEditor from "./OrdenEditor/OrdEditor";
 import AXIOS from "../../services/http-axios"
 
 import './Editor.css'
+import {useParams} from "react-router-dom";
 
 export default function Editor(props) {
-  const cookies = new Cookies();
-  const [allActivity, setAllActivity] = useState([]);
+
+  const cookie = new Cookies();
+  const params = useParams();
+  const [activityData, setActivityData] = useState(null);
   const [currentEditor, setCurrentEditor] = useState([]);
 
 
-  useEffect(()=> {    
-    //AXIOS.get('/activity/activityresolve')
-    //.then((res)=> {
-      
-    //}).catch((err)=> {
+  useEffect(()=> { 
+    
+    const credentials = {
+      userId: cookie.get('userId'),
+      UUID: cookie.get('UUID'),
+      activityId: params.activityId,
+    };
 
-    //});
-    setCurrentEditor(<MapaEditor setData={setActivityData} id={1} type={1}/>);
+
+    AXIOS.get('/activity/activityedit', {params: credentials})
+    .then((res)=> {
+      console.log("EDITOR>> ", res.data.message, res.data);
+      const activityp = res.data.activityData;
+      activityp.actividad = JSON.parse(activityp.actividad);
+      setActivityData(activityp);
+    }).catch((err)=> {
+      if(err) throw err;
+
+    });
+    
   }, []);
 
 
-  function setActivityData(data) {
-    setAllActivity([...allActivity, data]);
-    console.log(data)
+  function addActivityData(data) {
+    setActivityData([...activityData, data]);
   };
 
 
