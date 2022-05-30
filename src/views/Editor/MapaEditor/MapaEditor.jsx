@@ -15,9 +15,14 @@ export default function MapaEditor (props) {
     
     return ()=> {
       console.log('Componente desmontado');
-      
-      props.setLista(listaPreguntasMapa);
-
+      console.log(listaPreguntasMapa);
+      const activityData = {
+        id: props.id,
+        type: props.type,
+        preguntas: listaPreguntasMapa,
+      };
+      props.setData(activityData);
+      console.log(activityData)
     }
 
   }, [])
@@ -62,11 +67,7 @@ export default function MapaEditor (props) {
   const [tipoMapa,setTipoMapa]=useState ("1");
   const [opciones,setOpciones]=useState (estaditos);
   const [preguntas, setPreguntas]=useState([]);
-  
-  const onGuardarHijo = (data) =>{
-    data.IDMapa=refPregunta.current.value
-    listaPreguntasMapa.push(data);
-  }
+ 
 
   const onBorrarHijo = (idx) =>{
     console.log(preguntas)
@@ -134,7 +135,7 @@ export default function MapaEditor (props) {
       </form>
 
         {preguntas.map((value, index) =>{
-          return <Pregunta IDMapa={tipoMapa} opciones={opciones} key={value} data-key={index} onBorrarme={onBorrarHijo} onGuardarme={onGuardarHijo} lista={listaPreguntasMapa} />
+          return <Pregunta IDMapa={tipoMapa} opciones={opciones} key={value} data-key={index} onBorrarme={onBorrarHijo}  lista={listaPreguntasMapa} />
         }
         )
         }

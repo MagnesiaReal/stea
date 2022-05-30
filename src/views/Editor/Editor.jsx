@@ -11,7 +11,7 @@ import './Editor.css'
 
 export default function Editor(props) {
   const cookies = new Cookies();
-  const [allActivity, setAllActivity] = useState({});
+  const [allActivity, setAllActivity] = useState([]);
   const [currentEditor, setCurrentEditor] = useState([]);
 
 
@@ -22,12 +22,13 @@ export default function Editor(props) {
     //}).catch((err)=> {
 
     //});
-    setCurrentEditor(<MapaEditor setData={setActivityData}/>);
+    setCurrentEditor(<MapaEditor setData={setActivityData} id={1} type={1}/>);
   }, []);
 
 
   function setActivityData(data) {
     setAllActivity([...allActivity, data]);
+    console.log(data)
   };
 
 
