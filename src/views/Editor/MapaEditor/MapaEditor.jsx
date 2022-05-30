@@ -2,28 +2,26 @@ import { Component, createRef, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Pregunta from './Pregunta/Pregunta';
 
-import AXIOS from '../../../services/http-axios';
-import { useRef } from 'react';
-
 
 var i=0;
 var listaPreguntasMapa=[];
 export default function MapaEditor (props) {
-
+  
+  const [preguntas, setPreguntas]=useState([]);
+  const [tipoMapa,setTipoMapa]=useState ("1");
+  
   useEffect(()=> {
     console.log('Componente montado');
-    
-    return ()=> {
-      console.log('Componente desmontado');
-      console.log(listaPreguntasMapa);
-      const activityData = {
-        id: props.id,
-        type: props.type,
-        preguntas: listaPreguntasMapa,
-      };
-      props.setData(activityData);
-      console.log(activityData)
+    // set Questions registered if exists
+    if(props.actividad.preguntas) listaPreguntasMapa=props.actividad.preguntas;
+    // set questions number
+    const itrs = [];
+    for (i = 0; i < listaPreguntasMapa.length; i++) {
+      itrs.push(i);
     }
+    setPreguntas(itrs);
+    // set mapType if exist
+    if(props.actividad[0]) setTipoMapa(props.actividad[0].IDMapa);
 
   }, []);
 
@@ -64,9 +62,8 @@ export default function MapaEditor (props) {
 </>;
   
   const refPregunta=createRef();
-  const [tipoMapa,setTipoMapa]=useState ("1");
   const [opciones,setOpciones]=useState (estaditos);
-  const [preguntas, setPreguntas]=useState([]);
+  
  
 
   const onBorrarHijo = (idx) =>{
@@ -83,11 +80,14 @@ export default function MapaEditor (props) {
   const onNuevaPregunta = (e) =>{
     e.preventDefault();
     setPreguntas([...preguntas,i++]);
-    console.log(listaPreguntasMapa)
+    console.log(listaPreguntasMapa);
   }
 
   const onTipoMapa=function (e){
     e.preventDefault();
+
+    listaPreguntasMapa.forEach(p => p.IDMapa = e.target.value);
+
     setTipoMapa(e.target.value);
     if(e.target.value==="1"){
       setOpciones(estaditos)

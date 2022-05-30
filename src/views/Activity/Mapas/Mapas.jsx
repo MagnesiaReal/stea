@@ -56,6 +56,7 @@ export default function Mapas(props){
         break;
       }
     }else{ 
+      var posicion = 1;
       var calificacion=0
       // preparing results 
       if(props.modo===1){//examen
@@ -101,7 +102,7 @@ export default function Mapas(props){
           }
           )
           calificacion=auxPregunta*multiplicador;
-          experiencia;
+          var experiencia;
         }else if(idAvatar===2){//profesora
           listaRespuestas.forEach((respuesta)=>{
             califPregunta=0;//Limpiamos el valor de cada pregunta para evitar errores
@@ -138,7 +139,7 @@ export default function Mapas(props){
             multiplicador=1.05*seguidas//Si tenemos que la racha actual es mayor a la historica se multiplica por ese factor
           }
           calificacion=auxPregunta*multiplicador;//puntuación con el multiplicador
-          experiencia;//experiencia ganada
+          var experiencia;//experiencia ganada
         }else if(idAvatar===4){//ingeniero
           listaRespuestas.forEach((respuesta)=>{
           califPregunta=0;//Limpiamos el valor de cada pregunta para evitar errores
@@ -161,7 +162,7 @@ export default function Mapas(props){
           }
           multiplicador=multiplicador+(puntosIng/10);
           calificacion=(auxPregunta*multiplicador);//puntuación con el multiplicador
-          experiencia;//experiencia ganada 
+          var experiencia;//experiencia ganada 
           
           }
           )

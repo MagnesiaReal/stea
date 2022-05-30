@@ -11,8 +11,15 @@ export default function Pregunta (props) {
   const [respuesta,setRespuesta]=useState ('');
   
   useEffect(function (){
-    props.lista.push({IDMapa:props.IDMapa,IDPregunta:props['data-key'],Tiempo:0,})
-  },[])
+    
+    if(props.lista[props['data-key']]) {
+      setPregunta(props.lista[props['data-key']].Cuerpo);
+      setRespuesta(props.lista[props['data-key']].Resp);
+      props.lista[props['data-key']].IDPregunta = props['data-key'];
+    } 
+    else props.lista.push({IDMapa:props.IDMapa,IDPregunta:props['data-key'],Tiempo:0});
+  },[]);
+  
   const onBorrarPregunta=(e)=>{
     e.preventDefault();
     props.onBorrarme(props['data-key'])
