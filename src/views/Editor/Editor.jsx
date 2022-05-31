@@ -11,14 +11,17 @@ import './Editor.css'
 import {useParams} from "react-router-dom";
 import Mapas from "../Activity/Mapas/Mapas";
 
-let activitiesData = []
+let activityData = null;
 export default function Editor(props) {
 
   const cookie = new Cookies();
   const params = useParams();
-  const [activityData, setActivityData] = useState([]);
+
+  const [show, setShow] = useState(false);
+
   const [generalData, setGeneralData] = useState(null);
   const [currentEditor, setCurrentEditor] = useState(null);
+  const [activities, setActivities] = useState([]);
 
   const activityType = [
     <small>Mapas Interactivos</small>,
@@ -28,7 +31,7 @@ export default function Editor(props) {
 
 
   useEffect(()=> { 
-    activitiesData = [];
+    activityData = null;
     const credentials = {
       userId: cookie.get('userId'),
       UUID: cookie.get('UUID'),
@@ -39,14 +42,14 @@ export default function Editor(props) {
     AXIOS.get('/activity/activityedit', {params: credentials})
       .then((res)=> {
         console.log("EDITOR>> ", res.data.message, res.data);
-        const activityp = res.data.activityData;
-        if(activityp !== null) {
-          activityp.actividad = JSON.parse(activityp.actividad);
-          setEditor(activityp.actividad[0]);
+        activityData = res.data.activityData;
+        if(activityData !== null) {
+          activityData.actividad = JSON.parse(activityData.actividad);
+          setEditor(activityData.actividad[0]);
+          setGeneralData(activityData.actividad[0]);
+          setActivities(activityData.actividad);
         }
-        activitiesData = activityp.actividad;
-        setGeneralData(activityp);
-        setActivityData(activityp.actividad);
+        
       }).catch((err)=> {
         if(err) throw err;
 
@@ -59,13 +62,13 @@ export default function Editor(props) {
     const editorType = activity.type;
     switch (editorType) {
       case 1:
-        setCurrentEditor(<MapaEditor activitiesData={activitiesData} actividad={activity}/>);
+        setCurrentEditor(<MapaEditor actividad={activity}/>);
         break;
       case 2:
-        setCurrentEditor(<OrdEditor activitiesData={activitiesData} actividad={activity}/>);
+        setCurrentEditor(<OrdEditor activity={activity}/>);
         break;
       case 3:
-        setCurrentEditor(<RespCoinEditor activitiesData={activitiesData} actividad={activity}/>);
+        setCurrentEditor(<RespCoinEditor activity={activity}/>);
         break;
       default:
       setCurrentEditor(<h1>NO HAY NINGUN EDITOR SELECCIONADO</h1>);
@@ -73,14 +76,14 @@ export default function Editor(props) {
     }
   }
 
-  function addActivityData(data) {
-    setActivityData([...activityData, data]);
-  };
+  function addEditor(newData) {
+    
+  }
 
 
   return (
-    <article id="stea-editor-container">
-      <section id="stea-editor-sidebar">
+    <div id="stea-editor-container">
+      <section id="stea-editor-sidebar" className={(show)?"show":""}>
         <ul>
           <li>
             <FontAwesomeIcon icon="fa-solid fa-plus"/>
@@ -96,18 +99,28 @@ export default function Editor(props) {
           </li>
         </ul>
         <ul>
-          {activityData.map((v, idx)=> <li key={v} idx={idx}>
+          {activities.map((v, idx)=> <li key={v} idx={idx}>
             <div>
               <h3>{v.name}</h3>
               {activityType[v.type-1]}
             </div>
           </li>)}
         </ul>
-        <button onClick={()=>{setCurrentEditor(null); console.log(activitiesData);}}>nullo</button>
+        <button onClick={()=>{setCurrentEditor(null); console.log(activityData);}}>nullo</button>
       </section>
       <section id="stea-editor-called">
+        <header id="stea-editor-header">
+          <button 
+            className="btn btn-light stea-editor-sidebar-button"
+            onClick={()=>{setShow((show)?false:true)}}>
+            <FontAwesomeIcon icon="fas fa-bars"/>
+          </button>
+          <h2>{(generalData)?generalData.name: "Actividad no seleccionada"}</h2>
+          <button className="btn btn-light"><FontAwesomeIcon icon="fas fa-cog" /> Modificar</button>
+        </header>
         {currentEditor}
       </section>
-    </article>
+      <div className={(show)?"stea-black-window":""} onClick={()=>{setShow(false)}}></div>
+    </div>
   );
 }

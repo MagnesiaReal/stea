@@ -12,6 +12,7 @@ export default function MapaEditor (props) {
   
   useEffect(()=> {
     console.log('Componente montado');
+    console.log('From Maps -> ', props.actividad);
     // set Questions registered if exists
     if(props.actividad.preguntas) listaPreguntasMapa=props.actividad.preguntas;
     // set questions number
@@ -21,7 +22,7 @@ export default function MapaEditor (props) {
     }
     setPreguntas(itrs);
     // set mapType if exist
-    if(props.actividad[0]) setTipoMapa(props.actividad[0].IDMapa);
+    if(props.actividad) setTipoMapa(props.actividad.IDMapa);
 
   }, []);
 
