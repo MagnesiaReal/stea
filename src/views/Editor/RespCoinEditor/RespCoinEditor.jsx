@@ -1,11 +1,11 @@
 import AXIOS from '../../../services/http-axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './RespCoinEditor.css'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Question from './Question/Question';
 import InputTime from './Question/InputTime/InputTime';
 
-let questKey = 1;
+let questKey = 0;
 let questAns = [];
 export default function RespCoinEditor(props) {
   
@@ -13,8 +13,18 @@ export default function RespCoinEditor(props) {
   const [wrongAnswer, setWrongAnswer] = useState('');
   const [time, setTime] = useState(0);
   
-  const [questions, setQuestions] = useState([0]);
+  const [questions, setQuestions] = useState([]);
   
+  useEffect(()=>{
+    questKey = 0;
+    questAns = props.activity.questions;
+    questAns.forEach(()=> {
+      setQuestions([...questions, questKey++]);
+    });
+    
+
+  }, []);
+
   function onAddQuesiton(e){
     e.preventDefault();
     setQuestions([...questions, questKey++]);
