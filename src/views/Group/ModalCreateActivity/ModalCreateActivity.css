@@ -1,0 +1,9 @@
+.stea-modalForm-container{
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+}
+
+.stea-modalForm-text{
+    margin: 1em 0;
+}

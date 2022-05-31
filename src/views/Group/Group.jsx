@@ -8,13 +8,14 @@ import ModalLink from './ModalLink/ModalLink';
 import ModalConfigActivity from './ModalConfigActivity/ModalConfigActivity';
 import ModalAddActivity from './ModalAddActivity/ModalAddActivity';
 import { act } from '@testing-library/react';
+import ModalCreateActivity from './ModalCreateActivity/ModalCreateActivity';
 
 export default function Group(props) {
   
   const navigation = useNavigate();
   const params = useParams();
   const [loading, setLoading] = useState(true);
-  const [groupData, setGroupData] = useState();
+  const [groupData, setGroupData] = useState([]);
   const [activities, setActivities] = useState([]);
   const [token, setToken] = useState('');
   const [idConfig, setIdConfig] = useState();
@@ -159,6 +160,7 @@ export default function Group(props) {
 
           <div className='stea-grupoDetalles-container'>
           <button className="btn btn-dark" onClick={onAccessLink} data-toggle="modal" data-target="#stea-token-modal">Liga de Acceso</button>
+          <button className="btn btn-dark" data-target="#stea-create-modal" data-toggle="modal">Crear actividad</button>
           {groupData.userType !== 3 ? <button className="btn btn-dark" onClick={addActivity} data-toggle="modal" data-target="#stea-add-modal">Añadir actividad</button> : <div></div>}
           {activities !== undefined && activities.map( (actividad, index) => {return(
               <div key={index} className='stea-grupoActividades-container'>
@@ -198,7 +200,8 @@ export default function Group(props) {
       </div>
       <ModalLink token={token}/>
       <ModalConfigActivity groupId={params.groupId} idConfig={idConfig} />
-      <ModalAddActivity groupId={params.groupId} activities={activitiesList} /> {/*Pasamos el groupId para ponerlo en los datos de envio */}
+      <ModalAddActivity groupId={params.groupId} activities={activitiesList} />
+      <ModalCreateActivity/> {/*Pasamos el groupId para ponerlo en los datos de envio */}
     </>
   );
 }
