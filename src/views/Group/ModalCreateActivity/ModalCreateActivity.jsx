@@ -56,10 +56,10 @@ const ModalCreateActivity = (props) => {
                             </button>
                         </div>
                         <div className="modal-body" align="middle">
-                          <form className='stea-modalForm-container' onSubmit={onCreateActivity}>
+                          <form className='stea-modalForm-container' >
                             <input className='stea-modalForm-text' type="text" onChange={handleTitle} placeholder="Pon el titulo de la aplicación" required/>
                             <textarea className='stea-modalForm-text' onChange={handleDescription} rows="6" placeholder="Pon una descripción" required/>
-                            <input type="submit"/>
+                            <input type="submit"  data-dismiss="modal" onClick={onCreateActivity}/>
                           </form>
                         </div>
                     </div>

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Placeholder from '../components/Placeholder/Placeholder';
 import './OrdenamientoAct.css'
-const OrdenamientoAct = () => {
+
+const OrdenamientoAct = (props) => {
 
   const question = {
     id : 1,
