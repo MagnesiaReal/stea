@@ -11,6 +11,7 @@ import './Editor.css'
 import {useParams} from "react-router-dom";
 import EditorModal from './EditorModal/EditorModal'
 
+let activityIncrement = 0;
 let activityData = null;
 export default function Editor(props) {
 
@@ -45,13 +46,23 @@ export default function Editor(props) {
       .then((res)=> {
         console.log("EDITOR>> ", res.data.message, res.data);
         activityData = res.data.activityData;
-        if(activityData.actividad !== null) {
-          activityData.actividad = JSON.parse(activityData.actividad);
+
+       
+
+        activityData.actividad = JSON.parse(activityData.actividad);
+
+        if(activityData.actividad === null || activityData.actividad.length === 0) {
+          activityData.actividad = [];
+          setEditor(0);
+          setGeneralData(activityData);
+          setActivities(activityData.actividad);
+        } else {
+          activityData.actividad.forEach((a)=>{
+            a.map = activityIncrement++;
+          });
           setEditor(activityData.actividad[0]);
           setGeneralData(activityData.actividad[0]);
           setActivities(activityData.actividad);
-        } else {
-          setEditor(0);
         }
         
       }).catch((err)=> {
@@ -84,12 +95,16 @@ export default function Editor(props) {
   function addEditor(values) {
     // build an editor
     const build = {
+      map: activityIncrement++,
       id: activities.length,
       type: values.type,
       name: values.title
     }
 
-    if(values.type == 3) build.questions = [];
+    if(values.type == 3){
+      build.questions = [];
+      build.wrongAnswers = [];
+    } 
     else build.preguntas = [];
     
     activities.push(build);
@@ -149,7 +164,7 @@ export default function Editor(props) {
           </li>
         </ul>
         <ul>
-          {activities.map((v, idx)=> <li key={v} idx={idx}>
+          {activities.map((v, idx)=> <li key={v.map} idx={idx}>
             <div onClick={()=>selectEditor(idx)}>
               <h3>{v.name}</h3>
               {activityType[v.type-1]}

@@ -7,7 +7,12 @@ export default function EditorModal(props) {
 
   function onCloseModal() {
     console.log('EditorModal Close');
-    props.onChange('');
+    const titleus = title, typeus = type;
+    
+
+    setTitle('');
+    setType('');
+
   }
 
 
@@ -42,7 +47,11 @@ export default function EditorModal(props) {
               </select>
             </div>
             <div className="modal-footer">
-              <button className="btn btn-dark" data-dismiss="modal" onClick={()=>{props.addEditor({title: title, type: type})}}>Crear</button>
+              <button className="btn btn-dark" data-dismiss="modal" 
+              onClick={(e)=>{
+                props.addEditor({title: title, type: type});
+                onCloseModal(e);
+              }}>Crear</button>
               <button className="btn" data-dismiss="modal" aria-label="Close" onClick={onCloseModal}>Cancelar</button>
             </div>
           </form>
