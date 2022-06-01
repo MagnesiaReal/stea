@@ -69,3 +69,4 @@ const ModalCreateActivity = (props) => {
 }
 
 export default ModalCreateActivity
+

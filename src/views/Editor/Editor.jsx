@@ -9,7 +9,7 @@ import AXIOS from "../../services/http-axios"
 
 import './Editor.css'
 import {useParams} from "react-router-dom";
-import Mapas from "../Activity/Mapas/Mapas";
+import EditorModal from './EditorModal/EditorModal'
 
 let activityData = null;
 export default function Editor(props) {
@@ -22,6 +22,8 @@ export default function Editor(props) {
   const [generalData, setGeneralData] = useState(null);
   const [currentEditor, setCurrentEditor] = useState(null);
   const [activities, setActivities] = useState([]);
+  
+  const [name, setName] = useState('');
 
   const activityType = [
     <small>Mapas Interactivos</small>,
@@ -43,11 +45,13 @@ export default function Editor(props) {
       .then((res)=> {
         console.log("EDITOR>> ", res.data.message, res.data);
         activityData = res.data.activityData;
-        if(activityData !== null) {
+        if(activityData.actividad !== null) {
           activityData.actividad = JSON.parse(activityData.actividad);
           setEditor(activityData.actividad[0]);
           setGeneralData(activityData.actividad[0]);
           setActivities(activityData.actividad);
+        } else {
+          setEditor(0);
         }
         
       }).catch((err)=> {
@@ -60,30 +64,76 @@ export default function Editor(props) {
   
   function setEditor(activity) {
     const editorType = activity.type;
+    console.log('Activity from editor: ', activity);
     switch (editorType) {
-      case 1:
+      case 1: case '1':
         setCurrentEditor(<MapaEditor actividad={activity}/>);
         break;
-      case 2:
+      case 2: case '2':
         setCurrentEditor(<OrdEditor activity={activity}/>);
         break;
-      case 3:
+      case 3: case '3':
         setCurrentEditor(<RespCoinEditor activity={activity}/>);
         break;
       default:
-      setCurrentEditor(<h1>NO HAY NINGUN EDITOR SELECCIONADO</h1>);
-      break;  
+        setCurrentEditor(<h1>CREA UNA ACTIVIDAD NUEVA PARA EDITAR</h1>);
+        break;  
     }
   }
 
-  function addEditor(newData) {
+  function addEditor(values) {
+    // build an editor
+    const build = {
+      id: activities.length,
+      type: values.type,
+      name: values.title
+    }
+
+    if(values.type == 3) build.questions = [];
+    else build.preguntas = [];
     
+    activities.push(build);
+    console.log(activities);
+    setEditor(activities[build.id]);
   }
 
+  function selectEditor(idx) {
+    setEditor(activities[idx]);
+  }
 
-  return (
+  function onDeleteActivity(idx) {
+    // activityData.actividad = activityData.actividad.filter((value, index)=> index !== idx);
+    activityData.actividad.splice(idx, 1);
+    const ids = 0;
+    activityData.actividad.forEach((a)=>{
+      a.id = ids;
+    });
+    setActivities(activityData.actividad);
+  
+  }
+  
+  function saveActivity(e) {
+    const credentials = {
+      userId: cookie.get('userId'),
+      UUID: cookie.get('UUID'),
+      title: 'XD',
+      description: "XD jajaj lol",
+      activityId: params.activityId,
+      activity: JSON.stringify(activityData.actividad)
+    }; 
+
+    AXIOS.put('/activity/update', credentials)
+      .then(res=>{
+        console.log('ACTIVITY SAVED >> ', res.data.message);
+      }).catch(err=> {
+        console.log('');
+      })
+  }
+
+  return (<>
     <div id="stea-editor-container">
       <section id="stea-editor-sidebar" className={(show)?"show":""}>
+        <button className="btn btn-success" data-toggle="modal" data-target="#stea-add-editor-modal">Agregar actividad</button>
         <ul>
           <li>
             <FontAwesomeIcon icon="fa-solid fa-plus"/>
@@ -100,13 +150,13 @@ export default function Editor(props) {
         </ul>
         <ul>
           {activities.map((v, idx)=> <li key={v} idx={idx}>
-            <div>
+            <div onClick={()=>selectEditor(idx)}>
               <h3>{v.name}</h3>
               {activityType[v.type-1]}
             </div>
           </li>)}
         </ul>
-        <button onClick={()=>{setCurrentEditor(null); console.log(activityData);}}>nullo</button>
+        <button onClick={saveActivity} className="btn btn-light">SAVE DATAAAA</button>
       </section>
       <section id="stea-editor-called">
         <header id="stea-editor-header">
@@ -122,5 +172,7 @@ export default function Editor(props) {
       </section>
       <div className={(show)?"stea-black-window":""} onClick={()=>{setShow(false)}}></div>
     </div>
+    <EditorModal addEditor={addEditor}/>
+    </>
   );
 }
