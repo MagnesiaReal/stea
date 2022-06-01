@@ -45,11 +45,13 @@ export default function Editor(props) {
       .then((res)=> {
         console.log("EDITOR>> ", res.data.message, res.data);
         activityData = res.data.activityData;
-        if(activityData !== null) {
+        if(activityData.actividad !== null) {
           activityData.actividad = JSON.parse(activityData.actividad);
           setEditor(activityData.actividad[0]);
           setGeneralData(activityData.actividad[0]);
           setActivities(activityData.actividad);
+        } else {
+          setEditor(0);
         }
         
       }).catch((err)=> {
@@ -109,7 +111,24 @@ export default function Editor(props) {
     setActivities(activityData.actividad);
   
   }
+  
+  function saveActivity(e) {
+    const credentials = {
+      userId: cookie.get('userId'),
+      UUID: cookie.get('UUID'),
+      title: 'XD',
+      description: "XD jajaj lol",
+      activityId: params.activityId,
+      activity: JSON.stringify(activityData.actividad)
+    }; 
 
+    AXIOS.put('/activity/update', credentials)
+      .then(res=>{
+        console.log('ACTIVITY SAVED >> ', res.data.message);
+      }).catch(err=> {
+        console.log('');
+      })
+  }
 
   return (<>
     <div id="stea-editor-container">
@@ -137,7 +156,7 @@ export default function Editor(props) {
             </div>
           </li>)}
         </ul>
-        <button onClick={()=>{setCurrentEditor(null); console.log(activityData);}}>nullo</button>
+        <button onClick={saveActivity} className="btn btn-light">SAVE DATAAAA</button>
       </section>
       <section id="stea-editor-called">
         <header id="stea-editor-header">
