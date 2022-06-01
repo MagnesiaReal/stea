@@ -10,6 +10,8 @@ function MapaReg(props){
     const [tiempo,setTiempo]=useState(props.pregunta.Tiempo)
     const [idProcess,setIdProcess]=useState(0)
     const [desmontar, setDesmontar]=useState(0)
+    const [tiempoAsc,setTiempoAsc]=useState(0)
+    
 
     useEffect(()=>{
     
@@ -28,7 +30,7 @@ function MapaReg(props){
 
     useEffect(()=>{
         if(tiempo===0 && props.pregunta.Tiempo!==0) {
-            props.lista.push({IDPreg:props.pregunta.IDPregunta,Respuesta:props.pregunta.Resp,Tiempo:props.pregunta.Tiempo,respuestaRes:"N/A",tiempoRes:0})
+            props.lista.push({IDPreg:props.pregunta.IDPregunta,Respuesta:props.pregunta.Resp,Tiempo:props.pregunta.Tiempo,respuestaRes:"N/A",tiempoRes:0, Cuerpo:props.pregunta.Cuerpo, TiempoAsc:tiempoAsc})
             console.log(props.lista)
             setDesmontar(2)
             
@@ -41,8 +43,9 @@ function MapaReg(props){
                 clearInterval(idProceso);   
             }
             else
-            setTiempo((tiempo)=>tiempo-1)
-        },1000);
+            setTiempo((tiempo)=>tiempo-0.1)
+            setTiempoAsc((tiempoAsc)=>tiempoAsc+0.1)
+        },100);
         setIdProcess(idProceso)
         return ()=>clearInterval(idProceso);     
     },[]);
@@ -63,7 +66,7 @@ function MapaReg(props){
             default: 
             return 'NA';
         }
-        props.lista.push({IDPreg:props.pregunta.IDPregunta,Respuesta:props.pregunta.Resp,Tiempo:props.pregunta.Tiempo,respuestaRes:event.target.id,tiempoRes:tiempo})
+        props.lista.push({IDPreg:props.pregunta.IDPregunta,Respuesta:props.pregunta.Resp,Tiempo:props.pregunta.Tiempo,respuestaRes:event.target.id,tiempoRes:tiempo, Cuerpo:props.pregunta.Cuerpo, TiempoAsc:tiempoAsc})
         console.log(props.lista)
         setDesmontar(1) 
         
