@@ -20,6 +20,7 @@ export default function Editor(props) {
 
   const [show, setShow] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
+  const [isChanged2, setIsChanged2] = useState(false);
 
   const [generalData, setGeneralData] = useState(null);
   const [currentEditor, setCurrentEditor] = useState(null);
@@ -134,7 +135,7 @@ export default function Editor(props) {
       userId: cookie.get('userId'),
       UUID: cookie.get('UUID'),
       title: generalData.titulo,
-      description: "DESCRIPCION LARGA ASKDFJAKLSDJFKLJ ALKSDJFAKLSDJFKLASDJFKLADJSFKLA JDFKLAJDSKLF JAKLDFJAKLDJFKLAJ KLFJAKLDJF KLJ DESCRIPCION ALRGA JASKDJFXD ALSKDFJASKLDFJA KL;SDJFKL;ADJSFKLJ",
+      description: generalData.descripcion,
       activityId: params.activityId,
       activity: JSON.stringify(activityData.actividad)
     }; 
@@ -193,6 +194,7 @@ export default function Editor(props) {
           </button>
 
           <h2
+            id="stea-editor-title-pregunta"
             className={(isChanged)?'d-none':''}
             onClick={()=>{setIsChanged(true)}}>
             {(generalData)?generalData.titulo: null}
@@ -206,8 +208,20 @@ export default function Editor(props) {
             onBlur={()=>setIsChanged(false)}
             onKeyDown={(e)=>{if(e.key==='Enter' || e.key==='Escape')setIsChanged(false);}}/>
         </header>
-        <article id="stea-editor-description">
-          {(generalData)? generalData.descripcion : ''}
+
+        <article className="stea-editor-general-contenedor" id="stea-editor-description">
+          
+          <section onClick={()=>{setIsChanged2(true)}} className={(isChanged2)?'d-none':''} id="stea-editor-general-seccion">
+            <h3>Descripción:</h3>
+            {(generalData)? generalData.descripcion : null}
+          </section>
+          <textarea 
+            id="stea-editor-general-description" 
+            className={`form-control ${(isChanged2)? '' : 'd-none'}`} 
+            value={(generalData)?generalData.descripcion:''}
+            onChange={(e)=>setGeneralData({...generalData, descripcion: e.target.value})}
+            onBlur={()=>setIsChanged2(false)}
+            onKeyDown={(e)=>{if(e.key==='Enter' || e.key==='Escape')setIsChanged2(false);}}/>
         </article>
         {currentEditor}
       </section>
