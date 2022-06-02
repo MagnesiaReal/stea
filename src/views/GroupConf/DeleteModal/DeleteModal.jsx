@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import Cookies from "universal-cookie";
 import AXIOS from '../../../services/http-axios'
 
@@ -7,6 +7,7 @@ export default function DeleteModal (props) {
 
   const cookie = new Cookies();
   const params = useParams();
+  const navigation = useNavigate();
 
   const [groupName, setGroupName] = useState('');
   const [isDeletable, setIsDeletable] = useState(true);
@@ -30,6 +31,7 @@ export default function DeleteModal (props) {
     AXIOS.delete('/group/delete', {data: {userId: cookie.get('userId'), groupId: params.groupId, UUID: cookie.get('UUID')}})
       .then((res)=> {
         console.log('DELETEMODAL>> message: ', res.data.message);
+        navigation('/');
       }).catch((err)=> {
         if(err) throw err;
       });

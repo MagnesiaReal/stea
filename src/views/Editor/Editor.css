@@ -31,6 +31,18 @@ html, body, #root {
   list-style-type: none;
   color: aliceblue;
 }
+
+.stea-editor-lista > li {
+  position: relative;
+}
+
+.stea-editor-lista > li > button {
+  position: absolute;
+  z-index: 5;
+  top: 5px;
+  right: 18px;
+}
+
 .stea-editor-actividad{
   background-color: aliceblue;
   border-radius: 5px;

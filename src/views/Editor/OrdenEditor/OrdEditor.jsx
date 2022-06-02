@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './OrdEditor.css'
 
 const OrdEditor = () => {
-    
+
     const [forms, setForm] = useState({});
     const [pregunta,setPregunta] = useState({});
     const [time, setTime] = useState(5);
@@ -13,9 +13,9 @@ const OrdEditor = () => {
         setListo(false);
         element.pop();
         setListo(true)
-    }, [])
+    }, []);
 
-    
+
 
     const handleChange = (e) => {
         if(e.target.name === "time"){

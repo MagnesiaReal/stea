@@ -49,6 +49,7 @@ function App() {
           <Route path='group/:groupId' element={<Group cookie={cookie}/>}/>
           <Route path='groupconf/:groupId' element={<GroupConf cookie={cookie}/>}/>
           <Route path='editor/:activityId' element={<Editor/>}/>
+          <Route path='activitygroup/:activityGroupId' element={<Activity/>}/>
           <Route exact path='*' element={<Navigate to={(cookie.get('userId') !== undefined) ? `/user/${cookie.get('userId')}` : '/home'}/>}/> 
         </Route>
 

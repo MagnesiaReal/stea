@@ -78,13 +78,7 @@ export default function Group(props) {
       activityId : e.target.id
     }
     console.log(e.target.id);
-    setIdConfig(e.target.id)
-    // AXIOS.get('/activity/activityedit', {params: activityCredentials})
-    // .then((res)=> {
-    //   console.log('activityedit/ -> ', res.data.activityData);
-    // }).catch((err)=> {
-    //   console.log('MODALACCESS>> Error status code: ', err.response.status, err.response.data.message);
-    // });
+    setIdConfig(e.target.id);
     
   }
 
@@ -185,10 +179,10 @@ export default function Group(props) {
                   </p>
                 </div>
                 <div className='stea-grupoActividades-botones'>
-                  <button className="btn btn-primary" onClick={() => console.log("jugando jiji")} data-toggle="modal">Jugar</button>
+                  <button className="btn btn-primary" onClick={() => {navigation(`/activitygroup/${actividad.idGrupoActividad}`)}} data-toggle="modal">Jugar</button>
                   {groupData.userType === 3 ? <div></div> : <button className="btn btn-dark" id={actividad.idGrupoActividad} onClick={configActivity} data-target="#stea-config-modal" data-toggle="modal">Configurar</button>}
                   {actividad.tipoPermiso === null ? <div></div> : <button className="btn btn-danger" id={actividad.idGrupoActividad} onClick={deleteActivity}  >Borrar</button>}
-                  {actividad.tipoPermiso === null ? <div></div> : <button className="btn btn-info" id={actividad.idGrupoActividad} onClick={() => console.log("Yendo al editor")}  >editar</button>}
+                  {actividad.tipoPermiso === null ? <div></div> : <button className="btn btn-info" id={actividad.idGrupoActividad} onClick={() => navigation(`/editor/${actividad.idActividad}`)}  >Editar</button>}
                 </div>
               </div>
             );})}

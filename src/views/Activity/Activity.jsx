@@ -1,6 +1,7 @@
 import Mapas from "./Mapas/Mapas"
 import { useEffect, useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import AXIOS from '../../services/http-axios'
 
 const jsonMoc={id:0, type:1,preguntas:[
   {IDMapa:1,IDPregunta:1,Cuerpo:"Estado de la republica donde se tiene más turismo",Resp:"ROO",Tiempo:5},
@@ -26,6 +27,9 @@ export default function Activity(){
     </>;
 
   useEffect(()=>{
+
+    
+
     actItr=0;
     onNextActivity();
   },[]);
@@ -36,6 +40,8 @@ export default function Activity(){
       setNextActivity(false);
     }
   },[nextActivity]);
+
+  
 
   function setResults(results) {
     console.log('Finishing activity, saving results...');

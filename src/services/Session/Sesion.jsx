@@ -19,8 +19,8 @@ export default function Session(props) {
 
 
   useEffect(()=>{
-    
-    if(location.pathname.split('/')[1] === 'editor') setHeader(false);
+    const dir = location.pathname.split('/')[1];
+    if(dir === 'editor' || dir === 'activitygroup') setHeader(false);
     else setHeader(true);
 
     AXIOS.put('/user/checksession', {UUID: props.cookie.get('UUID')})

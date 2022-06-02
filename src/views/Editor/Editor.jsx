@@ -8,7 +8,7 @@ import OrdEditor from "./OrdenEditor/OrdEditor";
 import AXIOS from "../../services/http-axios"
 
 import './Editor.css'
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import EditorModal from './EditorModal/EditorModal'
 
 let activityIncrement = 0;
@@ -17,14 +17,20 @@ export default function Editor(props) {
 
   const cookie = new Cookies();
   const params = useParams();
+  const navigation = useNavigate();
 
   const [show, setShow] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
   const [isChanged2, setIsChanged2] = useState(false);
+  const [isEditor, setIsEditor] = useState(false);
+
 
   const [generalData, setGeneralData] = useState(null);
   const [currentEditor, setCurrentEditor] = useState(null);
   const [activities, setActivities] = useState([]);
+
+  // bad practice
+  const [updatesForList, setUpdatesForList] = useState(0);
   
   const [name, setName] = useState('');
 
@@ -74,6 +80,11 @@ export default function Editor(props) {
 
   }, []);
 
+  useEffect(()=>{
+    if(isEditor) {
+      setIsEditor(false);
+    }
+  }, [isEditor]);
   
   function setEditor(activity) {
     const editorType = activity.type;
@@ -106,26 +117,33 @@ export default function Editor(props) {
     if(values.type == 3){
       build.questions = [];
       build.wrongAnswers = [];
-    } 
+    } else if(values.type == 2) {
+      build.pregunta = '';
+      build.pista_superior = '';
+      build.pista_inferior = '';
+      build.time = 0;
+    }
     else build.preguntas = [];
     
     activityData.actividad.push(build);
     setActivities(activityData.actividad);
     setEditor(activities[build.id]);
+    setIsEditor(true);
   }
 
   function selectEditor(idx) {
+    setIsEditor(true);
     setEditor(activities[idx]);
   }
 
   function onDeleteActivity(idx) {
-    // activityData.actividad = activityData.actividad.filter((value, index)=> index !== idx);
     activityData.actividad.splice(idx, 1);
-    const ids = 0;
+    let ids = 0;
     activityData.actividad.forEach((a)=>{
-      a.id = ids;
+      a.id = ids++;
     });
     setActivities(activityData.actividad);
+    setUpdatesForList(updatesForList + 1);
   
   }
   
@@ -143,6 +161,7 @@ export default function Editor(props) {
     AXIOS.put('/activity/update', credentials)
       .then(res=>{
         console.log('ACTIVITY SAVED >> ', res.data.message);
+        navigation('/');
       }).catch(err=> {
         if(err.response.status===409) {
           console.log(err.response.data.message, err.stack);    
@@ -168,11 +187,12 @@ export default function Editor(props) {
         
         <ul className="stea-editor-lista">
           
-          {activities.map((v, idx)=> <li key={v.map} idx={idx}>
+          {activities.map((v, idx)=> <li key={v.map}>
             <div className="stea-editor-actividad" onClick={()=>selectEditor(idx)}>
               <h3>{v.name}</h3>
               <h6>{activityType[v.type-1]}</h6> 
             </div>
+            <button type="submit" className="btn btn-danger" onClick={()=>{onDeleteActivity(idx)}}><FontAwesomeIcon icon="fa-solid fa-trash" /></button>
           </li>)}
           <li>
             <div className="stea-editor-actividad" id="stea-editor-add" data-toggle="modal" data-target="#stea-add-editor-modal">
@@ -183,7 +203,7 @@ export default function Editor(props) {
 
         <hr className="stea-editor-hrSegundo"></hr>
 
-        <button onClick={saveActivity} className="btn btn-success stea-editor-boton" >Guardar Actividades</button>
+        <button onClick={saveActivity} className="btn btn-success stea-editor-boton" >Guardar y Salir</button>
       </section>
       <section id="stea-editor-called">
         <header id="stea-editor-header">
@@ -223,7 +243,7 @@ export default function Editor(props) {
             onBlur={()=>setIsChanged2(false)}
             onKeyDown={(e)=>{if(e.key==='Enter' || e.key==='Escape')setIsChanged2(false);}}/>
         </article>
-        {currentEditor}
+        {(isEditor)? <h2>LOADING</h2> :currentEditor}
       </section>
       <div className={(show)?"stea-black-window":""} onClick={()=>{setShow(false)}}></div>
     </div>
