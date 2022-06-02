@@ -19,6 +19,7 @@ export default function Editor(props) {
   const params = useParams();
 
   const [show, setShow] = useState(false);
+  const [isChanged, setIsChanged] = useState(false);
 
   const [generalData, setGeneralData] = useState(null);
   const [currentEditor, setCurrentEditor] = useState(null);
@@ -61,7 +62,7 @@ export default function Editor(props) {
             a.map = activityIncrement++;
           });
           setEditor(activityData.actividad[0]);
-          setGeneralData(activityData.actividad[0]);
+          setGeneralData(activityData);
           setActivities(activityData.actividad);
         }
         
@@ -110,7 +111,6 @@ export default function Editor(props) {
     activityData.actividad.push(build);
     setActivities(activityData.actividad);
     setEditor(activities[build.id]);
-    generalData(activities[build.id]);
   }
 
   function selectEditor(idx) {
@@ -129,11 +129,12 @@ export default function Editor(props) {
   }
   
   function saveActivity(e) {
+    console.log(generalData);
     const credentials = {
       userId: cookie.get('userId'),
       UUID: cookie.get('UUID'),
-      title: 'XD',
-      description: "XD jajaj lol",
+      title: generalData.titulo,
+      description: "DESCRIPCION LARGA ASKDFJAKLSDJFKLJ ALKSDJFAKLSDJFKLASDJFKLADJSFKLA JDFKLAJDSKLF JAKLDFJAKLDJFKLAJ KLFJAKLDJF KLJ DESCRIPCION ALRGA JASKDJFXD ALSKDFJASKLDFJA KL;SDJFKL;ADJSFKLJ",
       activityId: params.activityId,
       activity: JSON.stringify(activityData.actividad)
     }; 
@@ -190,9 +191,24 @@ export default function Editor(props) {
             onClick={()=>{setShow((show)?false:true)}}>
             <FontAwesomeIcon icon="fas fa-bars"/>
           </button>
-          <h2>{(generalData)?generalData.name: "Actividad no seleccionada"}</h2>
-          <button className="btn btn-light"><FontAwesomeIcon icon="fas fa-cog" /> Modificar</button>
+
+          <h2
+            className={(isChanged)?'d-none':''}
+            onClick={()=>{setIsChanged(true)}}>
+            {(generalData)?generalData.titulo: null}
+          </h2>
+          <input 
+            type="text" 
+            id="stea-editor-general-title" 
+            className={`form-control ${(isChanged)? '' : 'd-none'}`} 
+            value={(generalData)?generalData.titulo:''}
+            onChange={(e)=>setGeneralData({...generalData, titulo: e.target.value})}
+            onBlur={()=>setIsChanged(false)}
+            onKeyDown={(e)=>{if(e.key==='Enter' || e.key==='Escape')setIsChanged(false);}}/>
         </header>
+        <article id="stea-editor-description">
+          {(generalData)? generalData.descripcion : ''}
+        </article>
         {currentEditor}
       </section>
       <div className={(show)?"stea-black-window":""} onClick={()=>{setShow(false)}}></div>

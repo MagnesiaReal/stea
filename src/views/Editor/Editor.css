@@ -92,16 +92,17 @@ html, body, #root {
   background-color: #069;
   padding: 1em;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  border-bottom-left-radius: 1em;
-  border-bottom-right-radius: 1em;
   margin-bottom: 1em;
+}
+
+#stea-editor-description {
+  background-color: grey;
 }
 
 @media (min-width: 993px) {
   #stea-editor-header .stea-editor-sidebar-button {
-    visibility: hidden;
+    display: none;
   }
   
   #stea-editor-sidebar {
