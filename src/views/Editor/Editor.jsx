@@ -147,31 +147,36 @@ export default function Editor(props) {
 
   return (<>
     <div id="stea-editor-container">
+      
       <section id="stea-editor-sidebar" className={(show)?"show":""}>
-        <button className="btn btn-success" data-toggle="modal" data-target="#stea-add-editor-modal">Agregar actividad</button>
-        <ul>
-          <li>
-            <FontAwesomeIcon icon="fa-solid fa-plus"/>
-            Mapas Interactivos
-          </li>
-          <li>
-            <FontAwesomeIcon icon="fa-solid fa-plus"/>
-            Ordenamiento Gerarquico
-          </li>
-          <li>
-            <FontAwesomeIcon icon="fa-solid fa-plus"/>
-            Respuestas Coincidentes
-          </li>
-        </ul>
-        <ul>
+        
+       <div>
+         <h1 className="stea-editor-nombre">STEA</h1>
+         <img src="/static/media/logo.e7781063c36a1c7b3f30.png" className="stea-editor-logo" alt=""/>
+         
+        </div>
+       
+       <hr className="stea-editor-hrPrimero"></hr>
+        
+        
+        <ul className="stea-editor-lista">
+          
           {activities.map((v, idx)=> <li key={v.map} idx={idx}>
-            <div onClick={()=>selectEditor(idx)}>
+            <div className="stea-editor-actividad" onClick={()=>selectEditor(idx)}>
               <h3>{v.name}</h3>
-              {activityType[v.type-1]}
+              <h6>{activityType[v.type-1]}</h6> 
             </div>
           </li>)}
+          <li>
+            <div className="stea-editor-actividad" id="stea-editor-add" data-toggle="modal" data-target="#stea-add-editor-modal">
+            <FontAwesomeIcon icon="fas fa-plus-circle" />
+            </div>
+          </li>
         </ul>
-        <button onClick={saveActivity} className="btn btn-light">SAVE DATAAAA</button>
+
+        <hr className="stea-editor-hrSegundo"></hr>
+
+        <button onClick={saveActivity} className="btn btn-success stea-editor-boton" >Guardar Actividades</button>
       </section>
       <section id="stea-editor-called">
         <header id="stea-editor-header">
