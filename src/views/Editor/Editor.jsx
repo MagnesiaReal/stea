@@ -107,9 +107,10 @@ export default function Editor(props) {
     } 
     else build.preguntas = [];
     
-    activities.push(build);
-    console.log(activities);
+    activityData.actividad.push(build);
+    setActivities(activityData.actividad);
     setEditor(activities[build.id]);
+    generalData(activities[build.id]);
   }
 
   function selectEditor(idx) {
@@ -141,7 +142,11 @@ export default function Editor(props) {
       .then(res=>{
         console.log('ACTIVITY SAVED >> ', res.data.message);
       }).catch(err=> {
-        console.log('');
+        if(err.response.status===409) {
+          console.log(err.response.data.message, err.stack);    
+        } else {
+          console.log(err.stack);
+        }
       })
   }
 

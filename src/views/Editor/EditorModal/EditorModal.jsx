@@ -7,12 +7,8 @@ export default function EditorModal(props) {
 
   function onCloseModal() {
     console.log('EditorModal Close');
-    const titleus = title, typeus = type;
-    
-
     setTitle('');
-    setType('');
-
+    setType(1);
   }
 
 
