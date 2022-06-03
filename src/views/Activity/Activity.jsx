@@ -80,13 +80,13 @@ export default function Activity(){
       const activity=activityData.actividad[actItr++];
       console.log('Esta es la constante activdiad', activity, nextActivity);
       switch (activity.type){
-        case 1:
+        case 1: case '1':
           setCurrentActivity(<Mapas activity={activity} setResults={setResults}/>);
           break;
-        case 2:
+        case 2: case '2':
           setCurrentActivity(<OrdenamientoAct activity={activity} setResults={setResults}/>);
           break;
-        case 3:
+        case 3: case '3':
           setCurrentActivity(<RespCoinEditor activity={activity} setResults={setResults}/>);
           break;
         default:
