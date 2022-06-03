@@ -33,7 +33,7 @@ const OrdenamientoAct = (props) => {
   /*Funcionamiento del juego*/
   const [time, setTime] = useState(question.time)
   const [timeAlong, setTimeAlong] = useState(0)
-  const [mode, setMode] = useState(2);
+  const [mode, setMode] = useState(props.mode);
   /*Ordenando el arreglo*/
   useEffect(() => { 
     question.options.map( (item, index) => {
