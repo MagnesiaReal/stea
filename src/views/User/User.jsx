@@ -11,6 +11,7 @@ import { gruposMock } from '../Dashboard/Mock/GroupsMock'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlus, faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons'
 import {useNavigate} from 'react-router-dom';
+import ModalCreateActivity from '../Group/ModalCreateActivity/ModalCreateActivity';
 
 export default function User (props) {
 
@@ -219,6 +220,8 @@ export default function User (props) {
         </div>
 
       </div>
+
+      <ModalCreateActivity/>
       {/*Modal*/}
       <ModalGroup/>
 

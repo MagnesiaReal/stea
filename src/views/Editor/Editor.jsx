@@ -122,6 +122,7 @@ export default function Editor(props) {
       build.pista_superior = '';
       build.pista_inferior = '';
       build.time = 0;
+      build.options = [{answer:"",pista:""}];
     }
     else build.preguntas = [];
     

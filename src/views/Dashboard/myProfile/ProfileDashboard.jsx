@@ -17,7 +17,7 @@ const ProfileDashboard = (props) => {
         <div className='stea-perfilLateral-semestre'>{props.avatar.nombre}</div>
       </div>
       <button className="btn btn-dark" data-target="#stea-create-modal" data-toggle="modal">Crear actividad</button>
-      <ModalCreateActivity/>
+      
     </div>
 
     
