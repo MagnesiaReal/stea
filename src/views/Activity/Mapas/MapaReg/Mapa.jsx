@@ -29,7 +29,7 @@ function MapaReg(props){
     },[desmontar]);
 
     useEffect(()=>{
-        if(tiempo===0 && props.pregunta.Tiempo!==0) {
+        if(tiempo<=0 && props.pregunta.Tiempo!==0) {
             props.lista.push({IDPreg:props.pregunta.IDPregunta,Respuesta:props.pregunta.Resp,Tiempo:props.pregunta.Tiempo,respuestaRes:"N/A",tiempoRes:0, Cuerpo:props.pregunta.Cuerpo, TiempoAsc:tiempoAsc})
             console.log(props.lista)
             setDesmontar(2)
@@ -43,8 +43,8 @@ function MapaReg(props){
                 clearInterval(idProceso);   
             }
             else
-            setTiempo((tiempo)=>tiempo-0.1)
-            setTiempoAsc((tiempoAsc)=>tiempoAsc+0.1)
+            setTiempo((tiempo)=>{const current = (tiempo-0.1).toFixed(2); return current; })
+            setTiempoAsc((tiempoAsc)=>{const current = (tiempo+0.1).toFixed(2); return current; })
         },100);
         setIdProcess(idProceso)
         return ()=>clearInterval(idProceso);     
