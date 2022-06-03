@@ -43,6 +43,8 @@ const OrdenamientoAct = (props) => {
     })
     setCorrectas(question.options)
     console.log("Las correctas son:",question.options);
+
+
     const jotason = JSON.parse(JSON.stringify(question))
     console.log("Las correctas son:",question.options);
     console.log(jotason);
