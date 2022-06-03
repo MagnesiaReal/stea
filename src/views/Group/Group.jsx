@@ -164,7 +164,7 @@ export default function Group(props) {
                     {actividad.titulo}
                   </p>
                   <p className='stea-grupoActividades-profesor'>
-                    {actividad.descripcion}
+                    {actividad.descripcion} | {actividad.modo}
                   </p>
                   
                 </div>
