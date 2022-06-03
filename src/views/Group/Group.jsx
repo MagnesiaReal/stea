@@ -10,6 +10,7 @@ import ModalAddActivity from './ModalAddActivity/ModalAddActivity';
 import { act } from '@testing-library/react';
 import ModalCreateActivity from './ModalCreateActivity/ModalCreateActivity';
 import dateFormat, { masks } from "dateformat";
+import ModalRank from './ModalRank/ModalRank';
 
 export default function Group(props) {
   
@@ -22,6 +23,8 @@ export default function Group(props) {
   const [idConfig, setIdConfig] = useState();
   //Para modal para agregar actvidad al grupo
   const [activitiesList, setActivitiesList] = useState([]);
+
+  const [modalData, setModalData] = useState(null);
   /*
 
   */
@@ -136,6 +139,21 @@ export default function Group(props) {
     navigation(`/groupconf/${params.groupId}`);
   }
 
+  function setModalRank(actividad) {
+    console.log('setModalRank');
+    const credentials = {
+      userId: props.cookie.get('userId'),
+      UUID: props.cookie.get('UUID'),
+      groupId: actividad.idGrupo,
+      activityId: actividad.idActividad,
+      groupActivityId: actividad.idGrupoActividad
+    };
+  
+    setModalData(credentials);  
+
+  }
+
+
   // Esto tiene que abrir un modal de acuerdo a lo que habiamos hablado
   // el modal debe mostrr la lista de actividaddes que solamete el owner puede agregar
   // admin no debe agregar actividades, solo se le puedan dar permisos de editar actividades
@@ -164,7 +182,7 @@ export default function Group(props) {
                     {actividad.titulo}
                   </p>
                   <p className='stea-grupoActividades-profesor'>
-                    {actividad.descripcion} | {actividad.modo}
+                    {actividad.descripcion} | {actividad.modo===1?<b>Examen</b> :  <b>Actividad</b>}
                   </p>
                   
                 </div>
@@ -184,10 +202,22 @@ export default function Group(props) {
                   </p>
                 </div>
                 <div className='stea-grupoActividades-botones'>
-                  <button className="btn btn-primary" onClick={() => {navigation(`/activitygroup/${actividad.idGrupoActividad}`)}} data-toggle="modal">Jugar</button>
+                  {actividad.calificacion==null?<button className="btn btn-primary" onClick={() => {navigation(`/activitygroup/${actividad.idGrupoActividad}`)}} data-toggle="modal">Jugar</button>:null}
                   {groupData.userType === 3 ? <div></div> : <button className="btn btn-dark" id={actividad.idGrupoActividad} onClick={configActivity} data-target="#stea-config-modal" data-toggle="modal">Configurar</button>}
                   {actividad.tipoPermiso === null ? <div></div> : <button className="btn btn-danger" id={actividad.idGrupoActividad} onClick={deleteActivity}  >Borrar</button>}
                   {actividad.tipoPermiso === null ? <div></div> : <button className="btn btn-info" id={actividad.idGrupoActividad} onClick={() => navigation(`/editor/${actividad.idActividad}`)}  >Editar</button>}
+                  {actividad.modo==2?<button 
+                    className="btn btn-warning"
+                    data-toggle="modal"
+                    data-target="#stea-rank-modal"
+                    onClick={(e)=>{
+                      e.preventDefault();
+                      setModalRank(actividad);
+                    }}
+                    >Ver Puntuacines</button>: null
+                  }
+                  {actividad.calificacion == null ? <b> No Resuelta</b> : <b> Calificacion: {actividad.calificacion}</b>}
+                  
                 </div>
               </div>
             );})}
@@ -197,6 +227,7 @@ export default function Group(props) {
         </div>
 
       </div>
+      <ModalRank modalData={modalData}/>
       <ModalLink token={token}/>
       <ModalConfigActivity groupId={params.groupId} idConfig={idConfig} />
       <ModalAddActivity groupId={params.groupId} activities={activitiesList} />

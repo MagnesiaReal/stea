@@ -89,7 +89,7 @@ export default function ModalAddActivity(props) {
                             </button>
                         </div>
                         <div className="modal-body" align="middle">
-                        {  props.activities.map( (actividad,index) => {
+                        {props.activities != null ? props.activities.map( (actividad,index) => {
                             return(
                                 actividad.tipoPermiso !== null && actividad.tipoPermiso !== 3  && <div key={index} className='stea-actividadPendiente-container'>
                                 <div className='stea-actividadPendiente-info'>
@@ -107,7 +107,7 @@ export default function ModalAddActivity(props) {
                                 </div>
                             </div>
                         );
-                    })}
+                    }): null}
                         </div>
                         <div className="modal-footer">
                             <input name="endDate" onChange={handleDates} min={initDate} type="date"/>

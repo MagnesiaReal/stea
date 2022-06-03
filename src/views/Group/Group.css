@@ -98,3 +98,14 @@
     display: flex;
     flex-direction: row;
 }
+
+.stea-rank-modal-element {
+  display:flex;
+  justify-content: space-between;
+  background-color: #069;
+  color: aliceblue;
+  padding: 1em;
+  margin: 5px;
+  border-radius: 1em;
+  box-shadow: 5px 5px 3px #00000099;
+}

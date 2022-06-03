@@ -93,13 +93,13 @@ export default function ModalConfigActivity(props) {
                         <select name="mode" id="mode"  onChange={handleMode}>
                             <option defaultValue value="1">Examen</option>
                             <option value="2">Actividad</option>
-                            <option value="3">Competencia</option>
+                            
                         </select>
                     </div>
                     <div className="modal-footer">
                         {mode === "1" ? <p>El usuario hará la actividad individual y solo puede ver sus resultados al final</p> : <p></p>}
                         {mode === "2" ? <p>El usuario hará la actividad individual y puede los resultados de todos</p> : <p></p>}
-                        {mode === "3" ? <p>El usuario hace la actividad en conjunto hasta que el administrador la inicie y puede ver los resultados de todos</p> : <p></p>}
+                        
                         <button className="btn" data-dismiss="modal" aria-label="Close">Cerrar</button>
                         { endDate !== undefined && <button onClick={onUpdateActivity} >Agregar</button>}
                     </div>

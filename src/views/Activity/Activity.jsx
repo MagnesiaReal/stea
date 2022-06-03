@@ -3,7 +3,7 @@ import OrdenamientoAct from "./Ordenamiento/container/OrdenamientoAct"
 import { useEffect, useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import AXIOS from '../../services/http-axios'
-import {useParams} from "react-router-dom"
+import {useNavigate, useParams} from "react-router-dom"
 import Cookies from "universal-cookie"
 import RespCoinEditor from "../Editor/RespCoinEditor/RespCoinEditor"
 
@@ -14,6 +14,7 @@ export default function Activity(){
   
   const cookie = new Cookies();
   const params = useParams();
+  const navigation = useNavigate();
 
   const [nextActivity,setNextActivity]=useState (false);
   const [currentActivity, setCurrentActivity]=useState(<h2>LODAGING... OR MAYBE AN ERROR</h2>);
@@ -65,14 +66,22 @@ export default function Activity(){
   }
 
 
-  function saveResults() {
+  function saveResults(grade, results) {
     const credentials = {
       userId: cookie.get('userId'),
       UUID: cookie.get('UUID'),
-      activityGroupId: params.activityGroupId
+      groupActivityId: params.activityGroupId,
+      qualification: grade,
+      results: JSON.stringify(results)
     };
 
-    AXIOS.post('/activity/results', )
+    AXIOS.post('/activity/results', credentials)
+      .then(res=> {
+        console.log('Success Saved message>> ', res.data.message);
+        navigation(-1);
+      }).catch(err => {
+        console.log(err.response, err.stack);
+      });
   }
 
   const onNextActivity = () => {
@@ -90,17 +99,31 @@ export default function Activity(){
           setCurrentActivity(<RespCoinEditor modo={activityData.modo} activity={activity} setResults={setResults}/>);
           break;
         default:
-          setCurrentActivity(<h1>Somethings wrong</h1>);
-          console.log('default');
-          break;
+        setCurrentActivity(<h1>Somethings wrong</h1>);
+        console.log('default');
+        break;
       }
     }else{
-      setCurrentActivity(<h1>TERMINADO</h1>);//Finalizar Actividad
+      let grade = 0;
+      answersList.forEach(a=> {
+        grade+=a.grade;
+      });
+
+      if(activityData.modo == 1) { 
+        grade = grade/answersList.length;
+        console.log('Calificaion Total if Examen: ', grade);
+      } else console.log('Calificacion total if aCtividad: ', grade);
+      
       console.log(answersList);
+
+      saveResults(grade, answersList);
+
+      setCurrentActivity(<h1>TERMINADO</h1>);//Finalizar Actividad
+      
     }
 
   }
-  
+
 
   if(nextActivity) return <>{carga}</>;
   else return(<>
