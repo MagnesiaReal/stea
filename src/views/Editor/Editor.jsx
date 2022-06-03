@@ -36,7 +36,7 @@ export default function Editor(props) {
 
   const activityType = [
     <small>Mapas Interactivos</small>,
-    <small>Ordenamiento Gerarquico</small>,
+    <small>Ordenamiento Jerárquico</small>,
     <small>Respuestas Coincidentes</small>
   ];
 
@@ -122,6 +122,7 @@ export default function Editor(props) {
       build.pista_superior = '';
       build.pista_inferior = '';
       build.time = 0;
+      build.options = [{answer:"",pista:""}];
     }
     else build.preguntas = [];
     

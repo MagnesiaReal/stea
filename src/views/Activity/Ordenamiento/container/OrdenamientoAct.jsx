@@ -43,8 +43,11 @@ const OrdenamientoAct = (props) => {
     })
     setCorrectas(question.options)
     console.log("Las correctas son:",question.options);
-    setOpciones(question.options)
-    // setOpciones(question.options.sort(()=>{return Math.random() -0.8}));
+    const jotason = JSON.parse(JSON.stringify(question))
+    console.log("Las correctas son:",question.options);
+    console.log(jotason);
+    setOpciones(jotason.options.sort(()=>{return Math.random() -0.5}));
+    
     
     console.log("Las que no son:",opciones);
     setReady(true)
@@ -148,7 +151,7 @@ const OrdenamientoAct = (props) => {
     let aciertos=0;
     let puntos = 0;
     respuesta.map((opcion,index) => {
-      if(correctas[index]===opcion) aciertos++;
+      if(correctas[index].id==opcion.id) aciertos++;
     })
     puntos = aciertos*100 / correctas.length
     console.log("los puntos son: ", puntos);
