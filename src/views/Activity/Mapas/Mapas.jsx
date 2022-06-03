@@ -59,12 +59,14 @@ export default function Mapas(props){
         break;
       }
     }else{
+      
       setMapa(<h2>Simulacro Terminado</h2>)
-      console.log('Calificando en Mapas');
+      console.log('Calificando en Mapas',props);
       var posicion = 1;
       var calificacion=0
       // preparing results 
-      if(props.modo===1){//examen
+      if(props.modo==1){//examen
+        console.log("Examen")
         var aciertos=0;
         listaRespuestas.forEach((respuesta)=>{
           if(respuesta.respuestaRes===respuesta.Respuesta)
@@ -73,7 +75,8 @@ export default function Mapas(props){
         )
         calificacion=(aciertos*100)/listaRespuestas.length; 
 
-      }else if(props.modo===2 || props.modo===3){// 2 libre 3 equipo
+      }else if(props.modo==2 || props.modo==3){// 2 libre 3 equipo
+        console.log("Normal")
         //const idAvatar=cookies.get("avatarId");
         const idAvatar=1//id del avatar a seguir
         var correctas=0;//variable para poder contar las respuestas correctas
@@ -88,11 +91,13 @@ export default function Mapas(props){
         var puntosIng=1;//Auxiliar para conocer la cantidad de veces que junto 3 preguntas
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if(idAvatar===1){//corredor
+          console.log("Corredor en normal")
           listaRespuestas.forEach((respuesta)=>{
             califPregunta=0;//Limpiamos el valor de cada pregunta para evitar errores
             if(respuesta.Tiempo===0){//Si no tenemos tiempo para resolver
-              if(respuesta.respuestaRes===respuesta.Respuesta){
+              if(respuesta.respuestaRes==respuesta.Respuesta){
                 correctas++
+                console.log(correctas)
                 califPregunta=10*(1+(1/respuesta.tiempoAsc));//calificación de la pregunta por el tiempo
                 auxPregunta=califPregunta+auxPregunta;//sumatoria de la calificación
 
@@ -109,7 +114,7 @@ export default function Mapas(props){
               }
             
             }else{//Si tenemos tiempo para resolver
-            if(respuesta.respuestaRes===respuesta.Respuesta){
+            if(respuesta.respuestaRes==respuesta.Respuesta){
               correctas++
               califPregunta=10*respuesta.tiempoRes;//calificación de la pregunta por el tiempo
               auxPregunta=califPregunta+auxPregunta;//sumatoria de la calificación
@@ -133,7 +138,7 @@ export default function Mapas(props){
           listaRespuestas.forEach((respuesta)=>{
             califPregunta=0;//Limpiamos el valor de cada pregunta para evitar errores
             if(respuesta.Tiempo===0){//Si no tenemos tiempo para resolver
-              if(respuesta.respuestaRes===respuesta.Respuesta){
+              if(respuesta.respuestaRes==respuesta.Respuesta){
                 correctas++
                 califPregunta=10*(1+(1/respuesta.tiempoAsc));//calificación de la pregunta por el tiempo
                 auxPregunta=califPregunta+auxPregunta;//sumatoria de la calificación
@@ -142,7 +147,7 @@ export default function Mapas(props){
                 }
               }
             }else{//si tenemos tiempo para resolver
-            if(respuesta.respuestaRes===respuesta.Respuesta){
+            if(respuesta.respuestaRes==respuesta.Respuesta){
               correctas++
               califPregunta=10*respuesta.tiempoRes;//calificación de la pregunta por el tiempo
               auxPregunta=califPregunta+auxPregunta;//sumatoria de la calificación
@@ -162,7 +167,7 @@ export default function Mapas(props){
           listaRespuestas.forEach((respuesta)=>{
             califPregunta=0;//Limpiamos el valor de cada pregunta para evitar errores
             if(respuesta.Tiempo===0){//Si no tenemos tiempo para resolver
-              if(respuesta.respuestaRes===respuesta.Respuesta){
+              if(respuesta.respuestaRes==respuesta.Respuesta){
                 correctas++
                 califPregunta=10*(1+(1/respuesta.tiempoAsc));//calificación de la pregunta por el tiempo
                 auxPregunta=califPregunta+auxPregunta;//sumatoria de la calificación
@@ -173,7 +178,7 @@ export default function Mapas(props){
                 seguidas=0;//Se reestablece el contador de seguidas
               }
             }else{//Si tenemos tiempo para resolver
-            if(respuesta.respuestaRes===respuesta.Respuesta){
+            if(respuesta.respuestaRes==respuesta.Respuesta){
               correctas++
               califPregunta=10*respuesta.tiempoRes;//calificación de la pregunta por el tiempo
               auxPregunta=califPregunta+auxPregunta;//sumatoria de la calificación
@@ -199,7 +204,7 @@ export default function Mapas(props){
           listaRespuestas.forEach((respuesta)=>{
           califPregunta=0;//Limpiamos el valor de cada pregunta para evitar errores
           if(respuesta.Tiempo===0){//Si no tenemos tiempo para responder
-            if(respuesta.respuestaRes===respuesta.Respuesta){
+            if(respuesta.respuestaRes==respuesta.Respuesta){
               correctas++
               califPregunta=10*(1+(1/respuesta.tiempoAsc));//calificación de la pregunta por el tiempo
               auxPregunta=califPregunta+auxPregunta;//sumatoria de la calificación
@@ -222,7 +227,7 @@ export default function Mapas(props){
             
             
           }else{//Si tenemos tiempo para responder
-          if(respuesta.respuestaRes===respuesta.Respuesta){
+          if(respuesta.respuestaRes==respuesta.Respuesta){
             correctas++
             califPregunta=10*respuesta.tiempoRes;//calificación de la pregunta por el tiempo
             auxPregunta=califPregunta+auxPregunta;//sumatoria de la calificación
