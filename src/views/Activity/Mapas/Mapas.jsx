@@ -74,11 +74,11 @@ export default function Mapas(props){
         }
         )
         calificacion=(aciertos*100)/listaRespuestas.length; 
-
+        console.log(calificacion,aciertos,listaRespuestas.length);
       }else if(props.modo==2 || props.modo==3){// 2 libre 3 equipo
         console.log("Normal")
         //const idAvatar=cookies.get("avatarId");
-        const idAvatar=1//id del avatar a seguir
+        const idAvatar=1;//id del avatar a seguir
         var correctas=0;//variable para poder contar las respuestas correctas
         var seguidas=0;//variable para contar las respuestas seguidas correctas de manera rapida
         var multiplicador=1;//multiplicador de puntaje
@@ -97,10 +97,10 @@ export default function Mapas(props){
             if(respuesta.Tiempo===0){//Si no tenemos tiempo para resolver
               if(respuesta.respuestaRes==respuesta.Respuesta){
                 correctas++
-                console.log(correctas)
-                califPregunta=10*(1+(1/respuesta.tiempoAsc));//calificación de la pregunta por el tiempo
+                console.log(correctas,"+")
+                califPregunta=10*(1+(1/parseFloat(respuesta.TiempoAsc)));//calificación de la pregunta por el tiempo
                 auxPregunta=califPregunta+auxPregunta;//sumatoria de la calificación
-
+                console.log(califPregunta,respuesta.TiempoAsc,auxPregunta)
                 if(respuesta.tiempoAsc<=(4)){
                   seguidas++//se incrementa la variable de respuestas seguidas siendo primeros
                 }else{
@@ -114,9 +114,13 @@ export default function Mapas(props){
               }
             
             }else{//Si tenemos tiempo para resolver
+
             if(respuesta.respuestaRes==respuesta.Respuesta){
               correctas++
+              
               califPregunta=10*respuesta.tiempoRes;//calificación de la pregunta por el tiempo
+              
+
               auxPregunta=califPregunta+auxPregunta;//sumatoria de la calificación
               if(respuesta.tiempoRes>=(respuesta.Tiempo*0.7)){
                 seguidas++//se incrementa la variable de respuestas seguidas siendo primeros
@@ -133,6 +137,7 @@ export default function Mapas(props){
         }
           )
           calificacion=auxPregunta*multiplicador;
+          console.log(calificacion,auxPregunta,multiplicador)
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////          
         }else if(idAvatar===2){//profesora
           listaRespuestas.forEach((respuesta)=>{
@@ -140,8 +145,9 @@ export default function Mapas(props){
             if(respuesta.Tiempo===0){//Si no tenemos tiempo para resolver
               if(respuesta.respuestaRes==respuesta.Respuesta){
                 correctas++
-                califPregunta=10*(1+(1/respuesta.tiempoAsc));//calificación de la pregunta por el tiempo
+                califPregunta=10*(1+(1/respuesta.TiempoAsc));//calificación de la pregunta por el tiempo
                 auxPregunta=califPregunta+auxPregunta;//sumatoria de la calificación
+                console.log(califPregunta,auxPregunta)
                 if(posicion===1||posicion===2||posicion===3){//uso posición porque no se como se puede obtener 
                   experienciaMul=1.1;//Modifica el multiplicador de experiencia
                 }
@@ -160,7 +166,7 @@ export default function Mapas(props){
           )
           calificacion=auxPregunta;
           experiencia=experiencia*experienciaMul;
-
+          console.log(calificacion,auxPregunta,multiplicador)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////          
         }else if(idAvatar===3){//cirujana
@@ -169,13 +175,13 @@ export default function Mapas(props){
             if(respuesta.Tiempo===0){//Si no tenemos tiempo para resolver
               if(respuesta.respuestaRes==respuesta.Respuesta){
                 correctas++
-                califPregunta=10*(1+(1/respuesta.tiempoAsc));//calificación de la pregunta por el tiempo
+                califPregunta=10*(1+(1/respuesta.TiempoAsc));//calificación de la pregunta por el tiempo
                 auxPregunta=califPregunta+auxPregunta;//sumatoria de la calificación
                 seguidas++//Cuenta la cantidad de preguntas seguidas que ha contestado
-                
+                console.log(califPregunta,auxPregunta,seguidas)
               }else{
                 seguidasAux=seguidas;//Se guarda el valor de las rachas en caso de que no tengamos respuesta correcta
-                seguidas=0;//Se reestablece el contador de seguidas
+                seguidas=1;//Se reestablece el contador de seguidas
               }
             }else{//Si tenemos tiempo para resolver
             if(respuesta.respuestaRes==respuesta.Respuesta){
@@ -186,7 +192,7 @@ export default function Mapas(props){
               
             }else{
               seguidasAux=seguidas;//Se guarda el valor de las rachas en caso de que no tengamos respuesta correcta
-              seguidas=0;//Se reestablece el contador de seguidas
+              seguidas=1;//Se reestablece el contador de seguidas
             }
           }
         }
@@ -197,7 +203,7 @@ export default function Mapas(props){
             multiplicador=1.05*seguidas//Si tenemos que la racha actual es mayor a la historica se multiplica por ese factor
           }
           calificacion=auxPregunta*multiplicador;//puntuación con el multiplicador
-          
+          console.log(calificacion,auxPregunta,multiplicador)
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         }else if(idAvatar===4){//ingeniero
@@ -206,12 +212,14 @@ export default function Mapas(props){
           if(respuesta.Tiempo===0){//Si no tenemos tiempo para responder
             if(respuesta.respuestaRes==respuesta.Respuesta){
               correctas++
-              califPregunta=10*(1+(1/respuesta.tiempoAsc));//calificación de la pregunta por el tiempo
+              califPregunta=10*(1+(1/respuesta.TiempoAsc));//calificación de la pregunta por el tiempo
               auxPregunta=califPregunta+auxPregunta;//sumatoria de la calificación
               seguidas++//Cuenta la cantidad de preguntas seguidas que ha contestado
             }else{
-                seguidasAux=seguidas;//Se guarda el valor de las rachas en caso de que no tengamos respuesta correcta
-                seguidas=0;//Se reestablece el contador de seguidas
+              califPregunta=0;
+              auxPregunta=califPregunta+auxPregunta;
+              seguidasAux=seguidas;//Se guarda el valor de las rachas en caso de que no tengamos respuesta correcta
+              seguidas=0;//Se reestablece el contador de seguidas
             }
             if(seguidasAux>=seguidas){//Compara que valor es el mayor entre las rachas obtenidas
               puntosIng=seguidasAux%3//contamos la cantidad de veces que acumulo 3 respuestas correctas
@@ -224,7 +232,7 @@ export default function Mapas(props){
             }
             multiplicador=multiplicador+(puntosIng/10);
             calificacion=(auxPregunta*multiplicador);//puntuación con el multiplicador
-            
+            console.log(calificacion,auxPregunta,multiplicador)
             
           }else{//Si tenemos tiempo para responder
           if(respuesta.respuestaRes==respuesta.Respuesta){
@@ -233,6 +241,8 @@ export default function Mapas(props){
             auxPregunta=califPregunta+auxPregunta;//sumatoria de la calificación
             seguidas++//Cuenta la cantidad de preguntas seguidas que ha contestado
           }else{
+              califPregunta=0;
+              auxPregunta=califPregunta+auxPregunta;
               seguidasAux=seguidas;//Se guarda el valor de las rachas en caso de que no tengamos respuesta correcta
               seguidas=0;//Se reestablece el contador de seguidas
           }
@@ -247,7 +257,7 @@ export default function Mapas(props){
           }
           multiplicador=multiplicador+(puntosIng/10);
           calificacion=(auxPregunta*multiplicador);//puntuación con el multiplicador
-          
+          console.log(calificacion,auxPregunta,multiplicador)          
           
           }
         }

@@ -44,11 +44,18 @@ function MapaReg(props){
             }
             else
             setTiempo((tiempo)=>{const current = (tiempo-0.1).toFixed(2); return current; })
-            setTiempoAsc((tiempoAsc)=>{const current = (tiempo+0.1).toFixed(2); return current; })
+            
         },100);
         setIdProcess(idProceso)
         return ()=>clearInterval(idProceso);     
     },[]);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setTiempoAsc((tiempoAsc)=>{const current = tiempoAsc+0.1; return current; })
+        }, 100);
+        return () => clearInterval(interval);
+      }, []);
     
 
     const getClassName = (event) => {
