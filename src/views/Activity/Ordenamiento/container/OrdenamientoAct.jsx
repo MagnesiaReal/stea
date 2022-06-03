@@ -87,14 +87,7 @@ const OrdenamientoAct = (props) => {
       ...question,
       puntos: puntos
     })
-    const results = {
-      id: props.activity.id,
-      type: props.activity.type,
-      answers: respuesta,
-      grade: puntos
-    };
-    props.setResults(results);
-    console.log("Lo que se manda es: ",results);
+    
   }
 
   const corredor = (puntos) => {
@@ -167,6 +160,14 @@ const OrdenamientoAct = (props) => {
       if(idAvatar===4) puntos = ingeniero(puntos);
       resultadoRespuestas(puntos)
     }
+    const results = {
+      id: props.activity.id,
+      type: props.activity.type,
+      answers: respuesta,
+      grade: puntos
+    };
+    props.setResults(results);
+    console.log("Lo que se manda es: ",results);
   }
   
 
