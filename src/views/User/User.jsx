@@ -13,6 +13,7 @@ import { faCirclePlus, faArrowRightToBracket } from '@fortawesome/free-solid-svg
 import {useNavigate} from 'react-router-dom';
 import ModalCreateActivity from '../Group/ModalCreateActivity/ModalCreateActivity';
 
+
 export default function User (props) {
 
   const navigation = useNavigate();
@@ -26,6 +27,8 @@ export default function User (props) {
   // Dashboard Profile
   const [userName, setUserName] = useState("");
   const [avatars, setAvatars] = useState("");
+  //Date
+  let now = new Date();
 
   useEffect(()=>{ // componentDidMount
     // all for user retrive all groups that user can access and returns userType
@@ -189,7 +192,9 @@ export default function User (props) {
                   </div>
                   <div className='stea-actividadPendiente-modo'>
                     <p className='stea-actividadPendiente-fechaLimite'>
-                      {actividad.fechaFin}
+                    Disponible hasta el {new Date(actividad.fechaFin).getDate()}/
+                    {new Date(actividad.fechaFin).getMonth()}/
+                    {new Date(actividad.fechaFin).getFullYear()}
                     </p>
                     <p className='stea-actividadPendiente-modoActividad'>
                       {actividad.modoActividad}
