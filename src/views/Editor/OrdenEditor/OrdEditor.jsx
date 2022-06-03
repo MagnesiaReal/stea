@@ -135,7 +135,7 @@ const OrdEditor = (props) => {
                     {element.map( (item,index) => 
                         <div  className='stea-orderItem-editorflexbox' index={index} key={index} >
                             <h1 className='stea-orderItemTitle-fontTitle'>{index}</h1>
-                            <h3 className='stea-orderItemTitle-fontTitle'>{item.answer}</h3>
+                            <p className='stea-orderItemTitle-fontTitle'>{item.answer}</p>
                             <h4>{item.pista}</h4>
                         </div>
                     )}
