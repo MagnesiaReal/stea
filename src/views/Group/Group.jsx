@@ -9,6 +9,7 @@ import ModalConfigActivity from './ModalConfigActivity/ModalConfigActivity';
 import ModalAddActivity from './ModalAddActivity/ModalAddActivity';
 import { act } from '@testing-library/react';
 import ModalCreateActivity from './ModalCreateActivity/ModalCreateActivity';
+import dateFormat, { masks } from "dateformat";
 
 export default function Group(props) {
   
@@ -169,10 +170,14 @@ export default function Group(props) {
                 </div>
                 <div className='stea-grupoActividades-modo'>
                   <p className='stea-grupoActividades-fechaLimite'>
-                    Creada el {actividad.fechaInicio}
+                    Creada el {new Date(actividad.fechaInicio).getDate()}/
+                    {new Date(actividad.fechaInicio).getMonth()}/
+                    {new Date(actividad.fechaInicio).getFullYear()}
                   </p>
                   <p className='stea-grupoActividades-fechaLimite'>
-                    Disponible hasta {actividad.fechaFin}
+                    Disponible hasta el {new Date(actividad.fechaFin).getDate()}/
+                    {new Date(actividad.fechaFin).getMonth()}/
+                    {new Date(actividad.fechaFin).getFullYear()}
                   </p>
                   <p className='stea-grupoActividades-modoActividad'>
                     {actividad.modoActividad}
