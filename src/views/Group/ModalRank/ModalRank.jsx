@@ -25,12 +25,15 @@ export default function ModalRank (props) {
             </button>
           </div>
           <div className="modal-body" align="middle">
-            
+            {rankList.map((v, idx) => {
+               
+            })
+            }
 
           </div>
           <div className="modal-footer">
-            
-            
+
+
             <button className="btn" data-dismiss="modal" aria-label="Close">Cerrar</button>
           </div>
         </div>

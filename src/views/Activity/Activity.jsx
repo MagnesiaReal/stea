@@ -34,7 +34,7 @@ export default function Activity(){
 
     AXIOS.get('/activity/activityresolve', {params: credetials})
       .then(res => {
-        console.log('CREDENCIALES >> Success: ', res.data.message);
+        console.log('CREDENCIALES >> Success: ', res.data.activityData);
         activityData = res.data.activityData;
         activityData.actividad = JSON.parse(activityData.actividad);
         actItr=0;
@@ -81,13 +81,13 @@ export default function Activity(){
       console.log('Esta es la constante activdiad', activity, nextActivity);
       switch (activity.type){
         case 1: case '1':
-          setCurrentActivity(<Mapas activity={activity} setResults={setResults}/>);
+          setCurrentActivity(<Mapas modo={activityData.modo} activity={activity} setResults={setResults}/>);
           break;
         case 2: case '2':
-          setCurrentActivity(<OrdenamientoAct activity={activity} setResults={setResults}/>);
+          setCurrentActivity(<OrdenamientoAct modo={activityData.modo} activity={activity} setResults={setResults}/>);
           break;
         case 3: case '3':
-          setCurrentActivity(<RespCoinEditor activity={activity} setResults={setResults}/>);
+          setCurrentActivity(<RespCoinEditor modo={activityData.modo} activity={activity} setResults={setResults}/>);
           break;
         default:
           setCurrentActivity(<h1>Somethings wrong</h1>);
