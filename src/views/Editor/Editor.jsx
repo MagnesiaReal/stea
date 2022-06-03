@@ -36,7 +36,7 @@ export default function Editor(props) {
 
   const activityType = [
     <small>Mapas Interactivos</small>,
-    <small>Ordenamiento Gerarquico</small>,
+    <small>Ordenamiento Jerárquico</small>,
     <small>Respuestas Coincidentes</small>
   ];
 

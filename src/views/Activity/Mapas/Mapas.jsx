@@ -17,17 +17,20 @@ export default function Mapas(props){
   const [nextPregunta,setNextPregunta]=useState (false);
 
   const carga=<>
-    <div className="stea-rotar">
+    <div className="stea-rotar">asdfasdfasdf
       <FontAwesomeIcon icon="fas fa-spinner" />
     </div>    
     </>;
 
   useEffect(()=>{
+    console.log('Primer useeffect', nextPregunta);
     listaRespuestas=[];
     iteradorMapa=0;
     onNextPregunta();
   },[]);
+
   useEffect(function(){
+    console.log('YAAAAAAAAAAAA!!!!!!!!!111');
     if(nextPregunta){
       onNextPregunta();
       setNextPregunta(false);
@@ -40,22 +43,24 @@ export default function Mapas(props){
     if(preguntas.length>iteradorMapa){
       const pregunta=preguntas[iteradorMapa++]
       switch (pregunta.IDMapa){
-        case 1:
+        case 1: case '1':
           setMapa(<MapaDiv nextPregunta={setNextPregunta} pregunta={pregunta} lista={listaRespuestas}/>);
 
           break;
-        case 2:
+        case 2: case '2':
           setMapa(<MapaReg nextPregunta={setNextPregunta} pregunta={pregunta} lista={listaRespuestas}/>);
 
           break;
-        case 3:
+        case 3: case '3':
           setMapa(<MapaCul nextPregunta={setNextPregunta} pregunta={pregunta} lista={listaRespuestas}/>);
           break;
         default:
         setMapa(carga);
         break;
       }
-    }else{ 
+    }else{
+      setMapa(<h2>Simulacro Terminado</h2>)
+      console.log('Calificando en Mapas');
       var posicion = 1;
       var calificacion=0
       // preparing results 
@@ -250,6 +255,7 @@ export default function Mapas(props){
         answers: listaRespuestas,
         grade: calificacion
       };
+      console.log('lanzando resultados');
       props.setResults(results);
     }
 
