@@ -30,7 +30,7 @@ export default function MapaEditor (props) {
       if(type==="1"){
         setOpciones(<>
     <option value="---">Selecciona tu respuesta</option>
-    <option value="AGU">Aguascalientes</option>
+    <option value="AGS">Aguascalientes</option>
     <option value="BCN">Baja California</option>
     <option value="BCS">Baja California Sur</option>
     <option value="CAM">Campeche</option>
