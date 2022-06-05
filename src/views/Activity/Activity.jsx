@@ -6,6 +6,7 @@ import AXIOS from '../../services/http-axios'
 import {useNavigate, useParams} from "react-router-dom"
 import Cookies from "universal-cookie"
 import RespCoinEditor from "../Editor/RespCoinEditor/RespCoinEditor"
+import ProgresoActivity from "./ProgresoActivity/ProgresoActivity"
 
 let activityData = {};
 
@@ -19,7 +20,7 @@ export default function Activity(){
   const [nextActivity,setNextActivity]=useState (false);
   const [currentActivity, setCurrentActivity]=useState(<h2>LODAGING... OR MAYBE AN ERROR</h2>);
   const [answersList, setAnswersList] = useState([]);
-
+  const [numAct, setNumAct] = useState(0)
    const carga=<>
     <div className="stea-rotar">
       <FontAwesomeIcon icon="fas fa-spinner" />
@@ -39,6 +40,7 @@ export default function Activity(){
         activityData = res.data.activityData;
         activityData.actividad = JSON.parse(activityData.actividad);
         actItr=0;
+        setNumAct(activityData.actividad.length)
         console.log('Actividad from ACTIVIDAD GLOBAL: ', activityData);
         onNextActivity();
       }).catch(err => {
@@ -125,9 +127,11 @@ export default function Activity(){
   }
 
 
-  if(nextActivity) return <>{carga}</>;
+  if(nextActivity) return <>{carga} {setTimeout(()=>console.log("esperando"),5000)} </>;
   else return(<>
     {currentActivity}
+    {console.log("Son: ",numAct)}
+    <ProgresoActivity longitud={numAct} actItr={actItr}/>
     </>);
 }
 

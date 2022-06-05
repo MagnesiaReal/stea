@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlus, faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons'
 import {useNavigate} from 'react-router-dom';
 import ModalCreateActivity from '../Group/ModalCreateActivity/ModalCreateActivity';
+import ProgresoActivity from '../Activity/ProgresoActivity/ProgresoActivity';
 
 
 export default function User (props) {
@@ -226,7 +227,7 @@ export default function User (props) {
             })}
           </div>
         </div>
-
+      
       </div>
 
       <ModalCreateActivity/>
@@ -235,6 +236,7 @@ export default function User (props) {
 
       {/*Modal Access*/}
       <ModalAccess/>
+
     </>
   );
 
