@@ -8,11 +8,15 @@
     width: 100%;
 }
 
+.stea-group-descripcion{
+    padding: 1em;
+}
+
 .stea-group-container{
     background-color: white;
     position: relative;
 
-    min-width: 94%;
+    min-width: 50%;
     max-width: 100%;
     margin: 3em;
     
@@ -35,12 +39,13 @@
     position: relative;
     background-color: white;
     width: 100%;
-    height: 10em;
+    height: auto;
     margin: 2em 0;
 
     /*Flexbox*/
     display: flex;
     flex-direction: column;
+    align-items: center;
     box-shadow: 0 .3em 10px 1px rgba(2, 58, 63, 0.432);
     
 }
@@ -48,11 +53,16 @@
 
 .stea-grupoActividades-info{
     background-color: white;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
 }
 
 .stea-grupoActividades-nombre{
     background-color: #069;
     color: white;
+    width: 100%;
     padding: .5em .5em;
     font-size: 1em;
     font-weight: 600;
@@ -63,6 +73,7 @@
     margin: .5em 0;
     padding: 0 .7em;
     font-size: .8em;
+    align-self: center;
     background-color: white;
 }
 
@@ -73,7 +84,7 @@
     margin: 0 1em ;
     font-size: .8em;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .stea-grupoActividades-modo p{
@@ -86,6 +97,7 @@
     text-align: left;
     width: 160px;
     color: #797979;
+    align-self: center;
 }
 
 .stea-grupoActividades-modoActividad{
@@ -95,9 +107,14 @@
 }
 
 .stea-grupoActividades-botones{
+    width: 50%;
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    align-self: center;
 }
+
 
 .stea-rank-modal-element {
   display:flex;
@@ -108,4 +125,70 @@
   margin: 5px;
   border-radius: 1em;
   box-shadow: 5px 5px 3px #00000099;
+}
+
+
+@media (max-width: 800px) {
+    
+    .stea-group-container{
+        background-color: white;
+        position: relative;
+        width: 100%;
+        
+        margin: 3em 0;
+        border-radius: 1em;
+        /*flexbox*/
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .stea-grupoActividades-botones{
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-self: center;
+    }
+
+    .stea-grupoActividades-botonMovil{
+        width: 100%;
+    }
+
+    .stea-grupoActividades-container{
+        box-sizing: border-box;
+        position: relative;
+        background-color: white;
+        width: 100%;
+        height: auto;
+        margin: 2em 0;
+    
+        /*Flexbox*/
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 .3em 10px 1px rgba(2, 58, 63, 0.432);
+        
+    }
+
+    .stea-grupoActividades-modo{
+        background-color: white;
+        align-self: center;
+        min-width: 90%;
+        margin: 0 1em ;
+        font-size: .8em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .stea-grupoActividades-fechaLimite{
+        font-size: .9em;
+        text-align: center;
+        width: 160px;
+        color: #797979;
+        align-self: center;
+    }
 }
