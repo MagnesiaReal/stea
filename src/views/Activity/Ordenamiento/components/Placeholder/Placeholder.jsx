@@ -27,7 +27,7 @@ const Placeholder = (props) => {
     }
 
   return(
-    <div>
+    <div className='stea-ordenamientoActividad-Container'>
     <DragDropContext onDragEnd={handlingOnDrag}>
         <Droppable droppableId='datos'>
           {(provided)=>(
@@ -45,9 +45,9 @@ const Placeholder = (props) => {
                                         {...provided.dragHandleProps}
                                         className='stea-orderItem-flexbox'
                                     >
-                                        <p>{index}.</p>
+                                        <p className='stea-orderItemTitle-fontTitle'>{index}.</p>
                                         <p className='stea-orderItemTitle-fontTitle'>{item.answer}</p>
-                                        <p>{item.pista}</p>
+                                        <p className='stea-orderItemTitle-fontTitle'>{item.pista}</p>
                                     </div>
                                   )}
                               </Draggable>

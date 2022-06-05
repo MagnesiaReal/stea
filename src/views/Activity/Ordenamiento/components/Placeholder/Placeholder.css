@@ -1,11 +1,20 @@
+.stea-ordenamientoActividad-Container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    
+    margin: 10%;
+    align-items: center;
+}
+
 .stea-ordenamientoOptions-flexbox {
     display: flex;
     
+    width: 80%;
     flex-direction: column;
     align-items: center;
     list-style: none;
-    padding-left: 0;
-    justify-content: center;
+    margin: 0;
 }
 
 .stea-orderItem-flexbox {
@@ -20,18 +29,47 @@
 
     max-width: 20em;
     min-width: 5em;
-    height: 1em;
-    border: solid 2px #d0d0d0;
+    height: auto;
+    border: solid 4px #000000;
 
-    border-radius: .2em;
+    border-radius: .5em;
     padding: 1em .8em ;
-    margin-bottom: .8em;
+    width: 100%;
+
+    margin: .4em;
+    
 }
+
+.stea-orderItem-flexbox:hover{
+    background-color: rgb(9, 36, 49);
+    color: rgb(255, 255, 255);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    font-size: 1em;
+
+    max-width: 20em;
+    min-width: 5em;
+    height: auto;
+    border: solid 4px #000000;
+
+    border-radius: .5em;
+    padding: 1em .8em ;
+    width: 95%;
+
+    margin: .4em;
+    transition-duration: 200ms;
+}
+
+
 
 .stea-orderItemTitle-fontTitle {
     max-width: none;
     font-size: 1em;
-    margin: 0 3em;
+    text-align: center;
+    margin: 0;
 }
 
 

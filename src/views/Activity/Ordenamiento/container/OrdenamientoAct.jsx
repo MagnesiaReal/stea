@@ -176,17 +176,19 @@ const OrdenamientoAct = (props) => {
 
     return (
       <div className='stea-ordenamientoContenedor-Padding'>
-        <p>Pregunta {question.id}-. {question.pregunta}</p>
-        {question.time!==0 ? <h1>{time}</h1> : <h1>{timeAlong}</h1>}
-        <h3>{question.pista_superior}</h3>
+        <div className='stea-ordenamientoContenedor-Contenedor'>
+          <p className='stea-ordenamientoContenedor-Pregunta'>Pregunta {question.pregunta}</p>
+          {question.time!==0 ? <h1 className='stea-ordenamientoContenedor-time'>Tiempo {time}s </h1> : <h1 className='stea-ordenamientoContenedor-time'>Tiempo {timeAlong}s </h1>}
+          <h3>{question.pista_superior}</h3>
 
-        <div className='stea-ordenamientoContenedor-contenedorDragNDrop'>
-          <Placeholder options={opciones} respuesta={respuesta} setRespuesta={setRespuesta}/>
+          <div className='stea-ordenamientoContenedor-contenedorDragNDrop'>
+            <Placeholder options={opciones} respuesta={respuesta} setRespuesta={setRespuesta}/>
+          </div>
+          <h3>{question.pista_inferior}</h3>
+
+          <button className='stea-ordenamientoAct-botonEstilo' onClick={resultado}> Enviar </button>
+          {calificacion.puntos}
         </div>
-        <h3>{question.pista_inferior}</h3>
-
-        <button className='stea-ordenamientoAct-botonEstilo' onClick={resultado}> Enviar </button>
-        {calificacion.puntos}
       </div>
     )}
 };
