@@ -216,8 +216,10 @@ export default function User (props) {
                     <p className='stea-actividadPendiente-profesor'>
                       {actividad.descripcion}
                     </p>
-                    <button className="btn btn-danger" id={actividad.idActividad} onClick={deleteActivity}  >Borrar</button>
-                    <button className="btn btn-info" id={actividad.idActividad} onClick={() => navigation(`/editor/${actividad.idActividad}`)}  >editar</button>
+                    <div className='stea-actividadPendiente-botones'>
+                      <button className="btn btn-danger stea-actividadPendiente-boton" id={actividad.idActividad} onClick={deleteActivity}  >Borrar</button>
+                      <button className="btn btn-info stea-actividadPendiente-boton" id={actividad.idActividad} onClick={() => navigation(`/editor/${actividad.idActividad}`)}  >editar</button>
+                    </div>
                   </div>
                 </div>
               );

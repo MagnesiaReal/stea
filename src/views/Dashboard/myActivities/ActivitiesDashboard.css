@@ -42,8 +42,22 @@
     
 }
 
+.stea-actividadPendiente-botones{
+    align-self: center;
+    justify-content: center;
+    width: 100%;
+    display: flex;
+}
+
+.stea-actividadPendiente-boton{
+    width: 50%;
+}
+
 .stea-actividadPendiente-info{
     background-color: white;
+    display: flex;
+    flex-direction: column;
+    
 }
 
 .stea-actividadPendiente-nombre{
