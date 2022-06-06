@@ -5,48 +5,68 @@ import { useState, useEffect } from 'react';
 import Question from './Question/Question';
 import InputTime from './Question/InputTime/InputTime';
 
-let questKey = 0;
-let questAns = [];
 export default function RespCoinEditor(props) {
-  
   const [wrongAnswers, setWrongAnswers] = useState([]);
   const [wrongAnswer, setWrongAnswer] = useState('');
   const [time, setTime] = useState(0);
-  
   const [questions, setQuestions] = useState([]);
+  const [questKey, setQuestKey] = useState(0);
   
   useEffect(()=>{
-    questKey = 0;
-    questAns = props.activity.questions;
-    questAns.forEach(()=> {
-      setQuestions([...questions, questKey++]);
+    console.log('RespCoinEditor recive this activity activity: ', props.activity);
+    let key = 0;
+    const questionIdArray = [];
+    props.activity.questions.forEach(()=> {
+      questionIdArray.push(key++);
     });
-    
+    setQuestions(questionIdArray);
+    setQuestKey(key);
 
+    setWrongAnswers(props.activity.wrongAnswers);
+
+    setTime(props.activity.time);
   }, []);
 
   function onAddQuesiton(e){
     e.preventDefault();
-    setQuestions([...questions, questKey++]);
-    console.log(questAns);
+
+    const newQuestion = {
+      // questionId is set in Question mount
+      question: '',
+      answer: '',
+      time: 0
+    };
+    
+    props.activity.questions.push(newQuestion);
+    setQuestions([...questions, questKey]);
+    setQuestKey(questKey+1);
   }
 
   function onDeleteQuesiton(idx){
     setQuestions(questions.filter((value,index)=>index!==idx));
-    questAns.splice(idx,1);
+    props.activity.questions.splice(idx,1);
     var id=0;
-    questAns.forEach(element => {
+    props.activity.questions.forEach(element => {
       element.questionId=id++;
     });
-    console.log(questAns);
   }
 
   function onAddWrongAnswer(e) {
     e.preventDefault();
     if(wrongAnswer === '' || wrongAnswers.find(wa=> wa === wrongAnswer)) return;
-    if(questAns.length && questAns.find(qa => qa.answer === wrongAnswer)) return;
+    if(props.activity.questions.length && props.activity.questions.find(qa => qa.answer === wrongAnswer)) return;
+
     setWrongAnswers([...wrongAnswers, wrongAnswer]);
+    props.activity.wrongAnswers.push(wrongAnswer);
+
     setWrongAnswer('');
+    console.log(props.activity.wrongAnswers);
+  }
+
+  function onDeleteWrongAnswer(e, index) {
+    setWrongAnswers(wrongAnswers.filter((v, idx) => idx !== index));
+    props.activity.wrongAnswers.splice(index, 1);
+    console.log(props.activity.wrongAnswers);
   }
   
   function onEnter(e) {
@@ -73,12 +93,12 @@ export default function RespCoinEditor(props) {
           </section>
           <section className="stea-rc-header">
             <section className="stea-rc-total-time">Tiempo total actividad:
-              <InputTime value={time} onChange={(time)=>setTime(time)} step={15}/>
+              <InputTime value={time} onChange={(time)=> {setTime(time); props.activity.time = time}} step={15}/>
             </section>
           </section>
 
           {questions.map(function(v, idx){
-            return <Question key={v} questAns={questAns} data-key={idx} showTime={(time===0)} onDeleteMe={onDeleteQuesiton} onBlur={onCheckRepeat}/>
+            return <Question key={v} questions={props.activity.questions} idx={idx} showTime={(time===0)} onDeleteMe={onDeleteQuesiton} onBlur={onCheckRepeat}/>
           }        
           )}
           <button className="btn btn-success" onClick={onAddQuesiton}>
@@ -95,7 +115,7 @@ export default function RespCoinEditor(props) {
           <section className="stea-rce-wrong-answers">
             {wrongAnswers.map((value, index)=> 
               <div key={value}>
-                <button className="btn" onClick={()=>{setWrongAnswers(wrongAnswers.filter((v) => v !== value))}}>
+                <button className="btn" onClick={(e)=>{onDeleteWrongAnswer(e, index)}}>
                   <FontAwesomeIcon icon="fas fa-times"/>
                 </button> 
                 <span>{value}</span>

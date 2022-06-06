@@ -1,0 +1,87 @@
+#stea-stretch {
+  align-items: stretch;
+  display: relative;
+  flex-flow: row wrap;
+  height: 100%;
+  width: 100%;
+
+  button.btn-light {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+
+  button.btn-fire {
+    position: absolute;
+    bottom: 2em;
+    right: 2em;
+  }
+}
+
+@keyframes answer-tray {
+  0% {
+    right: -20%;
+  }
+  80% {
+    right: 60%;
+    opacity: 1;
+  }
+  100% {
+    right: 80%;
+    opacity: 0.0;
+  }
+}
+
+
+#stea-rc-game {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  
+  #stea-rc-area {
+    height: 100%;
+    background-color: black;
+    color: beige;
+    position: relative;
+  }
+  
+  #spacecraft {
+    border-radius: 15px;
+    background-color: black;
+    position: absolute;
+    pointer-events: none;
+    
+    div {
+      position: absolute;
+      height: 1px;
+      width: 100vw;
+      background-color: blue;
+      top: 60px;
+      z-index: 1;
+    }
+
+    .stea-rc-fire {
+      background-color: yellow;
+    }
+
+    img {
+      position: relative;
+      height: 120px;
+      z-index: 8;
+    }
+  }
+
+  #answers {
+    position: absolute;
+    animation: answer-tray 5s linear;
+    padding: 5px;
+    background-color: aliceblue;
+    color: black;
+    border-radius: 5px;
+  }
+
+  
+
+}
+
+

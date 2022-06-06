@@ -88,7 +88,6 @@ export default function Editor(props) {
   
   function setEditor(activity) {
     const editorType = activity.type;
-    console.log('Activity from editor: ', activity);
     switch (editorType) {
       case 1: case '1':
         setCurrentEditor(<MapaEditor actividad={activity}/>);
@@ -117,6 +116,7 @@ export default function Editor(props) {
     if(values.type == 3){
       build.questions = [];
       build.wrongAnswers = [];
+      build.time = 0;
     } else if(values.type == 2) {
       build.pregunta = '';
       build.pista_superior = '';

@@ -18,6 +18,7 @@ import RespCoinEditor from './views/Editor/RespCoinEditor/RespCoinEditor.jsx';
 
 import Activity from './views/Activity/Activity'
 import Editor from './views/Editor/Editor';
+import RespCoin from './views/Activity/RespCoin/RespCoin';
 
 function App() {
 
@@ -32,15 +33,8 @@ function App() {
         <Route path='/register' element={<Register cookie={cookie}/>}/>
         <Route path='/changepass/:code' element={<ChangePass/>}/>
 
-        <Route path='/editortest' element={<MapaEditor/>}/>
-        <Route path='/editortest2' element={<Editor/>}/>
-
-        <Route path='/actividad' element={<Activity/>}> </Route>
-
-        <Route path='/entrega' element={<Entrega/>}> </Route>
-        
-        <Route path='/inicio' element={<Dashboard/>}> </Route>
-      
+        <Route path='/TestActivity' element={<RespCoin/>}/>
+    
         
         {/*System paths*/}
         <Route path='/' element={<Session cookie={cookie}/>}>

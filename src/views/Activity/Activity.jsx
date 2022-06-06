@@ -5,8 +5,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import AXIOS from '../../services/http-axios'
 import {useNavigate, useParams} from "react-router-dom"
 import Cookies from "universal-cookie"
-import RespCoinEditor from "../Editor/RespCoinEditor/RespCoinEditor"
+
+
 import ProgresoActivity from "./ProgresoActivity/ProgresoActivity"
+
+import RespCoin from "./RespCoin/RespCoin"
+
 
 let activityData = {};
 
@@ -47,8 +51,11 @@ export default function Activity(){
         console.log(err.stack, err.response);
       });
     
-
-    
+    document.body.requestFullscreen();
+  
+    return () => {
+      window.document.exitFullscreen(document.body);
+    }
   },[]);
 
   useEffect(function(){
@@ -98,7 +105,7 @@ export default function Activity(){
           setCurrentActivity(<OrdenamientoAct modo={activityData.modo} activity={activity} setResults={setResults}/>);
           break;
         case 3: case '3':
-          setCurrentActivity(<RespCoinEditor modo={activityData.modo} activity={activity} setResults={setResults}/>);
+          setCurrentActivity(<RespCoin modo={activityData.modo} activity={activity} setResults={setResults}/>);
           break;
         default:
         setCurrentActivity(<h1>Somethings wrong</h1>);

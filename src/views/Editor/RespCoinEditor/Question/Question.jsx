@@ -6,36 +6,31 @@ import InputTime from './InputTime/InputTime';
 import "./Question.css"
 
 export default function Question (props) {
-  const [time,setTime]=useState (0);
-  const [question,setQuestion]=useState ('');
-  const [answer,setAnswer]=useState ('');
+  const [time,setTime]=useState (props.questions[props.idx].time);
+  const [question,setQuestion]=useState (props.questions[props.idx].question);
+  const [answer,setAnswer]=useState (props.questions[props.idx].answer);
   const [answerErr, setAnswerErr] = useState(null);
   
   useEffect(function (){
-    props.questAns.push({
-      questionId: props['data-key'],
-      question: '',
-      answer: '',
-      time: 0,
-    })
+    props.questions[props.idx].questionId = props.idx;
   },[]);
 
   const onDeleteQuestion=(e)=>{
     e.preventDefault();
-    console.log(props.questAns)
-    props.onDeleteMe(props['data-key']);
+    console.log(props.questions)
+    props.onDeleteMe(props.idx);
   }
   const onQuestion=(e)=>{
     setQuestion(e.target.value);
-    props.questAns[props["data-key"]].question=e.target.value;
+    props.questions[props.idx].question=e.target.value;
   }
   const onAnswer=(e)=>{
     setAnswer(e.target.value);
-    props.questAns[props["data-key"]].answer=e.target.value;
+    props.questions[props.idx].answer=e.target.value;
   }
   const onTime=(time)=>{
     setTime(time);
-    props.questAns[props["data-key"]].time=time;
+    props.questions[props.idx].time=time;
   }
 
   async function onRepeatWrongAnswer(e) {
@@ -50,7 +45,7 @@ export default function Question (props) {
   return (
     <article className="stea-rc-question">
       <div id="number">
-        <h1>{props['data-key']}</h1>
+        <h1>{props.idx+1}</h1>
         <div className='col-lg-1 stea-rc-question-delete'>
         </div>
       </div>
