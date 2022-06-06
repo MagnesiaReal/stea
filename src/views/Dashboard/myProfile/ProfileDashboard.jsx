@@ -14,10 +14,11 @@ const ProfileDashboard = (props) => {
       <img alt={profile.nombre} src={props.avatar.avatarUrl} className='stea-perfilLateral-img'></img>
       <div className='stea-perfilLateral-informacion'>
         <div className='stea-perfilLateral-name'>{props.userName}</div>
-        <div className='stea-perfilLateral-semestre'>{props.avatar.nombre}</div>
+        <div className='stea-perfilLateral-semestre'>Avatar: {props.avatar.nombre}</div>
       </div>
-      <button className="btn btn-dark" data-target="#stea-create-modal" data-toggle="modal">Crear actividad</button>
-      
+      <div className='stea-perfilLateral-enlaces'>
+        <button className="btn btn-dark" data-target="#stea-create-modal" data-toggle="modal">Crear actividad</button>
+      </div>
     </div>
 
     
