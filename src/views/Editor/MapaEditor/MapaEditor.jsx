@@ -14,6 +14,7 @@ export default function MapaEditor (props) {
   useEffect(()=> {
     console.log('Componente montado');
     console.log('From Maps -> ', props.actividad);
+    console.log('tiempo', listaPreguntasMapa.preguntas)
     // set Questions registered if exists
     if(props.actividad.preguntas) listaPreguntasMapa=props.actividad.preguntas;
     // set questions number

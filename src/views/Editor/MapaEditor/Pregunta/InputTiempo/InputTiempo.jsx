@@ -4,7 +4,7 @@ import "./InputTiempo.css"
 
 
 export default function InputTiempo (props) {
-  const [inputTiempo,setInputTiempo]=useState (0);
+  const [inputTiempo,setInputTiempo]=useState (props.value);
   
 
   const onMasTiempo=(e)=>{

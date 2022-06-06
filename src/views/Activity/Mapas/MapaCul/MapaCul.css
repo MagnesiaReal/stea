@@ -12,6 +12,11 @@
 }
 .mapadivCul :hover{
     fill:rgb(71, 60, 173);
+    
+    transform: scale(1.0032);
+    
+    transition: 0.1s;
+
 }
 .mapadivCul .Contorno :hover {
     fill:#FFF;

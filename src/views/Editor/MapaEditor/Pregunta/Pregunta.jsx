@@ -6,18 +6,20 @@ import InputTiempo from './InputTiempo/InputTiempo';
 import "./Pregunta.css"
 
 export default function Pregunta (props) {
-  const [tiempo,setTiempo]=useState (0);
+  
+  const [tiempo,setTiempo]=useState ((props.lista[props["data-key"]]) ? props.lista[props["data-key"]].Tiempo : 0  );
   const [pregunta,setPregunta]=useState ('');
   const [respuesta,setRespuesta]=useState ('');
   
   useEffect(function (){
     
     if(props.lista[props['data-key']]) {
+    
       setPregunta(props.lista[props['data-key']].Cuerpo);
       setRespuesta(props.lista[props['data-key']].Resp);
       props.lista[props['data-key']].IDPregunta = props['data-key'];
     } 
-    else props.lista.push({IDMapa:props.IDMapa,IDPregunta:props['data-key'],Tiempo:0});
+    else props.lista.push({IDMapa:props.IDMapa,IDPregunta:props['data-key'],Tiempo:0,Cuerpo:'',Resp:''});
   },[]);
   
   const onBorrarPregunta=(e)=>{

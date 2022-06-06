@@ -9,10 +9,18 @@
     fill:  #FFF;
     stroke: rgb(102, 102, 102);
     stroke-width: 1.5px;
+
+    
 }
-.mapadiv :hover{
+.mapadiv svg path:hover{
     fill:rgb(38, 6, 56);
+    
+    transform: scale(1.0032);
+    
+    transition: 0.1s;
+
 }
+
 .stea-timer{
     border:5px dashed red;
     position: absolute;

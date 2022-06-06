@@ -195,7 +195,9 @@ export default function Group(props) {
           <button className="btn btn-dark stea-grupoActividades-botonMovil" onClick={onAccessLink} data-toggle="modal" data-target="#stea-token-modal">Liga de Acceso</button>
           <button className="btn btn-dark stea-grupoActividades-botonMovil" data-target="#stea-create-modal" data-toggle="modal">Crear actividad</button>
           {groupData.userType !== 3 ? <button className="btn btn-dark stea-grupoActividades-botonMovil" onClick={addActivity} data-toggle="modal" data-target="#stea-add-modal">Añadir actividad</button> : <div></div>}
-          {activities !== undefined && activities.map( (actividad, index) => {return(
+          {activities !== undefined && activities.map( (actividad, index) =>{
+              if ((new Date(actividad.fechaFin).getMonth()+1)<10) {
+            return(
               <div key={index} className='stea-grupoActividades-container'>
                 <div className='stea-grupoActividades-info'>
                   <p className='stea-grupoActividades-nombre'>
@@ -208,12 +210,12 @@ export default function Group(props) {
                 </div>
                 <div className='stea-grupoActividades-modo'>
                   <p className='stea-grupoActividades-fechaLimite'>
-                    Creada el {new Date(actividad.fechaInicio).getDate()}/
+                    Creada el {new Date(actividad.fechaInicio).getDate()}/0
                     {new Date(actividad.fechaInicio).getMonth()+1}/
                     {new Date(actividad.fechaInicio).getFullYear()}
                   </p>
                   <p className='stea-grupoActividades-fechaLimite'>
-                    Disponible hasta el {new Date(actividad.fechaFin).getDate()}/
+                    Disponible hasta el {new Date(actividad.fechaFin).getDate()}/0
                     {new Date(actividad.fechaFin).getMonth()+1}/
                     {new Date(actividad.fechaFin).getFullYear()}
                   </p>
@@ -245,7 +247,61 @@ export default function Group(props) {
                 </p>
                   
               </div>
-            );})}
+            );} else {
+              return(
+                <div key={index} className='stea-grupoActividades-container'>
+                  <div className='stea-grupoActividades-info'>
+                    <p className='stea-grupoActividades-nombre'>
+                      {actividad.titulo}
+                    </p>
+                    <p className='stea-grupoActividades-profesor'>
+                      {actividad.descripcion} | {actividad.modo===1?<b>Examen</b> :  <b>Actividad</b>}
+                    </p>
+                    
+                  </div>
+                  <div className='stea-grupoActividades-modo'>
+                    <p className='stea-grupoActividades-fechaLimite'>
+                      Creada el {new Date(actividad.fechaInicio).getDate()}/
+                      {new Date(actividad.fechaInicio).getMonth()+1}/
+                      {new Date(actividad.fechaInicio).getFullYear()}
+                    </p>
+                    <p className='stea-grupoActividades-fechaLimite'>
+                      Disponible hasta el {new Date(actividad.fechaFin).getDate()}/
+                      {new Date(actividad.fechaFin).getMonth()+1}/
+                      {new Date(actividad.fechaFin).getFullYear()}
+                    </p>
+                    <p className='stea-grupoActividades-modoActividad'>
+                      {actividad.modoActividad}
+                    </p>
+                  </div>
+                  <div className='stea-grupoActividades-botones'>
+                    {actividad.calificacion==null && ((new Date(actividad.fechaInicio).getDate())<=(new Date().getDate()))?<button className="btn btn-primary stea-grupoActividades-botonMovil" onClick={() => {navigation(`/activitygroup/${actividad.idGrupoActividad}`)}} data-toggle="modal">Jugar</button>:null}
+                    
+                    {groupData.userType === 3 ? <div></div> : <button className="btn btn-dark stea-grupoActividades-botonMovil" id={actividad.idGrupoActividad} onClick={configActivity} data-target="#stea-config-modal" data-toggle="modal">Configurar</button>}
+                    {actividad.tipoPermiso === null ? <div></div> : <button className="btn btn-danger stea-grupoActividades-botonMovil" id={actividad.idGrupoActividad} onClick={deleteActivity}  >Borrar</button>}
+                    {actividad.tipoPermiso === null ? <div></div> : <button className="btn btn-info stea-grupoActividades-botonMovil" id={actividad.idGrupoActividad} onClick={() => navigation(`/editor/${actividad.idActividad}`)}  >Editar</button>}
+                    {actividad.modo==2?<button 
+                      className="btn btn-warning"
+                      data-toggle="modal"
+                      data-target="#stea-rank-modal"
+                      onClick={(e)=>{
+                        e.preventDefault();
+                        setModalRank(actividad);
+                      }}
+                      >Ver Puntuacines</button>: null
+                    }
+                    {actividad.calificacion == null ? <b> No Resuelta</b> : <b> Calificacion: {actividad.calificacion}</b>}
+                    
+                  </div>
+                  <p>
+                    {((new Date(actividad.fechaInicio).getDate())<=(new Date().getDate())) ? <></> : <p>Ya ha pasado la fecha para hacer la actividad!</p>}
+                  </p>
+                    
+                </div>
+              );
+            }
+            
+            })}
           </div>
           {console.log("Las propiedades son:",activitiesList)}
           <p>Configuracion grupo <button className="btn btn-dark stea-grupoActividades-botonMovil" onClick={onConfig}>Go Config</button></p>

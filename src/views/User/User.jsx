@@ -180,7 +180,33 @@ export default function User (props) {
           <div className='stea-actividadesPendientes-contenedor'>
             <p className='stea-actividadesPendientes-title'>Actividades pendientes</p>
             { allActivitiesUser.map( (actividad,index) => {
-              return(
+              if ((new Date(actividad.fechaFin).getMonth()+1)<10) {
+                return(
+                  <div key={index} className='stea-actividadPendiente-container'>
+                    <div className='stea-actividadPendiente-info'>
+                      <p className='stea-actividadPendiente-nombre'>
+                        {actividad.titulo}
+                      </p>
+                      <p className='stea-actividadPendiente-profesor'>
+                        {actividad.descripcion}
+                      </p>
+                    </div>
+                    <div className='stea-actividadPendiente-modo'>
+                      <p className='stea-actividadPendiente-fechaLimite'>
+                      
+                      Disponible hasta el {new Date(actividad.fechaFin).getDate()}/0
+                      {new Date(actividad.fechaFin).getMonth()+1}/
+                      {new Date(actividad.fechaFin).getFullYear()}
+                      
+                      </p>
+                      <p className='stea-actividadPendiente-modoActividad'>
+                        {actividad.modoActividad}
+                      </p>
+                    </div>
+                  </div>
+                )
+              }  else {
+                return(
                 <div key={index} className='stea-actividadPendiente-container'>
                   <div className='stea-actividadPendiente-info'>
                     <p className='stea-actividadPendiente-nombre'>
@@ -189,13 +215,14 @@ export default function User (props) {
                     <p className='stea-actividadPendiente-profesor'>
                       {actividad.descripcion}
                     </p>
-                    
                   </div>
                   <div className='stea-actividadPendiente-modo'>
                     <p className='stea-actividadPendiente-fechaLimite'>
+                    
                     Disponible hasta el {new Date(actividad.fechaFin).getDate()}/
-                    {new Date(actividad.fechaFin).getMonth()}/
+                    {new Date(actividad.fechaFin).getMonth()+1}/
                     {new Date(actividad.fechaFin).getFullYear()}
+                    
                     </p>
                     <p className='stea-actividadPendiente-modoActividad'>
                       {actividad.modoActividad}
@@ -203,6 +230,8 @@ export default function User (props) {
                   </div>
                 </div>
               )
+              }
+              
             })}
           </div>
           <div className='stea-actividadesPendientes-contenedor'>
