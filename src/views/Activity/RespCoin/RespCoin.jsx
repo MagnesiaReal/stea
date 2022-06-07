@@ -8,26 +8,37 @@ import './RespCoin.scss'
 
 export default function RespCoin(props) {
   const [mouseCoords, setMouseCoords] = useState({x: 0, y: 0});
+  
   const [wrongAnswers, setWrongAnswers] = useState(props.activity.wrongAnswers);
+  const [waItr, setWaItr] = useState(0);
+
   const [questions, setQuestions] = useState(props.activity.questions);
+  const [qItr, setQItr] = useState(0);
+
+  const [toShow, setToShow] = useState([]);
+  const [questionTime, setQuestionTime] = useState(99999);
+
   const [globTime, setGlobTime] = useState(props.activity.time);
   const [time, setTime] = useState(0);
-  const [questItr, setQuestItr] = useState(0);
-  //const [wrongAnswers, setWrongAnswers] = useState();
-  //const [questions, setQuestions] = useState();
+
   const [fire, setFire] = useState(false);
 
-  const spaceShipRef = useRef(null);
+  const spaceRef = useRef(null);
   
   useEffect(()=>{
+    // FIRE FOR ANDROID BROWSER
     const onSpaceDown = (e) => {
       console.log(e.key);
       if(e.key === ' ') setFire(true);
     }
     window.addEventListener('keydown', onSpaceDown);
+    // ########################
 
-    
+    shuffle(wrongAnswers);
+    shuffle(questions);
+    onNextQuestion();
 
+    // ########################
     return () => {
       window.removeEventListener('keydown', onSpaceDown);
     }
@@ -59,18 +70,63 @@ export default function RespCoin(props) {
     setFire(true);
   }
 
+
+  const shuffle = function (array) {
+    let currentIndex = array.length,  randomIndex;
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+    }
+    return array;
+  }  
+
+  const setAnswerstoShow = (showAnswers) => {
+    // save correct answer
+    showAnswers.push({answer: questions[qItr].answer, y:0});
+    setQuestionTime(questions[qItr].time);
+    setQItr(qItr + 1);
+    // save proporcional wrong answers by questions but shuffle before use Effect
+    const answerStep = Math.floor(wrongAnswers.length/questions.length);
+    for (let i = answerStep*waItr ; i < wrongAnswers.length || i < answerStep*(waItr+1); i++) {
+      showAnswers.push({answer: wrongAnswers[i], y: 0});
+    }
+    setWaItr(waItr + 1); 
+  }
+
+  const setPositionInGame = (showAnswers) => {
+    const limit = spaceRef.current.clientHeight - 170;
+    const stepPos = limit / showAnswers.length;
+    for(let i = 0; i < showAnswers.length; i++) {
+      showAnswers[i].y = stepPos*i + 100;
+    }
+    console.log(showAnswers);
+  }
+
   function onNextQuestion(e) {
     if(globTime) {
 
-    } else {
-      
 
+    } else {
+      console.log('No time spaceRef: ', spaceRef);
+      // first create anAnswers array to show at the moment
+      const showAnswers = [];
+      setAnswerstoShow(showAnswers);
+      // shuffle answers and then set a position in grid
+      shuffle(showAnswers);
+      // set position for all possible answers
+      setPositionInGame(showAnswers);
+      setToShow(showAnswers);
     }
+
   }
 
   return(<div id="stea-stretch">
     <main id="stea-rc-game">
-      <section id="stea-rc-area" onMouseMove={onMouseCoords} onTouchMove={onToucheCoords}>
+      <section ref={spaceRef} id="stea-rc-area" onMouseMove={onMouseCoords} onTouchMove={onToucheCoords}>
       Coordenadas:
         x: {mouseCoords.x}
         y: {mouseCoords.y}
@@ -79,11 +135,20 @@ export default function RespCoin(props) {
           <img src={spacecraft} alt="spacecraft"/>
         </div>
 
-      
-      
-        <div id="answers">
-          Una respuesta
+
+
+        <div className="answers">
+        Una respuesta
         </div>
+        
+        {toShow.map((v, idx) => <div 
+          key={v.answer} 
+          className={(v.y < mouseCoords.y && v.y+40 > mouseCoords.y)?"answers focus-answer" : "answers"} 
+          style={{top: `${v.y}px`, animation:`answer-tray ${questionTime}s linear`}}>
+          {v.answer}
+        </div> )}
+        
+
 
       </section>
       {isMobile ? <button onClick={onFullScreen} className="btn btn-light">Full Screen</button> : null}

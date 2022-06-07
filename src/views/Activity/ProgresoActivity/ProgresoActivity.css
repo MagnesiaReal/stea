@@ -1,4 +1,5 @@
 .stea-progresoActivity-container{
+    pointer-events: none;
     width: 80%;
     height: 5em;
     left: 10%;
