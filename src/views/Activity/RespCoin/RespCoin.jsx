@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import spacecraft from '../../../images/spacecraft.png'
 import './RespCoin.scss'
+import Answer from './Answer/Answer';
 
 
 export default function RespCoin(props) {
@@ -91,7 +92,7 @@ export default function RespCoin(props) {
     setQItr(qItr + 1);
     // save proporcional wrong answers by questions but shuffle before use Effect
     const answerStep = Math.floor(wrongAnswers.length/questions.length);
-    for (let i = answerStep*waItr ; i < wrongAnswers.length || i < answerStep*(waItr+1); i++) {
+    for (let i = answerStep*waItr ; i < wrongAnswers.length && i < answerStep*(waItr+1); i++) {
       showAnswers.push({answer: wrongAnswers[i], y: 0});
     }
     setWaItr(waItr + 1); 
@@ -108,7 +109,7 @@ export default function RespCoin(props) {
 
   function onNextQuestion(e) {
     if(globTime) {
-
+      console.log('This activity has a global time');
 
     } else {
       console.log('No time spaceRef: ', spaceRef);
@@ -121,7 +122,6 @@ export default function RespCoin(props) {
       setPositionInGame(showAnswers);
       setToShow(showAnswers);
     }
-
   }
 
   return(<div id="stea-stretch">
@@ -141,13 +141,8 @@ export default function RespCoin(props) {
         Una respuesta
         </div>
         
-        {toShow.map((v, idx) => <div 
-          key={v.answer} 
-          className={(v.y < mouseCoords.y && v.y+40 > mouseCoords.y)?"answers focus-answer" : "answers"} 
-          style={{top: `${v.y}px`, animation:`answer-tray ${questionTime}s linear`}}>
-          {v.answer}
-        </div> )}
-        
+        {toShow.map((v, idx) =>  <Answer {...v} questionTime={questionTime} mouseCoords={mouseCoords} fire={fire}/> )}
+
 
 
       </section>
