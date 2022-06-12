@@ -136,7 +136,7 @@ const OrdEditor = (props) => {
                         <div  className='stea-orderItem-editorflexbox' index={index} key={index} >
                             <h1 className='stea-orderItemTitle-fontTitle'>{index}</h1>
                             <p className='stea-orderItemTitle-fontTitle'>{item.answer}</p>
-                            { item.pista.startsWith('http') ? <img alt={index} src={item.pista}></img> : <h4>{item.pista}</h4>}
+                            { item.pista.startsWith('http') ? <img className='stea-orderItemTitleEditor-img' alt={index} src={item.pista}></img> : <h4>{item.pista}</h4>}
                         </div>
                     )}
                     {forms.pista_inferior}

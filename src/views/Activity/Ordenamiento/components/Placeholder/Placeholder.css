@@ -27,7 +27,7 @@
 
     font-size: 1em;
 
-    max-width: 20em;
+    max-width: 55em;
     min-width: 5em;
     height: auto;
     border: solid 4px #000000;
@@ -50,14 +50,14 @@
 
     font-size: 1em;
 
-    max-width: 20em;
+    max-width: 40em;
     min-width: 5em;
     height: auto;
     border: solid 4px #000000;
 
     border-radius: .5em;
     padding: 1em .8em ;
-    width: 95%;
+    width: 90%;
 
     margin: .4em;
     transition-duration: 200ms;
@@ -72,4 +72,16 @@
     margin: 0;
 }
 
+.stea-orderItemTitle-img {
+    max-width: 8em;
+    min-width: 1em;
+    margin: 0;
+}
+
+.stea-orderItemTitleEditor-img {
+    max-width: 80px;
+
+    
+    margin: 0;
+}
 

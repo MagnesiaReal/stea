@@ -254,4 +254,10 @@
     .stea-ordenamiento-editorInputQ{
         margin: 1em;
     }
+
+    .stea-ordenamiento-Editorimg {
+        width: 50px;
+        height: 100%;
+    }
+    
   }

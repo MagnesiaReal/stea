@@ -47,7 +47,7 @@ const Placeholder = (props) => {
                                     >
                                         <p className='stea-orderItemTitle-fontTitle'>{index}.</p>
                                         <p className='stea-orderItemTitle-fontTitle'>{item.answer}</p>
-                                        {item.pista.startsWith('http') ? <img src={item.pista} alt={index}></img> : <p className='stea-orderItemTitle-fontTitle'>{item.pista}</p>}
+                                        {item.pista.startsWith('http') ? <img className='stea-orderItemTitle-img' src={item.pista} alt={index}></img> : <p className='stea-orderItemTitle-fontTitle'>{item.pista}</p>}
                                     </div>
                                   )}
                               </Draggable>
