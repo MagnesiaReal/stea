@@ -32,6 +32,28 @@
   }
 }
 
+@keyframes answer-rotate {
+  0% {
+    right: 0.3em;
+    bottom: 0.3em;
+  }
+  25%{
+    right: -0.3em;
+    bottom: -0.3em;
+  } 
+  50% {
+    right: 0.3em;
+    bottom: -0.3em;
+  }
+  75%{
+    right: -0.3em;
+    bottom: 0.3em;
+  }
+  100%{
+    right: 0.3em;
+    bottom: 0.3em;
+  }
+}
 
 #stea-rc-game {
   width: 100%;
@@ -71,13 +93,35 @@
     }
   }
 
-  #answers {
+  .answer {
+    pointer-events: none;
     position: absolute;
-    animation: answer-tray 5s linear;
+    z-index: 7;
+  }
+
+  .answer-rotation {
+    position: relative;
+    z-index: inherit;
+    max-width: 28em;
+    animation: answer-rotate 5s linear;
+    font-weight: bold;
+    font-size: 1.2em;
     padding: 5px;
     background-color: aliceblue;
     color: black;
     border-radius: 5px;
+    animation-iteration-count: infinite;
+  }
+
+  .answer-time {
+    pointer-events: none;
+    position: absolute;
+    z-index: 7;
+  }
+
+  .focus-answer {
+    border: 1px solid #000000;
+    box-shadow: 0px 0px 15px #BBDDFF;
   }
 
   

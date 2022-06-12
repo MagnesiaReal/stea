@@ -5,8 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import AXIOS from '../../services/http-axios'
 import {useNavigate, useParams} from "react-router-dom"
 import Cookies from "universal-cookie"
-
-
 import ProgresoActivity from "./ProgresoActivity/ProgresoActivity"
 
 import RespCoin from "./RespCoin/RespCoin"
