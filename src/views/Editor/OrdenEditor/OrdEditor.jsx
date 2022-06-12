@@ -123,7 +123,7 @@ const OrdEditor = (props) => {
                             <label className='stea-ordenamiento-editorLabel'>Respuesta de la opción</label>
                             <input type='text' className='stea-ordenamiento-editorInputQ' name='answer' value={item.answer} placeholder='Coloca la respuesta' id={index} key={index}  onChange={handleQuestionChange} required="required"/>
                             <label className='stea-ordenamiento-editorLabel'>Pista</label>
-                            <input type='text' className='stea-ordenamiento-editorInputQ' name='pista' value={item.pista} placeholder='Puedes insertar una pista' id={index}  onChange={handleQuestionChange}/>
+                            <input type='text' className='stea-ordenamiento-editorInputQ' name='pista' value={item.pista} placeholder='Pista o link de imagen' id={index}  onChange={handleQuestionChange}/>
                             <input className='stea-ordenamiento-botonGuay' type='button' name={index} id={index} value="Borrar" onClick={handleDelete}/>
                         </div>
                     )}
@@ -136,7 +136,7 @@ const OrdEditor = (props) => {
                         <div  className='stea-orderItem-editorflexbox' index={index} key={index} >
                             <h1 className='stea-orderItemTitle-fontTitle'>{index}</h1>
                             <p className='stea-orderItemTitle-fontTitle'>{item.answer}</p>
-                            <h4>{item.pista}</h4>
+                            { item.pista.startsWith('http') ? <img alt={index} src={item.pista}></img> : <h4>{item.pista}</h4>}
                         </div>
                     )}
                     {forms.pista_inferior}
