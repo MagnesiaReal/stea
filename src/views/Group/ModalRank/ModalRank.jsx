@@ -4,14 +4,13 @@ import AXIOS from '../../../services/http-axios'
 export default function ModalRank (props) {
   
   const [rankList, setRankList] = useState([]);
-  const [updates, setUpdates] = useState(0);
-
   
   useEffect(()=> {
     console.log('Llamando resultados desde modalRAnk', {params: props.modalData});
     AXIOS.get('activity/results', {params: props.modalData})
       .then(res=> {
         console.log('Modal rank data: ', res.data);
+        res.data.resultsData.sort((a, b) => b.calificacion - a.calificacion)
         setRankList(res.data.resultsData);
       }).catch(err=> {
         console.log(err.response, err.stack);
@@ -35,6 +34,7 @@ export default function ModalRank (props) {
             {rankList.map((v, idx) => {
               return <>
                 <div className="stea-rank-modal-element">
+                  <div><h2>{idx+1}</h2></div>
                   <div><img src={props.avatars[v.idAvatar-1].avatarUrl} alt="avatar.jpg"/></div>
                   <div>{v.nombre} {v.apellido}</div> 
                   <b>{v.calificacion}pts</b>

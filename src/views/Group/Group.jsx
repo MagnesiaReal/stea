@@ -241,15 +241,14 @@ export default function Group(props) {
                   {groupData.userType === 3 ? <div></div> : <button className="btn btn-dark stea-grupoActividades-botonMovil" id={actividad.idGrupoActividad} onClick={configActivity} data-target="#stea-config-modal" data-toggle="modal">Configurar</button>}
                   {actividad.tipoPermiso === null ? <div></div> : <button className="btn btn-danger stea-grupoActividades-botonMovil" id={actividad.idGrupoActividad} onClick={deleteActivity}  >Borrar</button>}
                   {actividad.tipoPermiso === null ? <div></div> : <button className="btn btn-info stea-grupoActividades-botonMovil" id={actividad.idGrupoActividad} onClick={() => navigation(`/editor/${actividad.idActividad}`)}  >Editar</button>}
-                  {actividad.modo==2?<button 
+                  {actividad.modo==2 || actividad.tipoPermiso === 1?<button 
                     className="btn btn-warning"
                     data-toggle="modal"
                     data-target="#stea-rank-modal"
                     onClick={(e)=>{
                       e.preventDefault();
                       setModalRank(actividad);
-                    }}
-                    >Ver Puntuacines</button>: null
+                    }}>Ver Puntuaciones</button>: null
                   }
                   {actividad.calificacion == null ? <b> No Resuelta</b> : <b> Calificacion: {actividad.calificacion}</b>}
                   
@@ -292,15 +291,14 @@ export default function Group(props) {
                     {groupData.userType === 3 ? <div></div> : <button className="btn btn-dark stea-grupoActividades-botonMovil" id={actividad.idGrupoActividad} onClick={configActivity} data-target="#stea-config-modal" data-toggle="modal">Configurar</button>}
                     {actividad.tipoPermiso === null ? <div></div> : <button className="btn btn-danger stea-grupoActividades-botonMovil" id={actividad.idGrupoActividad} onClick={deleteActivity}  >Borrar</button>}
                     {actividad.tipoPermiso === null ? <div></div> : <button className="btn btn-info stea-grupoActividades-botonMovil" id={actividad.idGrupoActividad} onClick={() => navigation(`/editor/${actividad.idActividad}`)}  >Editar</button>}
-                    {actividad.modo==2?<button 
+                    {actividad.modo==2 || actividad.tipoPermiso===1 ?<button 
                       className="btn btn-warning"
                       data-toggle="modal"
                       data-target="#stea-rank-modal"
                       onClick={(e)=>{
                         e.preventDefault();
                         setModalRank(actividad);
-                      }}
-                      >Ver Puntuacines</button>: null
+                      }}>Ver Puntuaciones</button>: null
                     }
                     {actividad.calificacion == null ? <b> No Resuelta</b> : <b> Calificacion: {actividad.calificacion}</b>}
                     

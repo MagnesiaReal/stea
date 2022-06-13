@@ -114,7 +114,6 @@ export default function ModalAddActivity(props) {
                             <select name="mode" id="mode"  onChange={handleMode}>
                                 <option defaultValue value="1">Examen</option>
                                 <option value="2">Actividad</option>
-                                <option value="3">Competencia</option>
                             </select>
                             {mode === "1" ? <p>El usuario hará la actividad individual y solo puede ver sus resultados al final</p> : <p></p>}
                             {mode === "2" ? <p>El usuario hará la actividad individual y puede los resultados de todos</p> : <p></p>}

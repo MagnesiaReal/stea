@@ -14,11 +14,14 @@ import {useNavigate} from 'react-router-dom';
 import ModalCreateActivity from '../Group/ModalCreateActivity/ModalCreateActivity';
 import ProgresoActivity from '../Activity/ProgresoActivity/ProgresoActivity';
 
+import './User.css'
+
 
 export default function User (props) {
 
   const navigation = useNavigate();
   
+  const [config, setConfig] = useState({});
   // loading status
   const [loading, setLoading] = useState(true);
   // Listas
@@ -32,10 +35,7 @@ export default function User (props) {
   let now = new Date();
 
   useEffect(()=>{ // componentDidMount
-    // all for user retrive all groups that user can access and returns userType
-    // 1 -- owner
-    // 2 -- admin
-    // 3 -- just a simple participant
+    
     AXIOS.get('/group/allforuser', {params: {userId: props.cookie.get('userId'), UUID: props.cookie.get('UUID')}})
     .then((res) => {
       if(res.status === 204) {
@@ -93,7 +93,8 @@ export default function User (props) {
       console.log('ACTIVITIES>> Error: ', err.response.status, err.response.data.message);
     })
     
-
+    setConfig(props.cookie.get('configuration'));
+    
   },[]);
 
   const onAccessGroup = (e) => {
@@ -141,7 +142,7 @@ export default function User (props) {
   else return(
     <>
       <div className='stea-dashboard-contenedor'>
-        <ProfileDashboard userName={userName} avatar={avatars[props.cookie.get('avatarId')-1]}/>
+        <ProfileDashboard userName={userName} avatar={avatars[props.cookie.get('avatarId')-1]} config={config}/>
         <div className='stea-inicio-contenedor'>
           <div className='stea-barraBusquedaDashboard-contenedor'>
             <form className='stea-barraBusquedaDashboard-form' action="#">

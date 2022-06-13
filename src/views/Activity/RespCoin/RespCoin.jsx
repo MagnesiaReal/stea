@@ -185,7 +185,7 @@ export default function RespCoin(props) {
         answers.forEach(a=> {
           if(a.answer === a.correctAnswer) grade += 100;
         });
-        //grade = grade / answers.length;
+        grade = grade / answers.length;
       } else {
         const avatarId = cookie.get('avatarId');
         if (avatarId == 1) grade = corredor(answers);
