@@ -35,7 +35,9 @@ export default function ModalRank (props) {
             {rankList.map((v, idx) => {
               return <>
                 <div className="stea-rank-modal-element">
-                  <div>{v.nombre} {v.apellido}</div> <b>{v.calificacion}pts</b>
+                  <div><img src={props.avatars[v.idAvatar-1].avatarUrl} alt="avatar.jpg"/></div>
+                  <div>{v.nombre} {v.apellido}</div> 
+                  <b>{v.calificacion}pts</b>
                 </div>
               </>
             })

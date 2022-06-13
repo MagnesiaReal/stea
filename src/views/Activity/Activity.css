@@ -139,3 +139,10 @@
   align-items: center;
   justify-content: center;
 }
+
+.stea-exit-button {
+  position: fixed;
+  bottom: 2em;
+  left: 49%;
+  z-index: 10;
+}

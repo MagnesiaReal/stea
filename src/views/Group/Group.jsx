@@ -16,6 +16,8 @@ export default function Group(props) {
   
   const navigation = useNavigate();
   const params = useParams();
+
+  const [avatars, setAvatars] = useState([]);
   const [loading, setLoading] = useState(true);
   const [groupData, setGroupData] = useState([]);
   const [activities, setActivities] = useState([]);
@@ -56,6 +58,16 @@ export default function Group(props) {
       
     }).catch((err)=> {
       console.log('MODALACCESS>> Error status code: ', err.status, err.response.data.message);
+    });
+
+    AXIOS.get('/user/avatars',{})
+    .then((res)=> {
+
+      console.log("USER>> avatars: ", res.data);
+      setAvatars(res.data.avatars);
+
+    }).catch((err)=>{
+      console.log("Aqui estoy, no pude traer a los avatares unu",err.response.status,err.response.data.message)
     });
     
   }, []);
@@ -308,7 +320,7 @@ export default function Group(props) {
         </div>
 
       </div>
-      <ModalRank modalData={modalData}/>
+      <ModalRank modalData={modalData} avatars={avatars}/>
       <ModalLink token={token}/>
       <ModalConfigActivity groupId={params.groupId} idConfig={idConfig} />
       <ModalAddActivity groupId={params.groupId} activities={activitiesList} />

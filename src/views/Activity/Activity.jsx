@@ -8,10 +8,15 @@ import Cookies from "universal-cookie"
 import ProgresoActivity from "./ProgresoActivity/ProgresoActivity"
 import CountUp from "react-countup"
 
+import medal1 from '../../images/1.png'
+import medal2 from '../../images/2.png'
+import medal3 from '../../images/3.png'
+
 import RespCoin from "./RespCoin/RespCoin"
 import './Activity.css'
 
 let activityData = {};
+const medals = [medal1, medal2, medal3];
 
 var actItr=0;
 export default function Activity(){
@@ -23,6 +28,8 @@ export default function Activity(){
   const [preGrade, setPreGrade] = useState(0);
   const [name, setName] = useState('');
   const [avatars, setAvatars] = useState([]);
+  const [finish, setFinish] = useState(false);
+  const [extra, setExtra] = useState(null);
   const [nextActivity,setNextActivity]=useState (false);
   const [currentActivity, setCurrentActivity]=useState(<h2>LODAGING... OR MAYBE AN ERROR</h2>);
   const [answersList, setAnswersList] = useState([]);
@@ -104,7 +111,9 @@ export default function Activity(){
     AXIOS.post('/activity/results', credentials)
       .then(res=> {
         console.log('Success Saved message>> ', res.data.message);
-        //navigation(-1);
+        const extraJson = res.data.extra;
+        setExtra(JSON.parse(extraJson));
+        setFinish(true);
       }).catch(err => {
         console.log(err.response, err.stack);
       });
@@ -128,6 +137,7 @@ export default function Activity(){
           break;
         default:
         setCurrentActivity(<h1>Somethings wrong</h1>);
+
         console.log('default');
         break;
       }
@@ -147,6 +157,35 @@ export default function Activity(){
 
   }
 
+  if(finish) return <div className="stea-activity-back">
+    <section className="stea-activity-subact-title">
+      <h1>{activityData.titulo}</h1>
+    </section>
+    <section className="stea-activity-points">
+      <img 
+        src={avatars[cookie.get('avatarId')-1].avatarUrl} alt="avatar.jotapege"
+        id="stea-activity-avatar"/>
+      <div className="stea-activity-grade">
+        <h1>{extra.grade.toFixed(0)} pts</h1>
+      </div>
+      <div className="stea-activity-grade">
+        Fuiste la persona numero {extra.rank} en resolver la actividad
+      </div>
+      
+    </section>
+    {(extra.rank <=3)?<section className="stea-activity-points">
+      <div className="stea-activity-grade">
+        <h2><b>Felicidades !!!</b><br/>
+        Ganaste una medalla de {extra.rank}° lugar.</h2>
+      </div>
+      <img src={medals[extra.rank-1]} alt="medal"/>
+    </section>:null}
+    
+    <button className="btn btn-dark stea-exit-button" onClick={()=>{navigation(-1)}}>Regresar a Inicio</button>
+    
+    <ProgresoActivity longitud={numAct} actItr={actItr}/>
+  </div>
+
   if(showDesc) return <>
     <article className="stea-activity-start-description">
       <section className="stea-activity-title">
@@ -156,10 +195,10 @@ export default function Activity(){
       <section className="stea-activity-desc">
         <h2>{activityData.descripcion}</h2>
         <div id ="stea-forbutton">
-        <button className="btn btn-primary" onClick={()=>{setShowDesc(false)}}><i class="fas fa-play"></i> Comenzar </button>
-      </div>
+          <button className="btn btn-primary" onClick={()=>{setShowDesc(false)}}><i class="fas fa-play"></i> Comenzar </button>
+        </div>
       </section>
-      
+
     </article>
     </>
   if(nextActivity) return <div className="stea-activity-back">
