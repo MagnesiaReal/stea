@@ -33,6 +33,8 @@ export default function DeleteModal (props) {
         console.log('DELETEMODAL>> message: ', res.data.message);
         navigation('/');
       }).catch((err)=> {
+        console.log(err.stack);
+        console.log(err.status);
         if(err) throw err;
       });
 

@@ -1,0 +1,141 @@
+.stea-activity-start-description {
+  height: 100%;
+  background-size: 1920px 1080px;
+  background-image: url('../../images/globo_terraqueo.jpg');
+}
+
+@keyframes buttonA {
+  0% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+
+.stea-activity-desc button {
+  animation: buttonA 3s;
+}
+
+.stea-activity-start-description #stea-forbutton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stea-activity-desc {
+  position: relative;
+  margin-top: 1.5em;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-bottom: 1em;
+  border-radius: 10px;
+  background-color: #FFF;
+  padding: 1em;
+  color: black;
+  animation: up-desc 2s;
+}
+
+.stea-activity-title {
+  widows: 100%;
+  padding: 1em;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  animation: up-desc 2s;
+}
+
+
+@keyframes up-desc {
+  0% {
+    top: -20%;
+    opacity: 0;
+  }
+  100% {
+    top: 0%;
+    opacity: 1;
+  }
+}
+
+
+.stea-activity-title h1 {
+  background-color: black;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.stea-rotar{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 100px;
+  margin:-60px 0 0 -60px;
+  -webkit-animation:spin 2s linear infinite;
+  -moz-animation:spin 2s linear infinite;
+  animation:spin 2s linear infinite;
+}
+@-moz-keyframes spin { 
+  100% { -moz-transform: rotate(360deg); } 
+}
+@-webkit-keyframes spin { 
+  100% { -webkit-transform: rotate(360deg); } 
+}
+@keyframes spin { 
+  100% { 
+    -webkit-transform: rotate(360deg); 
+    transform:rotate(360deg); 
+  } 
+}
+
+#stea-activity-avatar {
+  width: 12em;
+  height: 12em;
+  border-radius: 1em;
+  border: 2px solid black;
+}
+
+.stea-activity-back {
+  height: 100%;
+  background-image: linear-gradient(to right, #6CF, #069);
+}
+
+.stea-activity-subact-title {
+  padding: 1em;
+  margin-top: 0;
+  margin-bottom: 1em;
+  margin-left: 15%;
+  margin-right: 15%;
+  border-radius: 0em 0em 1em 1em;
+  background-color: white;
+  box-shadow: 5px 5px 15px black;
+  justify-content: center;
+  text-align: center;
+}
+
+.stea-activity-points {
+  padding: 1em;
+  border-radius: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 15%;
+  margin-right: 15%;
+  background-color: white;
+  color: black;
+  box-shadow: 5px 5px 15px black;
+  display: flex;
+  height: 14em;
+}
+
+.stea-activity-grade {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

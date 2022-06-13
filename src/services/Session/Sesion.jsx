@@ -26,7 +26,7 @@ export default function Session(props) {
     AXIOS.put('/user/checksession', {UUID: props.cookie.get('UUID')})
       .then((res)=>{
 
-        console.log("SESSION>> ", res.data.message);
+        console.log("SESSION>> ", res.data);
         const avatarId = props.cookie.get('avatarId');
 
         if(avatarId === 'null' || avatarId === null) {
@@ -35,6 +35,7 @@ export default function Session(props) {
           setNewRegister(true);
         
         }
+        props.cookie.set('configuration', res.data.configuracion, { path: '/'})
 
       }).catch((err)=> {
         

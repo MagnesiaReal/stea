@@ -91,7 +91,7 @@ export default function RespCoinEditor(props) {
           <section className="stea-rc-header">
             <h3>Preguntas</h3>
           </section>
-          <section className="stea-rc-header">
+          <section className="stea-rc-header d-none">
             <section className="stea-rc-total-time">Tiempo total actividad:
               <InputTime value={time} onChange={(time)=> {setTime(time); props.activity.time = time}} step={15}/>
             </section>
@@ -113,13 +113,17 @@ export default function RespCoinEditor(props) {
             <button className="btn btn-primary" onClick={onAddWrongAnswer}><FontAwesomeIcon icon="fa-solid fa-plus" /></button>
           </section>
           <section className="stea-rce-wrong-answers">
-            {wrongAnswers.map((value, index)=> 
-              <div key={value}>
+            {wrongAnswers.map((value, index)=> {
+              const wans = (value.startsWith("http://") || value.startsWith("https://")) ? <img src={value} alt={value} style={{maxWidth: "30em", maxHeight: "120px"}}/> : value;
+
+              return <div key={value}>
                 <button className="btn" onClick={(e)=>{onDeleteWrongAnswer(e, index)}}>
                   <FontAwesomeIcon icon="fas fa-times"/>
                 </button> 
-                <span>{value}</span>
-              </div>)}
+                <span>{wans}</span>
+              </div>
+            }
+            )}
           </section>
 
         </article>

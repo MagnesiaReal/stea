@@ -77,8 +77,7 @@ export default function Mapas(props){
         console.log(calificacion,aciertos,listaRespuestas.length);
       }else if(props.modo==2 || props.modo==3){// 2 libre 3 equipo
         console.log("Normal")
-        //const idAvatar=cookies.get("avatarId");
-        const idAvatar=1;//id del avatar a seguir
+        const idAvatar=cookies.get("avatarId");
         var correctas=0;//variable para poder contar las respuestas correctas
         var seguidas=0;//variable para contar las respuestas seguidas correctas de manera rapida
         var multiplicador=1;//multiplicador de puntaje
