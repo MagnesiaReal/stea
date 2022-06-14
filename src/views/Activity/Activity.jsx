@@ -66,10 +66,10 @@ export default function Activity(){
       console.log("Aqui estoy :D",err.response.status,err.response.data.message)
     });
     
-    document.body.requestFullscreen();
+    //document.body.requestFullscreen();
   
     return () => {
-      window.document.exitFullscreen(document.body);
+      //window.document.exitFullscreen(document.body);
     }
   },[]);
 

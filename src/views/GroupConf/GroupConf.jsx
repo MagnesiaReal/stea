@@ -144,7 +144,7 @@ export default function GroupConf(props) {
             Total: {userList.length} miembros.
             {error}
             <button type="submit" className="btn btn-primary stea-mapaEditor-add my-1" onClick={null} data-toggle="modal" data-target="#stea-add-user-modal"><FontAwesomeIcon icon="fa-solid fa-plus" /> Agregar miembros</button>
-            <ul>
+          <ul>
             {userList.map(function (value, index) {
               return(
               <li key={value.idUsuario}>

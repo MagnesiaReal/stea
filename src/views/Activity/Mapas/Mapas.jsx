@@ -69,7 +69,7 @@ export default function Mapas(props){
         console.log("Examen")
         var aciertos=0;
         listaRespuestas.forEach((respuesta)=>{
-          if(respuesta.respuestaRes===respuesta.Respuesta)
+          if(respuesta.respuestaRes == respuesta.Respuesta)
             aciertos++
         }
         )

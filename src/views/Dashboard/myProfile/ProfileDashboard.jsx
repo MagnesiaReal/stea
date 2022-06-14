@@ -10,7 +10,12 @@ import medal2 from '../../../images/2.png'
 import medal3 from '../../../images/3.png'
 
 const ProfileDashboard = (props) => {
-
+  
+  const [level, setLevel] = useState(props.config.xp/150);
+  const [xp, setXp] = useState(props.config.xp%150);
+  useEffect(()=> {
+    
+  });
 
   return (
     <div className='stea-perfilLateral-contenedor'>
@@ -20,13 +25,19 @@ const ProfileDashboard = (props) => {
           src={props.avatar.avatarUrl} 
           className='stea-perfilLateral-img'></img>
         <ProgressBar 
-          progress={60} 
+          progress={props.config.xp%150}
+          steps={150}
           radius={100} 
           strokeWidth={10} 
           trackStrokeWidth={10} 
           pointerRadius={0.1} 
           strokeColor={"#069"} 
-          pointerStrokeColor={"#069"}/>
+          pointerStrokeColor={"#069"}
+          transition="1.2s ease"
+          initialAnimation={true}
+          initialAnimationDelay={600}/>
+          <div className='stea-perfilLateral-semestre'>Nivel: {(props.xp)?(props.config.xp/150).toFixed(0):0}</div>
+          <div className="stea-perfilLateral-semestre">XP: {(props.xp)?(props.config.xp%150).toFixed(0):0}/150</div>
       </div>
       
       <div className='stea-perfilLateral-informacion'>

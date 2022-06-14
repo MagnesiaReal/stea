@@ -35,7 +35,7 @@ export default function ModalRank (props) {
               return <>
                 <div className="stea-rank-modal-element">
                   <div><h2>{idx+1}</h2></div>
-                  <div><img src={props.avatars[v.idAvatar-1].avatarUrl} alt="avatar.jpg"/></div>
+                  {/*<div><img src={props.avatars[v.idAvatar-1].avatarUrl} alt="avatar.jpg"/></div>*/}
                   <div>{v.nombre} {v.apellido}</div> 
                   <b>{v.calificacion}pts</b>
                 </div>

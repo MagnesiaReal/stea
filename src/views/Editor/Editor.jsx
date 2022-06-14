@@ -10,6 +10,7 @@ import AXIOS from "../../services/http-axios"
 import './Editor.css'
 import {useNavigate, useParams} from "react-router-dom";
 import EditorModal from './EditorModal/EditorModal'
+import AddUserActivityModal from './AddUserActivityModal/AddUserActivityModal'
 
 let activityIncrement = 0;
 let activityData = null;
@@ -205,6 +206,7 @@ export default function Editor(props) {
         <hr className="stea-editor-hrSegundo"></hr>
 
         <button onClick={saveActivity} className="btn btn-success stea-editor-boton" >Guardar y Salir</button>
+        <button data-target="#stea-add-user-activity-modal" data-toggle="modal" className="btn btn-warning stea-editor-boton" >Agregar permisos</button>
       </section>
       <section id="stea-editor-called">
         <header id="stea-editor-header">
@@ -249,6 +251,7 @@ export default function Editor(props) {
       <div className={(show)?"stea-black-window":""} onClick={()=>{setShow(false)}}></div>
     </div>
     <EditorModal addEditor={addEditor}/>
+    <AddUserActivityModal />
     </>
   );
 }
